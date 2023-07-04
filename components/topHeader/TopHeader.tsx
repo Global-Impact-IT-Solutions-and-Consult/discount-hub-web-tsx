@@ -5,6 +5,7 @@ import {
   BiSearch,
   BiSearchAlt,
   BiSolidBookReader,
+  BiSolidDiscount,
   BiSolidLandmark,
   BiSolidLock,
   BiSolidUser,
@@ -13,8 +14,10 @@ import {
 const TopHeader = () => {
   return (
     <>
+      {/* top top bar */}
       <div className="w-full bg-gray-200 p-4 flex items-center justify-center">
         <div className="flex items-center justify-between text-sm font-sans lg:w-10/12 2xl:w-8/12">
+          {/* left */}
           <div className="hidden md:flex md:gap-6 md:items-center md:justify-center">
             <a href="#">
               <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
@@ -31,6 +34,7 @@ const TopHeader = () => {
               </div>
             </a>
           </div>
+          {/* right */}
           <div className="flex gap-6 items-center justify-center">
             <a href="#">
               <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
@@ -54,16 +58,26 @@ const TopHeader = () => {
           </div>
         </div>
       </div>
+      {/* logo, search, cart bar */}
       <div className="px-1 py-5 bg-white w-full flex items-center justify-center lg:p-8">
         <div className="flex flex-col gap-7 items-center justify-between md:flex-row  lg:flex-row lg:w-10/12 lg:gap-5 2xl:w-8/12">
-          <Image
+          {/* <Image
             src="/vercel.svg"
             alt="Vercel Logo"
             className="dark:invert"
             width={150}
             height={28}
             priority
-          />
+          /> */}
+          <a
+            href="/"
+            className="flex items-center gap-1 p-4 text-black duration-300 ease-in-out lg:w-[15rem]"
+          >
+            <span className="w-full font-extrabold text-2xl font-sans md:text-xl  xl:text-2xl">
+              Discount Hub
+            </span>
+            <BiSolidDiscount size={30} className="text-green-400" />
+          </a>
           <div className="flex justify-center lg:w-3/4">
             <input
               type="text"
