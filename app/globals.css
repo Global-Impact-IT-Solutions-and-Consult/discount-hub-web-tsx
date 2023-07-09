@@ -17,13 +17,15 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
+  color: rgb(29, 29, 29);
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: sans-serif;
 }
 
 /* Hero left */
@@ -42,4 +44,31 @@ body {
 
 .LinkBorder:hover {
   color: white;
+}
+
+/* PAGINATION */
+.paginationBtn {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 13px;
+  line-height: 32px;
+  height: 36px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  -webkit-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  border-color: #d3d9dd;
+  color: #576366;
+}
+
+.paginationBtn:hover {
+  color: white;
+  border: 2px solid rgb(74 222 128);
+}
+
+/* PRODUCT PAGE */
+.ppLineHeight {
+  line-height: 30px;
 }

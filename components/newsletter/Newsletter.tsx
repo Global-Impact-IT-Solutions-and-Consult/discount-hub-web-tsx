@@ -19,7 +19,7 @@ const Newsletter = () => {
             <input
               type="text"
               placeholder="Your email address"
-              className="p-1 border border-gray-300 font-sans pl-3 rounded-l-md w-3/4 focus:ring-2 focus:ring-gray-300 outline-none"
+              className="p-1 border border-gray-300 font-sans pl-3 bg-white rounded-l-md w-3/4 focus:ring-2 focus:ring-gray-300 outline-none"
             />
             <button className="flex items-center justify-center rounded-r-md bg-green-400 text-white px-4 py-2 focus:ring-2 focus:ring-gray-300 outline-none w-2/5 text-sm font-sans">
               SIGN UP

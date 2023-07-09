@@ -13,7 +13,7 @@ import {
 const PopularStores = () => {
   return (
     <>
-      <div className="px-4 py-8  w-full flex flex-col items-center justify-start gap-8">
+      <div className="py-8 w-full flex flex-col items-center justify-start gap-8">
         <SectionTopBar
           title={"Popular Stores"}
           linkText={"VIEW ALL"}

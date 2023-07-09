@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
         <TopHeader />
         <Navbar />
         <main className=" bg-slate-200 min-h-screen items-start w-full lg:flex  lg:justify-center">
-          <div className="w-full lg:w-10/12 lg:flex-col  2xl:w-8/12">
+          <div className="w-full px-4 py-8 lg:w-10/12 lg:flex-col  2xl:w-8/12">
             {children}
           </div>
         </main>

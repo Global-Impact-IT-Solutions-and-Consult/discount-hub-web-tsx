@@ -1,19 +1,18 @@
+import DealCard from "@/components/latestDeals/DealCard";
+import Pagination from "@/widgets/pagination/Pagination";
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-import DealCard from "./DealCard";
 
-const LatestDeals = () => {
+const page = () => {
   return (
     <>
-      <div className="py-8 w-full flex flex-col items-center justify-start gap-8">
+      <div className="px-4 pt-8  w-full flex flex-col items-center justify-start gap-8">
         {/* TOP PART */}
         <SectionTopBar
           title={"Latest Deals"}
-          linkText={"VIEW ALL"}
-          link={"/latest-deals"}
+          linkText={"CONTACT US"}
+          link={"#"}
         />
         {/* BOTTOM PART (CARDS) */}
-        {/* <div className="w-full flex flex-col gap-8 items-center md:flex-row md:justify-start md:flex-wrap md:pl-[0.5rem] lg:pl-[3rem] xl:pl-[2.5rem] 2xl:pl-[3rem] 2xl:gap-16"> */}
-        {/* <div className="w-full flex flex-col gap-2 items-center lg:px-6  md:flex-row md:justify-evenly md:flex-wrap  2xl:gap-16"> */}
         <div className="w-full flex flex-col gap-2 items-center md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16">
           {/* card */}
           <DealCard
@@ -25,7 +24,6 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
           {/* card */}
           <DealCard
@@ -37,7 +35,6 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
           {/* card */}
           <DealCard
@@ -49,7 +46,6 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
           {/* card */}
           <DealCard
@@ -61,7 +57,6 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
           {/* card */}
           <DealCard
@@ -73,7 +68,6 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
           {/* card */}
           <DealCard
@@ -85,12 +79,13 @@ const LatestDeals = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
             }
             price={"£350.00"}
-            link={"/product"}
           />
         </div>
       </div>
+
+      <Pagination />
     </>
   );
 };
 
-export default LatestDeals;
+export default page;

@@ -53,14 +53,14 @@ const CouponCard = ({
           <div className="mt-4 w-full flex items-center justify-start relative ">
             {showCode ? (
               <span
-                className="w-full p-3  bg-slate-300 text-red-600 font-mono rounded-md text-center text-sm border-dashed duration-500 ease-in-out"
+                className="w-full p-3  bg-slate-300 text-red-600 font-mono rounded-md text-center text-sm border-dashed duration-500 ease-in-out cursor-pointer"
                 onClick={() => setShowCode(!showCode)}
               >
                 {code}
               </span>
             ) : (
               <span
-                className="p-3 bg-green-400 rounded-md text-white w-full text-center text-sm duration-500 ease-in-out"
+                className="p-3 bg-green-400 rounded-md text-white w-full text-center text-sm duration-500 ease-in-out cursor-pointer"
                 onClick={() => setShowCode(!showCode)}
               >
                 SHOW CODE

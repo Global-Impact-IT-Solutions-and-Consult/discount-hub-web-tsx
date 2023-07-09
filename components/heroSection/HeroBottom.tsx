@@ -3,7 +3,7 @@ import Image from "next/image";
 const HeroBottom = () => {
   return (
     <>
-      <div className="w-full py-4 px-2 md:flex md:flex-row md:gap-4 lg:flex lg:flex-row lg:gap-6 2xl:gap-16">
+      <div className="w-full py-4  md:flex md:flex-row md:gap-4 lg:flex lg:flex-row lg:gap-6 2xl:gap-16">
         {/* card */}
         <div className="bg-white rounded-t-lg flex gap-2 items-center justify-center px-2 py-6 shadow-lg lg:w-4/12 lg:py-6 lg:rounded-lg 2xl:px-4 2xl:py-12">
           {/* left */}

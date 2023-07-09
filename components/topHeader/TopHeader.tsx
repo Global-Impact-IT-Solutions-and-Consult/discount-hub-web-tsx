@@ -82,7 +82,7 @@ const TopHeader = () => {
             <input
               type="text"
               placeholder="Enter keyword here..."
-              className="p-3 border-[2px] border-r-[1px] rounded-l-md w-2/5 text-sm font-sans outline-none focus:ring-2 focus:ring-gray-300"
+              className="p-3 border-[2px] border-r-[1px] bg-white rounded-l-md w-2/5 text-sm font-sans outline-none focus:ring-2 focus:ring-gray-300"
             />
             <select
               name="search"
