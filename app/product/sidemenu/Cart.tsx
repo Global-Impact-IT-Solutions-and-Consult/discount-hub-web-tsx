@@ -12,7 +12,7 @@ import {
 const Cart = () => {
   return (
     <>
-      <div className="w-full bg-white flex flex-col rounded-md">
+      <div className="w-full bg-white flex flex-col rounded-md mb-4">
         {/* card bottom */}
 
         <div className="p-5 flex flex-col gap-6 items-center justify-center shadow-lg text-center text-gray-800 font-sans">
