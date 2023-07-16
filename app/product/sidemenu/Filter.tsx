@@ -3,7 +3,7 @@ import React from "react";
 const Filter = () => {
   return (
     <>
-      <div className="w-full bg-white flex flex-col rounded-md">
+      <div className="w-full bg-white my-8 flex flex-col rounded-md">
         {/* card bottom */}
         <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800 font-sans">
           <span className="font-light text-xl text-gray-900">

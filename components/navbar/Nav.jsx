@@ -117,7 +117,7 @@ const Nav = () => {
         </div>
 
         {/* LEFT LINKS */}
-        <div className="text-sm font-sans text-white font-normal hidden md:flex ">
+        <div className="text-sm font-sans text-white font-normal hidden md:flex">
           <a
             href="#"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
@@ -207,7 +207,7 @@ const Nav = () => {
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
               <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Top offers</a>
+                <a href="/stores">Top stores</a>
               </li>
               <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Best deals</a>
@@ -215,7 +215,7 @@ const Nav = () => {
             </ul>
           </div>
           <a
-            href="#"
+            href="/contact-us"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Contact us

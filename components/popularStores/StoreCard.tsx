@@ -8,7 +8,7 @@ const StoreCard = ({ image, title }: any) => {
           {/* <Image src={image} height={80} width={150} alt="#" /> */}
           {image}
         </div>
-        <div className="flex items-center justify-center font-sans text-sm w-full h-1/3 bg-gray-200  py-2 px-4">
+        <div className="flex items-center justify-center font-sans text-sm w-full h-1/3 rounded-b-md bg-gray-200 shadow-md  py-2 px-4">
           {title}
         </div>
       </div>
