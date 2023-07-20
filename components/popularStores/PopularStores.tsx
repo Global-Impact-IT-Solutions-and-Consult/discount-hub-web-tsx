@@ -23,30 +23,37 @@ const PopularStores = () => {
           <StoreCard
             image={<BiLogoSpotify size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoSnapchat size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoAirbnb size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoDrupal size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoTiktok size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoShopify size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
           <StoreCard
             image={<BiLogoTwitch size={60} />}
             title={"Callaway Golf"}
+            link={"/stores/one"}
           />
         </div>
       </div>
