@@ -24,7 +24,8 @@ const CouponCard = ({
 
   return (
     <>
-      <div className="bg-white p-6 pb-2 flex flex-col items-center my-4 mb-10 hover:shadow-lg cursor-pointer rounded-md w-full min-w-full md:min-w-[18.5rem] md:justify-start  2xl:w-[22rem] 2xl:my-2">
+      {/* <div className="bg-white p-6 pb-2 flex flex-col items-center my-4 mb-10 hover:shadow-lg cursor-pointer rounded-md w-full min-w-full md:min-w-[18.5rem] md:justify-start  2xl:w-[22rem] 2xl:my-2"> */}
+      <div className="bg-white p-[15px]  pb-2 flex flex-col items-center my-4 mb-10 hover:shadow-lg cursor-pointer rounded-md w-[280px] min-w-[280px] md:justify-start 2xl:my-2">
         {/* card top*/}
         <div className=" h-40 ">
           <Image width={1440} height={600} src={image} alt="/" />

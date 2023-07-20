@@ -1,17 +1,65 @@
+import CouponCard from "@/components/latestCoupons/Couponcard";
+import Pagination from "@/widgets/pagination/Pagination";
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-import CouponCard from "./Couponcard";
 
-const LatestCoupons = () => {
+const page = () => {
   return (
     <>
-      <div className="py-8 w-full flex flex-col items-center justify-start gap-8">
+      <div className="px-4 pt-8  w-full flex flex-col items-center justify-start gap-8">
+        {/* TOP PART */}
         <SectionTopBar
-          title={"Latest Coupons"}
-          link={"/coupons"}
-          linkText={"VIEW ALL"}
+          title={"All Coupons"}
+          linkText={"CONTACT US"}
+          link={"/contact-us"}
         />
-
-        <div className="w-full flex  gap-4 overflow-x-scroll scrolling-auto items-center justify-start  md:flex-row md:justify-start md:gap-4 2xl:gap-8">
+        {/* BOTTOM PART (CARDS) */}
+        <div className="w-full flex flex-col gap-2 items-center md:flex-row  md:justify-around md:flex-wrap 2xl:justify-center  2xl:gap-16">
+          {/* card */}
+          <CouponCard
+            image={"/heroSlider/1.jpg"}
+            location={"United States"}
+            store={"Amazon"}
+            description={"Flat 40% off hotel bookings in 10 cities"}
+            offer={"35"}
+            expires={"07-14-2023"}
+            code={"X410-17GT-OL57"}
+          />{" "}
+          <CouponCard
+            image={"/heroSlider/1.jpg"}
+            location={"United States"}
+            store={"Amazon"}
+            description={"Flat 40% off hotel bookings in 10 cities"}
+            offer={"35"}
+            expires={"07-14-2023"}
+            code={"X410-17GT-OL57"}
+          />{" "}
+          <CouponCard
+            image={"/heroSlider/1.jpg"}
+            location={"United States"}
+            store={"Amazon"}
+            description={"Flat 40% off hotel bookings in 10 cities"}
+            offer={"35"}
+            expires={"07-14-2023"}
+            code={"X410-17GT-OL57"}
+          />{" "}
+          <CouponCard
+            image={"/heroSlider/1.jpg"}
+            location={"United States"}
+            store={"Amazon"}
+            description={"Flat 40% off hotel bookings in 10 cities"}
+            offer={"35"}
+            expires={"07-14-2023"}
+            code={"X410-17GT-OL57"}
+          />{" "}
+          <CouponCard
+            image={"/heroSlider/1.jpg"}
+            location={"United States"}
+            store={"Amazon"}
+            description={"Flat 40% off hotel bookings in 10 cities"}
+            offer={"35"}
+            expires={"07-14-2023"}
+            code={"X410-17GT-OL57"}
+          />{" "}
           <CouponCard
             image={"/heroSlider/1.jpg"}
             location={"United States"}
@@ -21,46 +69,12 @@ const LatestCoupons = () => {
             expires={"07-14-2023"}
             code={"X410-17GT-OL57"}
           />
-          <CouponCard
-            image={"/heroSlider/2.jpg"}
-            location={"United States"}
-            store={"Amazon"}
-            description={"Flat 40% off hotel bookings in 10 cities"}
-            offer={"35"}
-            expires={"07-14-2023"}
-            code={"X410-17GT-OL57"}
-          />
-          <CouponCard
-            image={"/heroSlider/5.jpg"}
-            location={"United States"}
-            store={"Amazon"}
-            description={"Flat 40% off hotel bookings in 10 cities"}
-            offer={"35"}
-            expires={"07-14-2023"}
-            code={"X410-17GT-OL57"}
-          />
-          <CouponCard
-            image={"/heroSlider/4.jpg"}
-            location={"United States"}
-            store={"Amazon"}
-            description={"Flat 40% off hotel bookings in 10 cities"}
-            offer={"35"}
-            expires={"07-14-2023"}
-            code={"X410-17GT-OL57"}
-          />
-          <CouponCard
-            image={"/heroSlider/3.jpg"}
-            location={"United States"}
-            store={"Amazon"}
-            description={"Flat 40% off hotel bookings in 10 cities"}
-            offer={"35"}
-            expires={"07-14-2023"}
-            code={"X410-17GT-OL57"}
-          />
         </div>
       </div>
+
+      <Pagination />
     </>
   );
 };
 
-export default LatestCoupons;
+export default page;

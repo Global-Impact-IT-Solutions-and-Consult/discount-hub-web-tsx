@@ -17,7 +17,7 @@ const PopularStores = () => {
         <SectionTopBar
           title={"Popular Stores"}
           linkText={"VIEW ALL"}
-          link={"#"}
+          link={"/stores"}
         />
         <div className="w-full flex gap-4 overflow-x-scroll scrolling-auto items-center justify-start 2xl:gap-8">
           <StoreCard

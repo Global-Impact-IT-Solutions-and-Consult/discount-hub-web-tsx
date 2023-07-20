@@ -48,7 +48,7 @@ const Footer = () => {
                 <div className="flex flex-col gap-2">
                   <div>
                     <a
-                      href="#"
+                      href="/deals"
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm font-sans"
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
@@ -57,7 +57,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <a
-                      href="#"
+                      href="/coupons"
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm font-sans"
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
@@ -66,7 +66,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <a
-                      href="#"
+                      href="/contact"
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm font-sans"
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
