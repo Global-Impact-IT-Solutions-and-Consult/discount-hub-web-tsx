@@ -14,7 +14,7 @@ const DealCard = ({
   return (
     <>
       <a href={link}>
-        <div className="bg-white flex flex-col items-center my-6 hover:shadow-lg cursor-pointer rounded-md w-full md:w-[21.5rem] lg:w-[24rem] xl:w-[21.5rem] 2xl:w-[22rem] 2xl:my-2">
+        <div className="bg-white flex flex-col items-center my-6 cursor-pointer rounded w-full md:w-[21.5rem] lg:w-[24rem] xl:w-[21.5rem] 2xl:w-[22rem] 2xl:my-2">
           {/* card top*/}
           <div className="h-[30%]">
             <Image
@@ -22,11 +22,11 @@ const DealCard = ({
               height={600}
               src={image}
               alt="/"
-              className="rounded-t-md"
+              className="rounded-t"
             />
           </div>
           {/* card bottom */}
-          <div className="h-[70%] p-4 flex flex-col gap-3 shadow-lg text-gray-500 font-sans">
+          <div className="h-[70%] p-4 flex flex-col gap-3 text-gray-500  ">
             <RatingStars />
             <span className="font-light text-lg">{title}</span>
             <div className="flex gap-3 text-xs">

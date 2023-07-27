@@ -2,7 +2,7 @@ import { BiMenu } from "react-icons/bi";
 
 const Navbar = () => {
   return (
-    <div className="bg-cyan-900">
+    <div className="navBg">
       <div className="flex flex-wrap  items-center justify-between mx-auto px-4 lg:w-10/12 lg:flex lg:justify-between lg:items-center 2xl:w-8/12">
         {/* MOBILE MENU */}
         {/* <ul className="menu lg:menu-horizontal bg-base-200 rounded-box md:hidden">
@@ -58,10 +58,10 @@ const Navbar = () => {
                   Deals
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
@@ -73,10 +73,10 @@ const Navbar = () => {
                   Coupons
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
@@ -88,10 +88,10 @@ const Navbar = () => {
                   Stores
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
@@ -117,7 +117,7 @@ const Navbar = () => {
         </div>
 
         {/* LEFT LINKS */}
-        <div className="text-sm font-sans text-white font-normal hidden md:flex ">
+        <div className="text-sm   text-white font-normal hidden md:flex ">
           <a
             href="/"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
@@ -146,10 +146,10 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="/latest-deals">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Best deals</a>
               </li>
             </ul>
@@ -176,10 +176,10 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Best deals</a>
               </li>
             </ul>
@@ -206,10 +206,10 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
                 <a href="#">Best deals</a>
               </li>
             </ul>
@@ -230,7 +230,7 @@ const Navbar = () => {
 
         <a
           href="#"
-          className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white font-sans text-sm hover:bg-green-500"
+          className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white   text-sm hover:bg-green-500"
         >
           RLT VERSION
         </a>

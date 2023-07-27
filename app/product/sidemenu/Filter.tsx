@@ -5,7 +5,7 @@ const Filter = () => {
     <>
       <div className="w-full bg-white mb-4 flex flex-col rounded-md">
         {/* card bottom */}
-        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800 font-sans">
+        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
           <span className="font-light text-xl text-gray-900">
             Products Filter
           </span>

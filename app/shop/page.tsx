@@ -14,12 +14,12 @@ const page = () => {
       <div className="w-full my-4 flex flex-col gap-4 md:flex-row 2xl:gap-10">
         {/* left */}
         <div className="w-full flex flex-col items-start gap-4 md:w-2/3">
-          <div className="bg-white w-full rounded-lg flex items-center justify-between p-4 font-sans lg:text-lg font-normal shadow-lg">
+          <div className="bg-white w-full rounded-lg flex items-center justify-between p-4   lg:text-lg font-normal shadow-lg">
             <span> </span>
             <select
               name="#"
               id="#"
-              className="shopSelectOptions text-gray-800 text-xs px-2 py-1 rounded-sm border-green-400 duration-300 ease-in-out font-sans lg:px-4 lg:py-2 "
+              className="shopSelectOptions text-gray-800 text-xs px-2 py-1 rounded-sm border-green-400 duration-300 ease-in-out   lg:px-4 lg:py-2 "
             >
               <option value="#">Default Sorting</option>
               <option value="#">Sort by popularity</option>

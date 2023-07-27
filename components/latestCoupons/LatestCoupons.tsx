@@ -11,7 +11,7 @@ const LatestCoupons = () => {
           linkText={"VIEW ALL"}
         />
 
-        <div className="w-full flex  gap-4 overflow-x-scroll scrolling-auto items-center justify-start  md:flex-row md:justify-start md:gap-4 2xl:gap-8">
+        <div className="w-full flex  gap-4 overflow-x-scroll scrolling-auto items-center justify-start md:flex-row md:justify-start md:gap-4 2xl:gap-8">
           <CouponCard
             image={"/heroSlider/1.jpg"}
             location={"United States"}

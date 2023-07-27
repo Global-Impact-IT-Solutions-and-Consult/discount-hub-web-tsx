@@ -20,12 +20,12 @@ const ReviewCard = () => {
         </div>
         {/* right */}
         <div className="flex flex-col items-start gap-1 w-2/3 md:w-9/12">
-          <span className="text-sm text-gray-800 text-left font-sans font-normal duration-300 ease-in-out hover:text-green-400">
+          <span className="text-sm text-gray-800 text-left   font-normal duration-300 ease-in-out hover:text-green-400">
             <a href="/product">Buying a TV Is Easy When You Know These Terms</a>
           </span>
 
           <RatingStars size={14} />
-          <span className="text-sm text-gray-800 text-left font-sans font-normal">
+          <span className="text-sm text-gray-800 text-left   font-normal">
             by John Doe
           </span>
         </div>

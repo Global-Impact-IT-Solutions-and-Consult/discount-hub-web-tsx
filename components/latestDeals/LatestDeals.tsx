@@ -9,11 +9,9 @@ const LatestDeals = () => {
         <SectionTopBar
           title={"Latest Deals"}
           linkText={"VIEW ALL"}
-          link={"/latest-deals"}
+          link={"/deals"}
         />
         {/* BOTTOM PART (CARDS) */}
-        {/* <div className="w-full flex flex-col gap-8 items-center md:flex-row md:justify-start md:flex-wrap md:pl-[0.5rem] lg:pl-[3rem] xl:pl-[2.5rem] 2xl:pl-[3rem] 2xl:gap-16"> */}
-        {/* <div className="w-full flex flex-col gap-2 items-center lg:px-6  md:flex-row md:justify-evenly md:flex-wrap  2xl:gap-16"> */}
         <div className="w-full flex flex-col gap-2 items-center md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16">
           {/* card */}
           <DealCard

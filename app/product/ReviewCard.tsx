@@ -20,12 +20,12 @@ const ReviewCard = () => {
           {/* right top */}
           <div className="flex flex-col gap-1">
             <RatingStars size={14} />
-            <span className="text-sm text-gray-700 text-left font-sans font-normal">
+            <span className="text-sm text-gray-700 text-left   font-normal">
               <b>admin</b> – February 21, 2018
             </span>
           </div>
           {/* right bottom */}
-          <span className="text-sm text-gray-700 text-left font-sans font-normal">
+          <span className="text-sm text-gray-700 text-left   font-normal">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
             numquam nostrum.
           </span>

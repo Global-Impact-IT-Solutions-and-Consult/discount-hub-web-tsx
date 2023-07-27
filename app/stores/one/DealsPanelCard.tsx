@@ -26,7 +26,7 @@ const DealsPanelCard = ({
           />
         </div>
         {/* card bottom */}
-        <div className="h-[70%] p-4 flex flex-col gap-3 w-full text-gray-500 font-sans">
+        <div className="h-[70%] p-4 flex flex-col gap-3 w-full text-gray-500  ">
           <RatingStars />
           <span className="font-light text-lg">{title}</span>
           <div className="flex gap-3 text-xs">

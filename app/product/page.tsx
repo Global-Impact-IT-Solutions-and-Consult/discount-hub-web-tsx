@@ -29,8 +29,8 @@ const Page = () => {
                 onClick={() => setSwitchSection(!switchSection)}
                 className={
                   switchSection
-                    ? "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer font-sans hover:bg-green-500"
-                    : "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer font-sans hover:bg-green-500"
+                    ? "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
+                    : "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
                 }
               >
                 DESCRIPTION
@@ -39,8 +39,8 @@ const Page = () => {
                 onClick={() => setSwitchSection(!switchSection)}
                 className={
                   switchSection
-                    ? "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer font-sans hover:bg-green-500"
-                    : "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer font-sans hover:bg-green-500"
+                    ? "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
+                    : "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
                 }
               >
                 REVIEWS (2)

@@ -25,13 +25,13 @@ const CouponCard = ({
   return (
     <>
       {/* <div className="bg-white p-6 pb-2 flex flex-col items-center my-4 mb-10 hover:shadow-lg cursor-pointer rounded-md w-full min-w-full md:min-w-[18.5rem] md:justify-start  2xl:w-[22rem] 2xl:my-2"> */}
-      <div className="bg-white p-[15px]  pb-2 flex flex-col items-center my-4 mb-10 hover:shadow-lg cursor-pointer rounded-md w-[280px] min-w-[280px] md:justify-start 2xl:my-2">
+      <div className="bg-white p-[15px] h-[420px]  pb-2 flex flex-col items-center my-4 mb-10 cursor-pointer rounded w-[280px] min-w-[280px] md:justify-between 2xl:my-2">
         {/* card top*/}
         <div className=" h-full ">
           <Image width={1440} height={600} src={image} alt="/" />
         </div>
         {/* card bottom */}
-        <div className="h-[70%] p-4 flex flex-col gap-2 text-gray-500 font-sans">
+        <div className="h-[70%] p-4 flex flex-col gap-2 text-gray-500  ">
           <div className="flex items-center justify-center gap-3 text-sm w-full">
             <div className="flex items-center gap-1 ">
               <BiSolidMap />
@@ -54,7 +54,7 @@ const CouponCard = ({
           <div className="mt-4 w-full flex items-center justify-start relative ">
             {showCode ? (
               <span
-                className="w-full p-3  bg-slate-300 text-red-600 font-mono rounded-md text-center text-sm border-dashed duration-500 ease-in-out cursor-pointer"
+                className="w-full p-3  bg-slate-300 text-red-600 font-mono rounded-md text-center text-sm border-dashed border-green-500 duration-500 ease-in-out cursor-pointer"
                 onClick={() => setShowCode(!showCode)}
               >
                 {code}

@@ -7,14 +7,14 @@ const About = () => {
     <>
       <div className="w-full bg-white flex flex-col rounded-md">
         {/* card bottom */}
-        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800 font-sans">
+        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
           <span className="font-light text-xl text-gray-900">About Seller</span>
           {/* horizontal line */}
           <div className="w-full flex items-center">
             <div className="bg-green-400 p-[1px] w-2/12"></div>
             <div className="bg-gray-200 p-[1px] w-10/12"></div>
           </div>
-          <div className="flex flex-col gap-4 items-center justify-center text-sm font-sans text-gray-800 px-4 py-6">
+          <div className="flex flex-col gap-4 items-center justify-center text-sm   text-gray-800 px-4 py-6">
             <BiLogoTwitch size={60} />
             <span className="cursor-pointer text-lg duration-300 ease-in-out hover:text-green-400">
               <a href="www.twitch.com">Twitch</a>

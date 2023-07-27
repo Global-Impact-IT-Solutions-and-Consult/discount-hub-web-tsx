@@ -54,22 +54,14 @@ const RightHero = () => {
                     className="absolute top-[50%] right-0 text-white/70 cursor-pointer select-none z-[2] p-1 bg-gray-800/70 hover:bg-gray-800 ease-in duration-300"
                   />
                   <div className="absolute bottom-[5%] bg-black/60 rounded-md p-2 left-[1rem] max-w-[90%] flex flex-col gap-1 lg:top-[80%] lg:left-[2rem]">
-                    {/* <div className="flex">
-                      <BiSolidStar className="text-orange-500" size={20} />
-                      <BiSolidStar className="text-orange-500" size={20} />
-                      <BiSolidStar className="text-orange-500" size={20} />
-                      <BiSolidStar className="text-orange-500" size={20} />
-                      <BiSolidStarHalf className="text-orange-500" size={20} />
-                    </div> */}
                     <RatingStars />
-                    <span className="text-white font-sans font-light text-xs lg:text-base">
+                    <span className="text-white   font-light text-xs lg:text-base">
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     </span>
                   </div>
                 </div>
               </>
             );
-            // return slide.image;
           })}
         </div>
       </div>

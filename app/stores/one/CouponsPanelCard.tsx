@@ -30,7 +30,7 @@ const CouponsPanelCard = ({
           <Image width={1440} height={600} src={image} alt="/" />
         </div>
         {/* card bottom */}
-        <div className="h-[70%] p-4 flex flex-col gap-2 text-gray-500 font-sans">
+        <div className="h-[70%] p-4 flex flex-col gap-2 text-gray-500  ">
           <div className="flex items-center justify-center gap-3 text-sm w-full">
             <div className="flex items-center gap-1 ">
               <BiSolidMap />

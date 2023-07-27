@@ -19,7 +19,8 @@ const LatestNews = () => {
         <div className="w-full flex flex-col gap-2 items-center md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16">
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
@@ -31,7 +32,8 @@ const LatestNews = () => {
           />
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
@@ -43,7 +45,8 @@ const LatestNews = () => {
           />
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
@@ -55,7 +58,8 @@ const LatestNews = () => {
           />
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
@@ -67,7 +71,8 @@ const LatestNews = () => {
           />
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
@@ -79,7 +84,8 @@ const LatestNews = () => {
           />
           {/* card */}
           <NewsCard
-            date={"6 Mar"}
+            day={"6"}
+            month={"Mar"}
             image={"/heroSlider/1.jpg"}
             title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
             author={"sinan"}
