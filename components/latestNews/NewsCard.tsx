@@ -26,8 +26,8 @@ const NewsCard = ({
             alt="/"
             className="rounded-t-md"
           />
-          <div className="flex flex-col gap-4 p-4 bg-green-400 text-white text-sm absolute top-2 left-2 rounded">
-            <span>{day}</span>
+          <div className="flex flex-col items-center gap-2 py-3 px-5 bg-green-400 text-white text-sm absolute top-2 left-2 rounded">
+            <span className="text-lg font-semibold">{day}</span>
             <span>{month}</span>
           </div>
         </div>

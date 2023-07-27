@@ -20,7 +20,7 @@ const Footer = () => {
                   height={32}
                   priority
                 />
-                <span className="  text-sm text-white leading-7">
+                <span className="  text-smtext-white leading-7 text-gray-300">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Laboriosam dolores quidem mollitia id ipsa nisi necessitatibus
                   iure repudiandae aperiam, odit ipsam dolor fugiat corporis
@@ -52,7 +52,7 @@ const Footer = () => {
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm  "
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
-                      <span>Latest Deals</span>
+                      <span className="text-gray-300">Latest Deals</span>
                     </a>
                   </div>
                   <div>
@@ -61,7 +61,7 @@ const Footer = () => {
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm  "
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
-                      <span>Newest Coupons</span>
+                      <span className="text-gray-300">Newest Coupons</span>
                     </a>
                   </div>
                   <div>
@@ -70,7 +70,7 @@ const Footer = () => {
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm  "
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
-                      <span>Contact Us</span>
+                      <span className="text-gray-300">Contact Us</span>
                     </a>
                   </div>
                   <div>
@@ -79,7 +79,7 @@ const Footer = () => {
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm  "
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
-                      <span>Terms & Conditions</span>
+                      <span className="text-gray-300">Terms & Conditions</span>
                     </a>
                   </div>
                   <div>
@@ -88,7 +88,7 @@ const Footer = () => {
                       className="flex items-center justify-start gap-2 cursor-pointer hover:text-green-300 duration-300 ease-in-out text-sm  "
                     >
                       <BiChevronRight size={23} className="text-green-300" />{" "}
-                      <span>FAQ</span>
+                      <span className="text-gray-300">FAQ</span>
                     </a>
                   </div>
                 </div>
