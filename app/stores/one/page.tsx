@@ -7,7 +7,7 @@ import DealsPanel from "./DealsPanel";
 import CouponsPanel from "./CouponsPanel";
 import { BiSolidMessageRounded, BiSolidStar } from "react-icons/bi";
 
-const page = () => {
+const Page = () => {
   const [switchSection, setSwitchSection] = useState(true);
 
   return (
@@ -66,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
