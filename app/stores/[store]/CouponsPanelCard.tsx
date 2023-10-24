@@ -42,7 +42,7 @@ const CouponsPanelCard = ({
             </div>
           </div>
           <div className="w-full flex justify-center p-1 text-green-300 font-mono font-medium text-2xl">
-            {offer}% OFF
+            {offer} OFF
           </div>
           <span className="text-base text-center  font-medium">
             {description}

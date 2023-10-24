@@ -16,11 +16,11 @@ const TopHeader = () => {
     <>
       {/* top top bar */}
       <div className="w-full bg-gray-200 p-4 flex items-center justify-center">
-        <div className="flex items-center justify-between text-sm   lg:w-10/12 2xl:w-8/12">
+        <div className="flex items-center justify-between text-xs lg:w-10/12 2xl:w-8/12">
           {/* left */}
           <div className="hidden md:flex md:gap-6 md:items-center md:justify-center">
             <a href="#">
-              <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
+              <div className="flex font-light font-poppins items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
                 {" "}
                 <BiSolidBookReader className="text-green-400" /> Discounts Guide
               </div>
@@ -59,27 +59,27 @@ const TopHeader = () => {
         </div>
       </div>
       {/* logo, search, cart bar */}
-      <div className="px-1 py-5 bg-white w-full flex items-center justify-center lg:p-8">
+      <div className="px-1 py-5 bg-white w-full flex items-center justify-center lg:p-4">
         <div className="flex flex-col gap-7 items-center justify-between md:flex-row  lg:flex-row lg:w-10/12 lg:gap-5 2xl:w-8/12">
           <a
             href="/"
-            className="flex items-center gap-1 p-4 text-black duration-300 ease-in-out lg:w-[15rem]"
+            className="flex items-center gap-1 text-black duration-300 ease-in-out lg:w-[15rem]"
           >
-            <BiSolidDiscount size={30} className="text-green-400" />
-            <span className="w-full font-extrabold text-2xl   md:text-xl  xl:text-2xl">
+            <BiSolidDiscount size={40} className="text-green-400" />
+            <span className="w-full font-extrabold text-2xl   md:text-3xl  xl:text-3xl">
               Discount Hub
             </span>
           </a>
-          <div className="flex justify-center lg:w-3/4">
+          <div className="flex justify-center lg:w-[600px]">
             <input
               type="text"
               placeholder="Enter keyword here..."
-              className="p-3 border-[2px] border-r-[1px] bg-white rounded-l-sm w-2/5 text-sm   outline-none"
+              className="p-3 border-[1px] border-r-[1px] bg-white rounded-l-sm w-2/5 text-sm   outline-none"
             />
             <select
               name="search"
               id="search"
-              className="text-xs bg-white border-[2px] border-l-[1px] border-r-none text-gray-700 px-2 w-2/5   p-2 outline-none lg:w-1/4"
+              className="text-xs bg-white border-[1px] border-l-[1px] border-r-none text-gray-700 px-2 w-2/5   p-2 outline-none lg:w-1/4"
             >
               <option>Select your category</option>
             </select>

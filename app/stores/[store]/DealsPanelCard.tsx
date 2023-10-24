@@ -13,17 +13,29 @@ const DealsPanelCard = ({
   link,
 }: any) => {
   return (
-    <a href={link}>
+    <a href={`/product/${link}`}>
       <div className="bg-white flex flex-col items-center my-6 hover:shadow-lg cursor-pointer rounded-md w-full md:w-[250px] lg:w-[280px] xl:w-[380px] 2xl:w-[430px]">
         {/* card top*/}
         <div className="h-[30%]">
-          <Image
-            width={1440}
-            height={600}
-            src={image}
-            alt="/"
-            className="rounded-t-md"
-          />
+          {!image ? (
+            <>
+              <Image
+                width={1440}
+                height={600}
+                src={"/heroSlider/1.jpg"}
+                alt="/"
+                className="rounded-t"
+              />
+            </>
+          ) : (
+            <Image
+              width={1440}
+              height={600}
+              src={image}
+              alt="/"
+              className="rounded-t"
+            />
+          )}
         </div>
         {/* card bottom */}
         <div className="h-[70%] p-4 flex flex-col gap-3 w-full text-gray-500  ">

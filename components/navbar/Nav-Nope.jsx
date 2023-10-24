@@ -88,7 +88,7 @@ const Nav = () => {
         {/* LEFT LINKS */}
         <div className="text-sm   text-white font-normal hidden md:flex">
           <a
-            href="#"
+            href="/"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Home
@@ -116,10 +116,10 @@ const Nav = () => {
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
               <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Top offers</a>
+                <a href="/deals">Top offers</a>
               </li>
               <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+                <a href="/deals">Best deals</a>
               </li>
             </ul>
           </div>
@@ -146,10 +146,10 @@ const Nav = () => {
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
               <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Top offers</a>
+                <a href="/coupons">Top offers</a>
               </li>
               <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+                <a href="/coupons">Best deals</a>
               </li>
             </ul>
           </div>
@@ -179,7 +179,7 @@ const Nav = () => {
                 <a href="/stores">Top stores</a>
               </li>
               <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+                <a href="/stores">Best deals</a>
               </li>
             </ul>
           </div>

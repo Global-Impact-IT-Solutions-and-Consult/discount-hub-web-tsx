@@ -2,8 +2,7 @@ import RatingStars from "@/widgets/ratingStars/RatingStars";
 import React from "react";
 import { BiLogoTwitch } from "react-icons/bi";
 
-const About = ({ description, rating, ratingCount, title }: any) => {
-  console.log("🚀 ~ file: About.tsx:6 ~ About ~ title:", title);
+const About = ({ data }: any) => {
   return (
     <>
       <div className="w-full bg-white flex flex-col rounded-md">
@@ -18,13 +17,16 @@ const About = ({ description, rating, ratingCount, title }: any) => {
           <div className="flex flex-col gap-4 items-center justify-center text-sm   text-gray-800 px-4 py-6">
             <BiLogoTwitch size={60} />
             <span className="cursor-pointer text-lg duration-300 ease-in-out hover:text-green-400">
-              <a href="www.twitch.com">{title}</a>
+              <a href="#">{data.store.stores.title}</a>
+              {/* <a href="www.twitch.com">Twitch</a> */}
             </span>
             <div className="flex items-center justify-center gap-4">
-              <RatingStars size={16} />({ratingCount} rates)
+              <RatingStars size={16} number={data.store.stores.rating} />
+              <b>-</b> {data.store.stores.ratingCount} rate(s)
+              {/* (4 rates) */}
             </div>
             <span className="text-center">
-              {description}
+              {data.store.stores.description}
               {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Repudiandae quis, architecto perferendis nostrum quo commodi
               consectetur, blanditiis mollitia sequi nam necessitatibus,

@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { AppProvider } from "../context/AppContext";
+// import 'text-encoding';
 
 interface Props {
   children?: ReactNode;
@@ -22,6 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
+      {/* <AppProvider> */}
       <body className={inter.className}>
         <TopHeader />
         <Navbar />
@@ -32,6 +35,7 @@ export default function RootLayout({ children }: Props) {
         </main>
         <Footer />
       </body>
+      {/* </AppProvider> */}
     </html>
   );
 }
