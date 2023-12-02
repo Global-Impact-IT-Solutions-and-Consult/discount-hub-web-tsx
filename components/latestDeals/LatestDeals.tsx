@@ -10,53 +10,89 @@ import Spinner from "@/widgets/spinner/Spinner";
 
 const LatestDeals = () => {
   const [apiData, setApiData] = useState([]);
+  // console.log(
+  //   "🚀 ~ file: LatestDeals.tsx:13 ~ LatestDeals ~ apiData:",
+  //   apiData
+  // );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     async function fetchServices() {
-      const client = new ApolloClient({
-        uri: "http://localhost/wp/graphql",
-        cache: new InMemoryCache(),
-      });
+      try {
+        const client = new ApolloClient({
+          // uri: "http://localhost/wp/graphql",
+          // uri: "http://localhost:10019/graphql",
+          uri: "http://127.0.0.1:10019/graphql",
+          cache: new InMemoryCache(),
+        });
 
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            products {
-              nodes {
-                products {
-                  price
-                  rating
-                  title
-                  summary
-                  image {
-                    sourceUrl
+        // const response = await client.query({
+        //   query: gql`
+        //     query unemployed {
+        //       products {
+        //         nodes {
+        //           products {
+        //             price
+        //             rating
+        //             title
+        //             summary
+        //             image {
+        //               sourceUrl
+        //             }
+        //             location
+        //             store {
+        //               ... on Store {
+        //                 id
+        //                 title
+        //               }
+        //             }
+        //           }
+        //           slug
+        //           databaseId
+        //         }
+        //       }
+        //     }
+        //   `,
+        // });
+
+        const response = await client.query({
+          query: gql`
+            query unemployed {
+              discounts(last: 9) {
+                nodes {
+                  discounts {
+                    companyName
+                    discountPercentage
+                    discountPrice
+                    normalPrice
+                    productImageUrl
+                    productName
+                    productUrl
                   }
-                  location
-                  store {
-                    ... on Store {
-                      id
-                      title
-                    }
-                  }
+                  databaseId
                 }
-                slug
-                databaseId
               }
             }
-          }
-        `,
-      });
+          `,
+        });
+        // console.log(
+        //   "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
+        //   response
+        // );
 
-      const getResponse: any = response.data.products.nodes.map(
-        (item: any) => item
-      );
+        const getResponse: any = response.data.discounts.nodes.map(
+          (item: any) => item
+        );
 
-      const truncate = getResponse.slice(0, 6);
+        const truncate = getResponse.slice(0, 9);
 
-      setApiData(truncate);
-      setLoading(false);
+        setApiData(truncate);
+        setLoading(false);
+      } catch (ex: any) {
+        console.log("Error fetching data:", ex);
+        console.log("Server response:", ex.response);
+      }
     }
     fetchServices();
   }, []);
@@ -71,7 +107,8 @@ const LatestDeals = () => {
           link={"/deals"}
         />
         {/* BOTTOM PART (CARDS) */}
-        <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16">
+        {/* <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16"> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {/* card */}
           {loading ? (
             <Spinner />
@@ -83,13 +120,14 @@ const LatestDeals = () => {
                   {apiData.map((item: any, i) => (
                     <DealCard
                       key={i}
-                      title={item.products.title}
-                      image={item.products.image?.sourceUrl}
-                      description={item.products.summary}
-                      location={item.products.location}
-                      store={item.products.store?.title}
-                      price={item.products.price}
-                      rating={item.products.rating}
+                      title={item.discounts.productName}
+                      image={item.discounts.productImageUrl}
+                      // description={item.discounts.summary}
+                      // location={item.discounts.location}
+                      store={item.discounts.companyName}
+                      discountPrice={item.discounts.discountPrice}
+                      normalPrice={item.discounts.normalPrice}
+                      discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
                     />
                   ))}

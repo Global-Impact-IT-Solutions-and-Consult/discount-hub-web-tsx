@@ -1,8 +1,7 @@
 import React from "react";
 import ProductCard from "./widgets/ProductCard";
 
-const Products = ({ data }: any) => {
-  // console.log("🚀 ~ file: Products.tsx:5 ~ Products ~ data:", data);
+const Products = () => {
   return (
     <>
       <div className="w-full bg-white flex flex-col rounded-md">
@@ -15,24 +14,11 @@ const Products = ({ data }: any) => {
             <div className="bg-gray-200 p-[1px] w-10/12"></div>
           </div>
           <div className="flex flex-col items-center gap-2 w-full mt-5">
-            {data.length > 0 && (
-              <>
-                {data.map((item: any, i: any) => (
-                  <ProductCard
-                    key={i}
-                    title={item.title}
-                    image={item.image?.sourceUrl}
-                    price={item.price}
-                    link={item.databaseId}
-                  />
-                ))}
-              </>
-            )}
-            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard /> */}
+            <ProductCard />
+            <ProductCard />
           </div>
         </div>
       </div>

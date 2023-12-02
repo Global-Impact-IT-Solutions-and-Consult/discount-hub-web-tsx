@@ -18,8 +18,8 @@ const HeroBottom = () => {
             </div>
             {/* right bottom */}
             <div className="text-left w-full text-sm text-gray-600 md:text-xs lg:text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-              aspernatur
+              Stay up to date with the latest deals and coupons as we bring them
+              right to you in record time.
             </div>
           </div>
         </div>
@@ -33,12 +33,12 @@ const HeroBottom = () => {
           <div className="flex flex-col gap-4 text-left items-center justify-start w-2/3">
             {/* right top */}
             <div className="text-left w-full   md:text-sm lg:text-base">
-              Deals & Coupons
+              Best Percentages
             </div>
             {/* right bottom */}
             <div className="text-left w-full text-sm text-gray-600 md:text-xs lg:text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-              aspernatur
+              Get the best percentages off on your favorite products without the
+              stress of searching through multiple sites.
             </div>
           </div>
         </div>
@@ -52,12 +52,12 @@ const HeroBottom = () => {
           <div className="flex flex-col gap-4 text-left items-center justify-start w-2/3">
             {/* right top */}
             <div className="text-left w-full   md:text-sm lg:text-base">
-              Deals & Coupons
+              Save Money
             </div>
             {/* right bottom */}
             <div className="text-left w-full text-sm text-gray-600 md:text-xs lg:text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-              aspernatur
+              We have a collection of the best discounts aimed at helping you
+              spend little but still get the quality product you want.
             </div>
           </div>
         </div>

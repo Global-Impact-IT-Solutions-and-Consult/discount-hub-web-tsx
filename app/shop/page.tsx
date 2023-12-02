@@ -1,3 +1,5 @@
+"use client";
+
 import Pagination from "@/widgets/pagination/Pagination";
 import About from "../product/sidemenu/About";
 import Filter from "../product/sidemenu/Filter";
@@ -7,8 +9,40 @@ import RecentReviews from "../product/sidemenu/RecentReviews";
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 import ProductCard from "../product/ProductCard";
 import DealCard from "@/components/latestDeals/DealCard";
+import { useState } from "react";
 
-const page = () => {
+const Page = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasPrevPage, setHasPrevPage] = useState(false);
+  const [endCursor, setEndCursor] = useState(null);
+
+  const handleNextPageChange = (newPage: any) => {
+    if (
+      newPage > 0 &&
+      newPage <= currentPage + 1 &&
+      newPage !== currentPage &&
+      hasNextPage
+    ) {
+      setCurrentPage(newPage);
+    }
+    // fetchServices();
+    window.scrollTo({ top: 240, behavior: "smooth" });
+  };
+
+  const handlePrevPageChange = (newPage: any) => {
+    if (
+      newPage > 0 &&
+      newPage === currentPage - 1 &&
+      newPage !== currentPage &&
+      hasPrevPage
+    ) {
+      setCurrentPage(newPage);
+    }
+    // fetchServices();
+    window.scrollTo({ top: 240, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="w-full my-4 flex flex-col gap-4 md:flex-row 2xl:gap-10">
@@ -30,7 +64,7 @@ const page = () => {
             </select>
           </div>
           <div className="flex flex-col items-center gap-4 md:flex-row md:flex-wrap 2xl:gap-10">
-            <DealCard
+            {/* <DealCard
               image={"/heroSlider/1.jpg"}
               title={"The Crash Bad Instant Folding Twin Bed"}
               location={"United States"}
@@ -40,119 +74,135 @@ const page = () => {
               }
               price={"£350.00"}
               link={"/product"}
-            />{" "}
+            />{" "} */}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />{" "}
             <DealCard
-              image={"/heroSlider/1.jpg"}
+              // key={i}
               title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
+              image={"/heroSlider/1.jpg"}
+              // description={item.summary}
+              // location={item.location}
               store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
+              discountPrice={"N2000"}
+              normalPrice={"N2500"}
+              discountPercentage={"20%"}
               link={"/product"}
             />
           </div>
-          <Pagination />
+          {/* <Pagination /> */}
+          <Pagination
+            currentPage={currentPage}
+            hasNextPage={hasNextPage}
+            handleNextPageChange={handleNextPageChange}
+            handlePrevPageChange={handlePrevPageChange}
+          />
         </div>
         {/* right */}
         <div className="w-full mb-8 items-start flex flex-col gap-6 md:w-1/3">
@@ -167,4 +217,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

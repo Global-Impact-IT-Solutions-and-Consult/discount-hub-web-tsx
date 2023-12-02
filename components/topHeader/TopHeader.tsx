@@ -70,7 +70,7 @@ const TopHeader = () => {
               Discount Hub
             </span>
           </a>
-          <div className="flex justify-center lg:w-[600px]">
+          {/* <div className="flex justify-center lg:w-[600px]">
             <input
               type="text"
               placeholder="Enter keyword here..."
@@ -95,7 +95,7 @@ const TopHeader = () => {
             <span className="bg-red-400 text-white py-[2px] px-[8px] rounded-full absolute top-0 right-0">
               3
             </span>
-          </a>
+          </a> */}
           {/* <Image
             className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
             src="/next.svg"

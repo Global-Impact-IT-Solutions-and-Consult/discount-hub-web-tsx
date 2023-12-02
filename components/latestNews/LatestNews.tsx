@@ -15,54 +15,54 @@ const LatestNews = () => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
+  // useEffect(() => {
+  //   setLoading(true);
 
-    async function fetchServices() {
-      const client = new ApolloClient({
-        uri: "http://localhost/wp/graphql",
-        cache: new InMemoryCache(),
-      });
+  //   async function fetchServices() {
+  //     const client = new ApolloClient({
+  //       uri: "http://localhost/wp/graphql",
+  //       cache: new InMemoryCache(),
+  //     });
 
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            newsPlural {
-              nodes {
-                news {
-                  author
-                  summary
-                  title
-                  date
-                  image {
-                    sourceUrl
-                  }
-                  comment {
-                    comment
-                    author
-                    date
-                    image {
-                      sourceUrl
-                    }
-                  }
-                }
-              }
-            }
-          }
-        `,
-      });
+  //     const response = await client.query({
+  //       query: gql`
+  //         query unemployed {
+  //           newsPlural {
+  //             nodes {
+  //               news {
+  //                 author
+  //                 summary
+  //                 title
+  //                 date
+  //                 image {
+  //                   sourceUrl
+  //                 }
+  //                 comment {
+  //                   comment
+  //                   author
+  //                   date
+  //                   image {
+  //                     sourceUrl
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       `,
+  //     });
 
-      const getResponse: any = response.data.newsPlural.nodes.map(
-        (item: any) => item.news
-      );
+  //     const getResponse: any = response.data.newsPlural.nodes.map(
+  //       (item: any) => item.news
+  //     );
 
-      const truncate = getResponse.slice(0, 6);
+  //     const truncate = getResponse.slice(0, 6);
 
-      setApiData(truncate);
-      setLoading(false);
-    }
-    fetchServices();
-  }, []);
+  //     setApiData(truncate);
+  //     setLoading(false);
+  //   }
+  //   fetchServices();
+  // }, []);
 
   return (
     <>
@@ -77,7 +77,7 @@ const LatestNews = () => {
         {/* <div className="w-full flex flex-col gap-2 items-center lg:px-6  md:flex-row md:justify-evenly md:flex-wrap  2xl:gap-16"> */}
         <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16">
           {/* card */}
-          {loading ? (
+          {/* {loading ? (
             <Spinner />
           ) : (
             <>
@@ -99,9 +99,9 @@ const LatestNews = () => {
                 </>
               )}
             </>
-          )}
+          )} */}
 
-          {/* <NewsCard
+          <NewsCard
             day={"6"}
             month={"Mar"}
             image={"/heroSlider/1.jpg"}
@@ -112,7 +112,67 @@ const LatestNews = () => {
               "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
             }
             link={"#"}
-          /> */}
+          />
+          <NewsCard
+            day={"12"}
+            month={"Apr"}
+            image={"/heroSlider/1.jpg"}
+            title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
+            author={"sinan"}
+            comment={"4"}
+            description={
+              "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
+            }
+            link={"#"}
+          />
+          <NewsCard
+            day={"14"}
+            month={"Oct"}
+            image={"/heroSlider/1.jpg"}
+            title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
+            author={"sinan"}
+            comment={"4"}
+            description={
+              "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
+            }
+            link={"#"}
+          />
+          <NewsCard
+            day={"25"}
+            month={"Aug"}
+            image={"/heroSlider/1.jpg"}
+            title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
+            author={"sinan"}
+            comment={"4"}
+            description={
+              "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
+            }
+            link={"#"}
+          />
+          <NewsCard
+            day={"6"}
+            month={"Mar"}
+            image={"/heroSlider/1.jpg"}
+            title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
+            author={"sinan"}
+            comment={"4"}
+            description={
+              "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
+            }
+            link={"#"}
+          />
+          <NewsCard
+            day={"6"}
+            month={"Mar"}
+            image={"/heroSlider/1.jpg"}
+            title={"RESTAURANT EMPLOYER READ CLIENTS ORDERS ON HIS IPAD"}
+            author={"sinan"}
+            comment={"4"}
+            description={
+              "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac"
+            }
+            link={"#"}
+          />
         </div>
       </div>
     </>

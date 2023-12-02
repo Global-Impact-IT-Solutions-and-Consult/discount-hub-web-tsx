@@ -46,13 +46,13 @@ const Navbar = () => {
           >
             <li>
               <a
-                href="#"
+                href="/"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Home
               </a>
             </li>
-            <li>
+            {/*<li>
               <details open>
                 <summary className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
                   Deals
@@ -67,7 +67,7 @@ const Navbar = () => {
                 </ul>
               </details>
             </li>
-            <li>
+             <li>
               <details open>
                 <summary className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
                   Coupons
@@ -96,6 +96,14 @@ const Navbar = () => {
                   </li>
                 </ul>
               </details>
+            </li> */}
+            <li>
+              <a
+                href="/deals"
+                className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+              >
+                Deals
+              </a>
             </li>
             <li>
               <a
@@ -105,14 +113,14 @@ const Navbar = () => {
                 Contact us
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="#"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Blog
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -124,7 +132,7 @@ const Navbar = () => {
           >
             Home
           </a>
-          <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          {/* <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
             <label tabIndex={0} className="flex gap-2 cursor-pointer">
               Deals{" "}
               <svg
@@ -153,8 +161,8 @@ const Navbar = () => {
                 <a href="/deals">Best deals</a>
               </li>
             </ul>
-          </div>
-          <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          </div> */}
+          {/* <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
             <label tabIndex={0} className="flex gap-2 cursor-pointer">
               Coupons{" "}
               <svg
@@ -213,19 +221,25 @@ const Navbar = () => {
                 <a href="/stores">Best deals</a>
               </li>
             </ul>
-          </div>
+          </div> */}
+          <a
+            href="/deals"
+            className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+          >
+            Deals
+          </a>
           <a
             href="#"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Contact us
           </a>
-          <a
+          {/* <a
             href="#"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Blog
-          </a>
+          </a> */}
         </div>
 
         <a

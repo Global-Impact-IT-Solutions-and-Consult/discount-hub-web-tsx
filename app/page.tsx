@@ -10,10 +10,10 @@ export default function Home() {
     <>
       <HeroSection />
       <LatestDeals />
-      <LatestCoupons />
+      {/* <LatestCoupons />
       <PopularStores />
       <LatestNews />
-      <Newsletter />
+      <Newsletter /> */}
     </>
   );
 }

@@ -1,10 +1,10 @@
 import CouponsPanelCard from "./CouponsPanelCard";
 
 const CouponsPanel = ({ coupons }: any) => {
-  console.log(
-    "🚀 ~ file: CouponsPanel.tsx:4 ~ CouponsPanel ~ coupons:",
-    coupons
-  );
+  // console.log(
+  //   "🚀 ~ file: CouponsPanel.tsx:4 ~ CouponsPanel ~ coupons:",
+  //   coupons
+  // );
   return (
     <>
       <>

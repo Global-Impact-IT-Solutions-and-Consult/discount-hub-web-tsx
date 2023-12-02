@@ -1,6 +1,6 @@
-// "use client";
+"use client";
 
-// import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
@@ -17,70 +17,44 @@ import {
   BiSolidPlaneAlt,
   BiSolidZap,
 } from "react-icons/bi";
+import AppContext from "@/context/AppContext";
+import Spinner from "@/widgets/spinner/Spinner";
 
-const LeftHero = async ({ data }: any) => {
-  console.log("🚀 ~ file: LeftHero.tsx:22 ~ LeftHero ~ data:", data);
-
-  let apiData = [];
-
-  // const [apiData, setApiData] = useState([]);
-  // useEffect(() => {
-  async function fetchServices() {
-    const client = new ApolloClient({
-      uri: "http://localhost/wp/graphql",
-      cache: new InMemoryCache(),
-    });
-
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          productCategories {
-            nodes {
-              productCategories {
-                title
-                icon
-              }
-              slug
-            }
-          }
-        }
-      `,
-    });
-
-    const getResponse = response.data.productCategories.nodes.map(
-      (item: any) => {
-        return item;
-      }
-    );
-    return getResponse;
-    // setApiData(getResponse);
-  }
-  apiData = await fetchServices();
-  // }, []);
+const LeftHero = () => {
+  const { loading, setLoading, leftHero } = useContext(AppContext);
 
   return (
     <>
       <div className="w-full md:w-2/5 lg:w-1/4">
         <ul className="">
-          {apiData.length > 0 && (
+          {loading ? (
+            <Spinner />
+          ) : (
             <>
-              {apiData.map((item: any, i: any) => (
-                <li key={i} className="first:rounded-t last:rounded-b">
-                  <a
-                    href={`/category/${item.slug}`}
-                    className="specialHover p-3 flex gap-4 items-center border-b-[1px] bg-white font-light text-gray-600 hover:pl-5  duration-300 ease-in-out cursor-pointer text-sm   md:text-xs"
-                  >
-                    <div className=" flex justify-center items-center px-2 pr-4 border-r-[1px]">
-                      <BiSolidZap className="text-green-400" size={18} />
-                      <i></i>
-                    </div>
-                    {item.productCategories.title}
-                    <span className="text-gray-300 font-normal text-xs">2</span>
-                  </a>
-                </li>
-              ))}
+              {leftHero.length > 0 && (
+                <>
+                  {leftHero.map((item: any, i: any) => (
+                    <li key={i} className="first:rounded-t last:rounded-b">
+                      <a
+                        href={`/category/${item.slug}`}
+                        className="specialHover p-3 flex gap-4 items-center border-b-[1px] bg-white font-light text-gray-600 hover:pl-5  duration-300 ease-in-out cursor-pointer text-sm   md:text-xs"
+                      >
+                        <div className=" flex justify-center items-center px-2 pr-4 border-r-[1px]">
+                          <BiSolidZap className="text-green-400" size={18} />
+                          <i></i>
+                        </div>
+                        {item.name}
+                        <span className="text-gray-300 font-normal text-xs">
+                          {item.count}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </>
+              )}
             </>
           )}
+
           {/* <li className="first:rounded-t last:rounded-b">
             <a
               href="/shop"
@@ -190,48 +164,14 @@ const LeftHero = async ({ data }: any) => {
             </a>
           </li> */}
           <li className="specialHover p-3 pl-5 flex gap-4 items-center border-b-[1px] bg-white font-normal text-gray-600 hover:pl-3 duration-300 ease-in-out lg:last:rounded-b cursor-pointer text-sm">
-            <a href="/category"> ALL CATEGORIES</a>
+            {/* <a href="/category"> ALL CATEGORIES</a> */}
+            <a href="/deals"> ALL CATEGORIES</a>
           </li>
         </ul>
       </div>
     </>
   );
 };
-
-export async function getServerSideProps() {
-  const client = new ApolloClient({
-    uri: "http://localhost/wp/graphql",
-    cache: new InMemoryCache(),
-  });
-
-  const response = await client.query({
-    query: gql`
-      query unemployed {
-        productCategories {
-          nodes {
-            productCategories {
-              title
-              icon
-            }
-            slug
-          }
-        }
-      }
-    `,
-  });
-
-  const data = response.data.productCategories.nodes.map((item: any) => {
-    return item;
-  });
-  console.log("🚀 ~ file: LeftHero.tsx:223 ~ data ~ data:", data);
-
-  // Pass the fetched data as props to the component
-  return {
-    props: {
-      data,
-    },
-  };
-}
 
 export default LeftHero;
 

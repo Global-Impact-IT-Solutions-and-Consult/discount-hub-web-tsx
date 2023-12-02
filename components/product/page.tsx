@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import RatingStars from "@/widgets/ratingStars/RatingStars";
-import ProductCard from "./ProductCard";
-import DescriptionSection from "./DescriptionSection";
-import ReviewSection from "./ReviewSection";
-import { BiSolidBasket, BiSolidMap } from "react-icons/bi";
-import RelatedProducts from "./RelatedProducts";
-import Cart from "./sidemenu/Cart";
-import Filter from "./sidemenu/Filter";
-import About from "./sidemenu/About";
-import Products from "./sidemenu/Products";
-import RecentReviews from "./sidemenu/RecentReviews";
-import Newsletter from "./sidemenu/Newsletter";
+// import ProductCard from "./ProductCard";
+// import DescriptionSection from "./DescriptionSection";
+// import ReviewSection from "./ReviewSection";
+// import { BiSolidBasket, BiSolidMap } from "react-icons/bi";
+// import RelatedProducts from "./RelatedProducts";
+// import Cart from "./sidemenu/Cart";
+// import Filter from "./sidemenu/Filter";
+// import About from "./sidemenu/About";
+// import Products from "./sidemenu/Products";
+// import RecentReviews from "./sidemenu/RecentReviews";
+// import Newsletter from "./sidemenu/Newsletter";
 
 const Page = () => {
   const [switchSection, setSwitchSection] = useState(true);
@@ -22,8 +22,8 @@ const Page = () => {
       <div className="w-full flex flex-col gap-4 md:flex-row 2xl:gap-10">
         {/* left */}
         <div className="w-full flex flex-col gap-12 md:w-2/3">
-          <ProductCard />
-          {/* <div className="flex flex-col w-full">
+          {/* <ProductCard /> */}
+          <div className="flex flex-col w-full">
             <div className="w-full flex justify-start items-center gap-1">
               <span
                 onClick={() => setSwitchSection(!switchSection)}
@@ -46,7 +46,7 @@ const Page = () => {
                 REVIEWS (2)
               </span>
             </div>
-            {switchSection ? (
+            {/* {switchSection ? (
               <>
                 <DescriptionSection />
               </>
@@ -54,15 +54,15 @@ const Page = () => {
               <>
                 <ReviewSection />
               </>
-            )}
-          </div> */}
+            )} */}
+          </div>
           {/* related products */}
           {/* <RelatedProducts /> */}
         </div>
         {/* right */}
         <div className="w-full mb-8 md:w-1/3 flex flex-col gap-6">
-          <Cart />
-          {/* <Filter />
+          {/* <Cart />
+          <Filter />
           <About />
           <Products />
           <Newsletter />

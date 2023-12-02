@@ -23,48 +23,44 @@ const PopularStores = () => {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
 
-  useEffect(() => {
-    setLoading(true);
-    async function fetchServices() {
-      const client = new ApolloClient({
-        uri: "http://localhost/wp/graphql",
-        cache: new InMemoryCache(),
-      });
+  // useEffect(() => {
+  //   setLoading(true);
+  //   async function fetchServices() {
+  //     const client = new ApolloClient({
+  //       uri: "http://localhost/wp/graphql",
+  //       cache: new InMemoryCache(),
+  //     });
 
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            stores {
-              nodes {
-                databaseId
-                stores {
-                  description
-                  rating
-                  ratingCount
-                  title
-                }
-              }
-            }
-          }
-        `,
-      });
+  //     const response = await client.query({
+  //       query: gql`
+  //         query unemployed {
+  //           stores {
+  //             nodes {
+  //               databaseId
+  //               stores {
+  //                 description
+  //                 rating
+  //                 ratingCount
+  //                 title
+  //               }
+  //             }
+  //           }
+  //         }
+  //       `,
+  //     });
 
-      const getResponse: any = response.data.stores.nodes;
-      console.log(
-        "🚀 ~ file: PopularStores.tsx:47 ~ fetchServices ~ getResponse:",
-        getResponse
-      );
+  //     const getResponse: any = response.data.stores.nodes;
+  //     console.log(
+  //       "🚀 ~ file: PopularStores.tsx:47 ~ fetchServices ~ getResponse:",
+  //       getResponse
+  //     );
 
-      // .map(
-      //   (item: any) => item.stores
-      // );
-
-      const truncate = getResponse.slice(0, 9);
-      setApiData(truncate);
-      setLoading(false);
-    }
-    fetchServices();
-  }, []);
+  //     const truncate = getResponse.slice(0, 9);
+  //     setApiData(truncate);
+  //     setLoading(false);
+  //   }
+  //   fetchServices();
+  // }, []);
 
   return (
     <>
@@ -76,7 +72,7 @@ const PopularStores = () => {
         />
         <div className="w-full flex gap-4 overflow-x-scroll scrolling-auto items-center justify-start 2xl:gap-8">
           {/* {loading ? <Spinner /> : <></>} */}
-          {loading ? (
+          {/* {loading ? (
             <Spinner />
           ) : (
             <>
@@ -93,14 +89,14 @@ const PopularStores = () => {
                 </>
               )}
             </>
-          )}
+          )} */}
 
-          {/* <StoreCard
+          <StoreCard
             image={<BiLogoSpotify size={60} />}
             title={"Callaway Golf"}
             link={"/stores/one"}
-          /> */}
-          {/* <StoreCard
+          />
+          <StoreCard
             image={<BiLogoSnapchat size={60} />}
             title={"Callaway Golf"}
             link={"/stores/one"}
@@ -129,7 +125,7 @@ const PopularStores = () => {
             image={<BiLogoTwitch size={60} />}
             title={"Callaway Golf"}
             link={"/stores/one"}
-          /> */}
+          />
         </div>
       </div>
     </>

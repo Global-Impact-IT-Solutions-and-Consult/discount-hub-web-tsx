@@ -4,7 +4,7 @@ import DealCard from "@/components/latestDeals/DealCard";
 import DealsPanelCard from "./DealsPanelCard";
 
 const DealsPanel = ({ deals }: any) => {
-  console.log("🚀 ~ file: DealsPanel.tsx:5 ~ DealsPanel ~ deals:", deals);
+  // console.log("🚀 ~ file: DealsPanel.tsx:5 ~ DealsPanel ~ deals:", deals);
   return (
     <>
       <div className="w-full flex flex-col flex-wrap justify-between gap-4 md:flex-row">

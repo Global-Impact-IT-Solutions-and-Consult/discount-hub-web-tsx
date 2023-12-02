@@ -1,3 +1,5 @@
+// "use client";
+
 import Pagination from "@/widgets/pagination/Pagination";
 import About from "../../product/sidemenu/About";
 import Filter from "../../product/sidemenu/Filter";
@@ -9,44 +11,40 @@ import ProductCard from "../../product/ProductCard";
 import DealCard from "@/components/latestDeals/DealCard";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+// import { useEffect, useState } from "react";
+// import AppContext from "@/context/AppContext";
+import Category from "@/components/category/Category";
 
-const page = async ({ params }: any) => {
+const Page = async ({ params }: any) => {
+  // const { allDiscounts } = useContext(AppContext);
+  // console.log("🚀 ~ file: page.tsx:19 ~ Page ~ allDiscounts:", allDiscounts);
+
   // console.log("🚀 ~ file: page.tsx:14 ~ page ~ params:", params);
-  let apiData = [];
+  let apiData: any = [];
   let prodArr: any = [];
+
+  // const [discounts, setDiscounts] = useState([]);
 
   async function fetchServices() {
     const client = new ApolloClient({
-      uri: "http://localhost/wp/graphql",
+      uri: "http://127.0.0.1:10019/graphql",
       cache: new InMemoryCache(),
     });
 
     const response = await client.query({
       query: gql`
         query unemployed {
-          products {
+          discounts(first: 1000000) {
             nodes {
-              products {
-                price
-                rating
-                title
-                summary
-                image {
-                  sourceUrl
-                }
-                location
-                store {
-                  ... on Store {
-                    id
-                    title
-                  }
-                }
-                category {
-                  ... on ProductCategory {
-                    slug
-                    title
-                  }
-                }
+              discounts {
+                companyName
+                discountType
+                discountPrice
+                discountPercentage
+                normalPrice
+                productImageUrl
+                productName
+                productUrl
               }
               databaseId
             }
@@ -56,7 +54,12 @@ const page = async ({ params }: any) => {
     });
     // console.log("🚀 ~ file: page.tsx:48 ~ fetchServices ~ response:", response);
 
-    response.data.products.nodes.map((item: any) => {
+    // const getResponse = response.data.discountTypes.nodes.map((item: any) => {
+    //   return item;
+    // });
+    // setDiscounts(getResponse);
+
+    response.data.discounts.nodes.map((item: any) => {
       item.products.category.map((cat: any) => {
         if (cat.slug === params.category) {
           prodArr.push(item);
@@ -65,21 +68,26 @@ const page = async ({ params }: any) => {
       // return item.products;
     });
 
-    const getResponse = response.data.products.nodes.map((item: any) => {
+    const getResponse = response.data.discounts.nodes.map((item: any) => {
       return item.products;
     });
     return getResponse;
 
-    // return response.data;
+    return response.data;
   }
 
-  apiData = await fetchServices();
+  // apiData = await fetchServices();
   // console.log("🚀 ~ file: page.tsx:77 ~ page ~ apiData:", apiData);
 
   // console.log("🚀 ~ file: page.tsx:16 ~ page ~ prodArr:", prodArr);
 
+  // useEffect(() => {
+  //   // fetchServices();
+  // }, []);
+
   return (
     <>
+      <Category slug={params.category} />
       <div className="w-full my-4 flex flex-col gap-4 md:flex-row 2xl:gap-10">
         {/* left */}
         <div className="w-full flex flex-col items-start gap-4 md:w-2/3">
@@ -99,7 +107,7 @@ const page = async ({ params }: any) => {
             </select>
           </div> */}
           <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap 2xl:gap-10">
-            {prodArr ? (
+            {/* {prodArr ? (
               <>
                 {prodArr.map((item: any, i: any) => (
                   <DealCard
@@ -134,7 +142,7 @@ const page = async ({ params }: any) => {
                   </>
                 )}
               </>
-            )}
+            )} */}
             {/* <DealCard
               image={"/heroSlider/1.jpg"}
               title={"The Crash Bad Instant Folding Twin Bed"}
@@ -257,19 +265,19 @@ const page = async ({ params }: any) => {
               link={"/product"}
             /> */}
           </div>
-          <Pagination />
+          {/* <Pagination /> */}
         </div>
         {/* right */}
         <div className="w-full mb-8 items-start flex flex-col gap-6 md:w-1/3">
-          <Filter />
+          {/* <Filter />
           <About />
           <Products />
           <Newsletter />
-          <RecentReviews />
+          <RecentReviews /> */}
         </div>
       </div>
     </>
   );
 };
 
-export default page;
+export default Page;

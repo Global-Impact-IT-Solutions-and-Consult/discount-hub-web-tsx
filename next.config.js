@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
+  images: {
+    domains: ["ng.jumia.is"], // Add your domain(s) here
+  },
   // experimental: {
   //   outputStandalone: true,
   // },

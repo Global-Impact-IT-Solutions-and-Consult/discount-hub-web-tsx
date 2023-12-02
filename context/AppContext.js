@@ -8,6 +8,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [url, setUrl] = useState("http://127.0.0.1:10019/graphql");
   const [loading, setLoading] = useState(false);
   const [leftPanelLoading, setLeftPanelLoading] = useState(false);
   const [token, setToken] = useState(null);
@@ -15,10 +16,11 @@ export const AppProvider = ({ children }) => {
   const [printing, setPrinting] = useState(false);
   const [topbarName, setTopbarName] = useState("Welcome!");
 
-  // USERS
-  const [users, setUsers] = useState([]);
-  const [usersByDept, setUsersByDept] = useState([]);
-  const [userLogs, setUserLogs] = useState([]);
+  // HERO SECTION
+  const [leftHero, setLeftHero] = useState([]);
+
+  // DISCOUNTS
+  const [allDiscounts, setAllDiscounts] = useState([]);
 
   //************/
   //*******/
@@ -27,82 +29,119 @@ export const AppProvider = ({ children }) => {
   //*** FUNCTIONS ***//
   // **************** //
 
+  // HERO SECTION
+  // Fetch left hero categories
+  const getLeftHeroCategories = async () => {
+    try {
+      setLoading(true);
+      const client = new ApolloClient({
+        // uri: "http://localhost/wp/graphql",
+        uri: `${url}`,
+        cache: new InMemoryCache(),
+      });
+
+      const response = await client.query({
+        query: gql`
+          query unemployed {
+            discountTypes {
+              nodes {
+                name
+                count
+                slug
+              }
+            }
+          }
+        `,
+      });
+
+      const getResponse = response.data.discountTypes.nodes.map((item) => {
+        return item;
+      });
+      setLeftHero(getResponse);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(
+        "🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:",
+        error
+      );
+    }
+  };
+
   const fetchServices = async () => {
     const client = new ApolloClient({
-      uri: "http://discounthub.local/graphql",
+      // uri: "http://discounthub.local/graphql",
+      uri: "http://localhost:10019/graphql",
       cache: new InMemoryCache(),
     });
 
     const response = await client.query({
       query: gql`
-        query discountHub {
-          products {
-            nodes {
-              products {
-                location
-                price
-                productRating
-                store
-                summary
-                title
+        query unemployed {
+          discounts {
+            edges {
+              node {
+                discounts {
+                  companyName
+                  discountPercentage
+                  discountPrice
+                  normalPrice
+                  productImageUrl
+                  productName
+                  productUrl
+                }
               }
             }
           }
         }
       `,
     });
-    console.log(
-      "🚀 ~ file: AppContext.js:54 ~ fetchServices ~ response:",
-      response
-    );
+    // console.log(
+    //   "🚀 ~ file: AppContext.js:54 ~ fetchServices ~ response:",
+    //   response
+    // );
 
-    const getResponse = response.data.footer.footers;
+    // const getResponse = response.data.discounts.nodes.map((item) => {
+    //   return item;
+    // });
+
+    // const getResponse = response.data.footer.footers;
     // return getResponse;
   };
 
-  // Get active user
-  const activeUser = async () => {
-    try {
-      const userId = localStorage.getItem("userId");
-      const response = await axios.get(
-        `https://hospital-ms-api.herokuapp.com/users/${userId}`,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      setUser(response.data);
-    } catch (error) {
-      console.log("~ activeUser ~ error", error);
-    }
-  };
+  // DISCOUNTS
+  // Fetch all discounts
+  const getAllDiscounts = async () => {
+    const client = new ApolloClient({
+      uri: `${url}`,
+      cache: new InMemoryCache(),
+    });
 
-  // Get All users
-  const getUsers = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        "https://hospital-ms-api.herokuapp.com/users?page=0&size=15",
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+    const response = await client.query({
+      query: gql`
+        query unemployed {
+          discounts(first: 1000000) {
+            nodes {
+              discounts {
+                companyName
+                discountType
+                discountPrice
+                discountPercentage
+                normalPrice
+                productImageUrl
+                productName
+                productUrl
+              }
+            }
+          }
         }
-      );
-      // console.log("getUsers ~ response", response);
-      setLoading(false);
-      setUsers(response.data);
-    } catch (err) {
-      console.log(err);
-      if (err.response.status === 401) {
-        // error("Unauthorized");
-        localStorage.removeItem("token");
-        window.location.reload(false);
-      }
-    }
+      `,
+    });
+
+    const getResponse = response.data.discounts.nodes.map((item) => {
+      return item;
+    });
+    setAllDiscounts(getResponse);
   };
 
   //*******/
@@ -114,10 +153,10 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("Fetch everything");
-      getUsers();
-      activeUser();
-      fetchServices();
+      // console.log("Fetch everything");
+      // fetchServices();
+      getLeftHeroCategories();
+      getAllDiscounts();
     }
   }, []);
 
@@ -126,14 +165,22 @@ export const AppProvider = ({ children }) => {
       value={{
         // Misc
         user,
+        loading,
+        topbarName,
 
-        setUser,
+        setLoading,
 
-        // Users
-        users,
+        // HERO SECTION
+        leftHero,
 
-        setUsers,
-        getUsers,
+        setLeftHero,
+        getLeftHeroCategories,
+
+        // DISCOUNTS
+        allDiscounts,
+
+        setAllDiscounts,
+        getAllDiscounts,
       }}
     >
       {" "}

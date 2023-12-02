@@ -39,7 +39,7 @@ export default page;
 //   async function fetchStore() {
 //     // setLoading(true);
 //     const client = new ApolloClient({
-//       uri: "http://localhost/wp/graphql",
+//         uri: "http://localhost/wp/graphql",
 //       cache: new InMemoryCache(),
 //     });
 
@@ -114,7 +114,7 @@ export default page;
 
 //   async function fetchDeals() {
 //     const client = new ApolloClient({
-//       uri: "http://localhost/wp/graphql",
+//         uri: "http://localhost/wp/graphql",
 //       cache: new InMemoryCache(),
 //     });
 
@@ -175,7 +175,7 @@ export default page;
 
 //   // async function fetchCoupons() {
 //   //   const client = new ApolloClient({
-//   //     uri: "http://localhost/wp/graphql",
+//   //       uri: "http://localhost/wp/graphql",
 //   //     cache: new InMemoryCache(),
 //   //   });
 

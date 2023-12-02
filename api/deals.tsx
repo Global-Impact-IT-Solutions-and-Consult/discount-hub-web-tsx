@@ -89,7 +89,7 @@ export default data;
 // import { ApolloClient, InMemoryCache, HttpLink, gql } from "@apollo/client";
 
 // const link = new HttpLink({
-//   uri: "http://localhost/wp/graphql",
+//     uri: "http://localhost/wp/graphql",
 //   fetchOptions: {
 //     credentials: "same-origin",
 //   },
