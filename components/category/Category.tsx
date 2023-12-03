@@ -233,13 +233,13 @@ const Category = ({ slug }: any) => {
       </div>
 
       {/* <Pagination /> */}
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
         hasNextPage={currentPage < Math.ceil(apiData.length / itemsPerPage)}
         handleNextPageChange={handleNextPageChange}
         handlePrevPageChange={handlePrevPageChange}
         pages={pages}
-      />
+      /> */}
     </>
   );
 

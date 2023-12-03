@@ -69,8 +69,13 @@ const Page = () => {
       // );
 
       setApiData(responseData);
+      setVisibleData(responseData);
+      console.log(
+        "🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:",
+        responseData
+      );
       // setCurrentPage(1);
-      setVisibleData(responseData.slice(0, itemsPerPage));
+      // setVisibleData(responseData.slice(0, itemsPerPage));
       // setHasNextPage(response.data.discounts.pageInfo.hasNextPage);
       // setHasPrevPage(response.data.discounts.pageInfo.hasPreviousPage);
       // setEndCursor(response.data.discounts.pageInfo.endCursor);
@@ -114,7 +119,7 @@ const Page = () => {
     try {
       e.preventDefault();
       const filtrate = apiData.filter((item: any) =>
-        item.firstname
+        item.discounts.productName
           .toLowerCase()
           .includes(e.target.value.toLocaleLowerCase())
       );
@@ -124,29 +129,79 @@ const Page = () => {
     }
   };
 
+  // const handleSearch = (event: any) => {
+  //   const searchTerm = event.target.value;
+  //   setSearchTerm(searchTerm);
+  //   const filteredData = apiData.filter((item: any) =>
+  //     Object.values(item).some((value: any) =>
+  //       value.toLowerCase().includes(searchTerm.toLowerCase())
+  //     )
+  //   );
+  //   setPages(Math.ceil(filteredData.length / itemsPerPage));
+  //   setCurrentPage(0);
+  //   getVisibleData(filteredData);
+  // };
+
+  // useEffect(() => {
+  //   if (apiData) {
+  //     const filteredData = apiData.filter((item) =>
+  //       Object.values(item).some((value: any) =>
+  //         value.toLowerCase().includes(searchTerm.toLowerCase())
+  //       )
+  //     );
+  //     setPages(Math.ceil(filteredData.length / itemsPerPage));
+  //     setCurrentPage(0);
+  //     getVisibleData(filteredData);
+  //   }
+  // }, [apiData, searchTerm]);
+
   const handleSearch = (event: any) => {
-    const searchTerm = event.target.value;
+    const searchTerm = event.target.value.toLowerCase();
     setSearchTerm(searchTerm);
-    const filteredData = apiData.filter((item: any) =>
-      Object.values(item).some((value: any) =>
-        value.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    setPages(Math.ceil(filteredData.length / itemsPerPage));
-    setCurrentPage(0);
-    getVisibleData(filteredData);
+
+    const filteredData = apiData.filter((item: any) => {
+      for (const key in item) {
+        if (item.hasOwnProperty(key)) {
+          const value = item[key];
+
+          if (
+            typeof value === "string" &&
+            value.toLowerCase().includes(searchTerm)
+          ) {
+            return true; // Found a match in a string property
+          } else if (
+            typeof value === "number" &&
+            value.toString().includes(searchTerm)
+          ) {
+            return true; // Found a match in a numeric property
+          }
+        }
+      }
+      return false; // No match found in the current object
+    });
+
+    setVisibleData(filteredData);
   };
 
   useEffect(() => {
     if (apiData) {
-      const filteredData = apiData.filter((item) =>
-        Object.values(item).some((value: any) =>
-          value.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-      setPages(Math.ceil(filteredData.length / itemsPerPage));
-      setCurrentPage(0);
-      getVisibleData(filteredData);
+      const filteredData = apiData.filter((item: any) => {
+        for (const key in item) {
+          if (item.hasOwnProperty(key)) {
+            const value = item[key];
+
+            if (
+              (typeof value === "string" || typeof value === "number") &&
+              value.toString().toLowerCase().includes(searchTerm)
+            ) {
+              return true; // Found a match in a string or numeric property
+            }
+          }
+        }
+        return false; // No match found in the current object
+      });
+
+      setVisibleData(filteredData);
     }
   }, [apiData, searchTerm]);
 
@@ -162,7 +217,7 @@ const Page = () => {
   useEffect(() => {
     if (apiData) {
       setPages(Math.ceil(apiData.length / itemsPerPage));
-      getVisibleData(apiData);
+      setVisibleData(apiData);
     }
   }, [apiData]);
 
@@ -203,6 +258,7 @@ const Page = () => {
               placeholder="search product..."
               className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400"
               onChange={handleSearch}
+              // onChange={onSearchCangeHandler}
             />
           </div>
           {/* <a
@@ -263,13 +319,13 @@ const Page = () => {
       </div>
 
       {/* <Pagination /> */}
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
         hasNextPage={currentPage < Math.ceil(apiData.length / itemsPerPage)}
         handleNextPageChange={handleNextPageChange}
         handlePrevPageChange={handlePrevPageChange}
         pages={pages}
-      />
+      /> */}
     </>
   );
 };

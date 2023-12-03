@@ -15,49 +15,7 @@ const TopHeader = () => {
   return (
     <>
       {/* top top bar */}
-      <div className="w-full bg-gray-200 p-4 flex items-center justify-center">
-        <div className="flex items-center justify-between text-xs lg:w-10/12 2xl:w-8/12">
-          {/* left */}
-          <div className="hidden md:flex md:gap-6 md:items-center md:justify-center">
-            <a href="#">
-              <div className="flex font-light font-poppins items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
-                {" "}
-                <BiSolidBookReader className="text-green-400" /> Discounts Guide
-              </div>
-            </a>
-
-            <a href="#">
-              <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
-                {" "}
-                <BiSolidBookReader className="text-green-400" /> Customer
-                Assistance
-              </div>
-            </a>
-          </div>
-          {/* right */}
-          <div className="flex gap-6 items-center justify-center">
-            <a href="#">
-              <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
-                <BiSolidLandmark className="text-green-400" /> English
-              </div>
-            </a>
-
-            <a href="#">
-              <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
-                <BiSolidLock className="text-green-400" />
-                Sign In
-              </div>
-            </a>
-
-            <a href="#">
-              <div className="flex items-center gap-2 duration-300 ease-in cursor-pointer hover:text-green-400">
-                <BiSolidUser className="text-green-400" />
-                Sign Up
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+      {/* <div classNaes */}
       {/* logo, search, cart bar */}
       <div className="px-1 py-5 bg-white w-full flex items-center justify-center lg:p-4">
         <div className="flex flex-col gap-7 items-center justify-between md:flex-row  lg:flex-row lg:w-10/12 lg:gap-5 2xl:w-8/12">

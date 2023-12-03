@@ -202,13 +202,13 @@ const StorePage = ({ params }: any) => {
                   <>
                     <BiLogoTwitch size={60} />
                     <span className="cursor-pointer text-lg duration-300 ease-in-out hover:text-green-400">
-                      <a href="www.twitch.com">{store?.title}</a>
+                      {/* <a href="www.twitch.com">{store?.title}</a> */}
                     </span>
                     <div className="flex items-center justify-center gap-4">
-                      <RatingStars size={16} />({store?.ratingCount} rates)
+                      {/* <RatingStars size={16} />({store?.ratingCount} rates) */}
                     </div>
                     <span className="text-center">
-                      {store?.description}
+                      {/* {store?.description} */}
                       {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Repudiandae quis, architecto perferendis nostrum quo commodi
               consectetur, blanditiis mollitia sequi nam necessitatibus,

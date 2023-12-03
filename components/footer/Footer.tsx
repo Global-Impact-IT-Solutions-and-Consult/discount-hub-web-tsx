@@ -6,11 +6,9 @@ const Footer = () => {
     <>
       <div className="navBg bg- flex flex-col items-center justify-center w-full">
         {/* TOP PART */}
-        <div className="w-full flex-col items-center justify-center lg:w-10/12 lg:flex-col  2xl:w-8/12">
+        {/* <div className="w-full flex-col items-center justify-center lg:w-10/12 lg:flex-col  2xl:w-8/12">
           <div className="w-full flex flex-col flex-wrap gap-6 py-12 px-4 items-center justify-start lg:flex-row lg:flex-nowrap lg:gap-2">
-            {/* pair */}
             <div className="w-full flex flex-col gap-5 justify-evenly md:flex-row">
-              {/* LOGO STUFF */}
               <div className="flex flex-col gap-6 items-start justify-center w-full md:w-[55%]">
                 <Image
                   src="/vercel.svg"
@@ -27,24 +25,17 @@ const Footer = () => {
                   nesciunt illo nemo minus.
                 </span>
               </div>
-              {/* TWITTER STUFF */}
               <div className="flex text-white flex-col gap-6">
-                {/* title */}
                 <div className="font-normal  ">TWITTER FEED</div>
-                {/* twitter stuff */}
                 <span className="text-sm   font-semibold text-gray-300">
                   Could not authenticate you.
                 </span>
               </div>
             </div>
 
-            {/* pair */}
             <div className="w-full flex flex-col gap-10 justify-evenly md:flex-row">
-              {/* QUICK LINKS  */}
               <div className="flex text-white flex-col gap-6">
-                {/* title */}
                 <div className="font-normal  ">QUICK LINKS</div>
-                {/* links */}
                 <div className="flex flex-col gap-2">
                   <div>
                     <a
@@ -93,11 +84,8 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              {/* INSTAGRAM STUFF */}
               <div className="flex text-white flex-col gap-6">
-                {/* title */}
                 <div className="font-normal  ">INSTAGRAM</div>
-                {/* twitter stuff */}
                 <span className="text-sm   font-semibold text-gray-300">
                   ...
                 </span>
@@ -105,7 +93,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* CARD STUFF */}
           <div className="w-full flex items-center justify-center gap-2 my-8">
             <Image
               className="rounded-sm"
@@ -143,7 +130,7 @@ const Footer = () => {
               alt="/"
             />
           </div>
-        </div>
+        </div> */}
         {/* COPYWRIGHT */}
         <div className="w-full footerBottomBg p-4 flex items-center justify-center text-slate-500   text-md">
           Copyright 2022.KlbTheme . All rights reserved

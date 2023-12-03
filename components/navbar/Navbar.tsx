@@ -97,17 +97,17 @@ const Navbar = () => {
                 </ul>
               </details>
             </li> */}
-            <li>
+            {/* <li>
               <a
                 href="/deals"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Deals
               </a>
-            </li>
+            </li> */}
             <li>
               <a
-                href="#"
+                href="https://www.giitsc.com"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Contact us
@@ -222,14 +222,14 @@ const Navbar = () => {
               </li>
             </ul>
           </div> */}
-          <a
+          {/* <a
             href="/deals"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Deals
-          </a>
+          </a> */}
           <a
-            href="#"
+            href="https://www.giitsc.com"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Contact us
@@ -246,7 +246,7 @@ const Navbar = () => {
           href="#"
           className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white   text-sm hover:bg-green-500"
         >
-          RLT VERSION
+          BETA VERSION
         </a>
 
         {/* <div className="flex-1">

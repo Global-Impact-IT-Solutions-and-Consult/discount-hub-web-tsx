@@ -40,8 +40,13 @@ const DealCard = ({
                 />
               </>
             )}
-            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2">
-              - {discountPercentage}
+            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
+              {/* company logo */}
+              <img
+                src={image}
+                alt="#"
+                className="object-contain w-full h-full rounded-t"
+              />
             </div>
           </div>
           {/* card bottom */}
@@ -68,11 +73,18 @@ const DealCard = ({
                 {description}
               </span>
             </div> */}
-            <div className="w-full flex justify-end p-1 text-green-300 text-[24px]">
-              {discountPrice}
-            </div>
-            <div className="w-full flex justify-end p-1 text-gray-300 text-[18px] line-through">
-              {normalPrice}
+            <div className="flex justify-between items-center w-full relative mt-2">
+              <div className="flex flex-col justify-start items-start">
+                <div className="w-full flex py-1 text-green-300 text-[24px]">
+                  {discountPrice}
+                </div>
+                <div className="w-full flex py-1 text-gray-300 text-[18px] line-through">
+                  {normalPrice}
+                </div>
+              </div>
+              <div className="bg-red-300/40 text-orange-500 py-4 px-2 rounded-md flex items-center justify-center absolute top-2 right-2">
+                - {discountPercentage}
+              </div>
             </div>
           </div>
         </div>
