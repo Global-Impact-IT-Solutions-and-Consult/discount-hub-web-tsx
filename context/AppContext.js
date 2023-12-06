@@ -71,7 +71,7 @@ export const AppProvider = ({ children }) => {
   const fetchServices = async () => {
     const client = new ApolloClient({
       // uri: "http://discounthub.local/graphql",
-      uri: "http://localhost:10019/graphql",
+      uri: url,
       cache: new InMemoryCache(),
     });
 
@@ -164,6 +164,7 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         // Misc
+        url,
         user,
         loading,
         topbarName,

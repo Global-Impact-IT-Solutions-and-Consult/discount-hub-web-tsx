@@ -1,8 +1,10 @@
+import AppContext from "@/context/AppContext";
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const RightHeroCard = () => {
+  const { url } = useContext(AppContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +13,7 @@ const RightHeroCard = () => {
     async function fetchServices() {
       try {
         const client = new ApolloClient({
-          uri: "http://127.0.0.1:10019/graphql",
+          uri: url,
           cache: new InMemoryCache(),
         });
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
@@ -10,6 +10,7 @@ import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 
 // Spinner
 import Spinner from "@/widgets/spinner/Spinner";
+import AppContext from "@/context/AppContext";
 
 const Page = () => {
   const [apiData, setApiData] = useState([]);
@@ -19,12 +20,14 @@ const Page = () => {
   const [hasPrevPage, setHasPrevPage] = useState(false);
   const [endCursor, setEndCursor] = useState(null);
 
+  const { url } = useContext(AppContext);
+
   const fetchServices = async () => {
     try {
       setLoading(true);
 
       const client = new ApolloClient({
-        uri: "http://127.0.0.1:10019/graphql",
+        uri: url,
         cache: new InMemoryCache(),
       });
 

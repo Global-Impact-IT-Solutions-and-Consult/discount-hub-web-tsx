@@ -11,70 +11,70 @@ import ProductCard from "../../product/ProductCard";
 import DealCard from "@/components/latestDeals/DealCard";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-// import { useEffect, useState } from "react";
-// import AppContext from "@/context/AppContext";
+import { useEffect, useState, useContext } from "react";
+import AppContext from "@/context/AppContext";
 import Category from "@/components/category/Category";
 
 const Page = async ({ params }: any) => {
-  // const { allDiscounts } = useContext(AppContext);
+  // const { url, allDiscounts } = useContext(AppContext);
   // console.log("🚀 ~ file: page.tsx:19 ~ Page ~ allDiscounts:", allDiscounts);
 
   // console.log("🚀 ~ file: page.tsx:14 ~ page ~ params:", params);
-  let apiData: any = [];
-  let prodArr: any = [];
+  // let apiData: any = [];
+  // let prodArr: any = [];
 
   // const [discounts, setDiscounts] = useState([]);
 
-  async function fetchServices() {
-    const client = new ApolloClient({
-      uri: "http://127.0.0.1:10019/graphql",
-      cache: new InMemoryCache(),
-    });
+  // async function fetchServices() {
+  //   const client = new ApolloClient({
+  //     uri: url,
+  //     cache: new InMemoryCache(),
+  //   });
 
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          discounts(first: 1000000) {
-            nodes {
-              discounts {
-                companyName
-                discountType
-                discountPrice
-                discountPercentage
-                normalPrice
-                productImageUrl
-                productName
-                productUrl
-              }
-              databaseId
-            }
-          }
-        }
-      `,
-    });
-    // console.log("🚀 ~ file: page.tsx:48 ~ fetchServices ~ response:", response);
+  //   const response = await client.query({
+  //     query: gql`
+  //       query unemployed {
+  //         discounts(first: 1000000) {
+  //           nodes {
+  //             discounts {
+  //               companyName
+  //               discountType
+  //               discountPrice
+  //               discountPercentage
+  //               normalPrice
+  //               productImageUrl
+  //               productName
+  //               productUrl
+  //             }
+  //             databaseId
+  //           }
+  //         }
+  //       }
+  //     `,
+  //   });
+  //   // console.log("🚀 ~ file: page.tsx:48 ~ fetchServices ~ response:", response);
 
-    // const getResponse = response.data.discountTypes.nodes.map((item: any) => {
-    //   return item;
-    // });
-    // setDiscounts(getResponse);
+  //   // const getResponse = response.data.discountTypes.nodes.map((item: any) => {
+  //   //   return item;
+  //   // });
+  //   // setDiscounts(getResponse);
 
-    response.data.discounts.nodes.map((item: any) => {
-      item.products.category.map((cat: any) => {
-        if (cat.slug === params.category) {
-          prodArr.push(item);
-        }
-      });
-      // return item.products;
-    });
+  //   response.data.discounts.nodes.map((item: any) => {
+  //     item.products.category.map((cat: any) => {
+  //       if (cat.slug === params.category) {
+  //         prodArr.push(item);
+  //       }
+  //     });
+  //     // return item.products;
+  //   });
 
-    const getResponse = response.data.discounts.nodes.map((item: any) => {
-      return item.products;
-    });
-    return getResponse;
+  //   const getResponse = response.data.discounts.nodes.map((item: any) => {
+  //     return item.products;
+  //   });
+  //   return getResponse;
 
-    return response.data;
-  }
+  //   return response.data;
+  // }
 
   // apiData = await fetchServices();
   // console.log("🚀 ~ file: page.tsx:77 ~ page ~ apiData:", apiData);

@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Cart from "./sidemenu/Cart";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Spinner from "@/widgets/spinner/Spinner";
+import AppContext from "@/context/AppContext";
 
 const ProductPage = ({ id }: any) => {
+  const { url } = useContext(AppContext);
+
   const [switchSection, setSwitchSection] = useState(true);
 
   const [apiData, setApiData] = useState([]);
@@ -17,7 +20,7 @@ const ProductPage = ({ id }: any) => {
     async function fetchServices() {
       try {
         const client = new ApolloClient({
-          uri: "http://127.0.0.1:10019/graphql",
+          uri: url,
           cache: new InMemoryCache(),
         });
 

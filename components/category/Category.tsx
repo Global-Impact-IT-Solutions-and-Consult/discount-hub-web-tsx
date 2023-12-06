@@ -11,7 +11,7 @@ import Spinner from "@/widgets/spinner/Spinner";
 import Pagination from "@/widgets/pagination/Pagination";
 
 const Category = ({ slug }: any) => {
-  const { loading, setLoading, allDiscounts } = useContext(AppContext);
+  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
   const [discounts, setDiscounts] = useState([]);
   const [apiData, setApiData] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
@@ -26,7 +26,7 @@ const Category = ({ slug }: any) => {
     try {
       setLoading(true);
       const client = new ApolloClient({
-        uri: "http://127.0.0.1:10019/graphql",
+        uri: url,
         cache: new InMemoryCache(),
       });
 
@@ -109,6 +109,48 @@ const Category = ({ slug }: any) => {
     setLoading(false);
   };
 
+  // SearchBar Handler
+  const onSearchCangeHandler = async (e: any) => {
+    try {
+      e.preventDefault();
+      const filtrate = discounts.filter((item: any) =>
+        item.discounts.productName
+          .toLowerCase()
+          .includes(e.target.value.toLocaleLowerCase())
+      );
+      console.log(
+        "🚀 ~ file: page.tsx:126 ~ onSearchCangeHandler ~ filtrate:",
+        filtrate
+      );
+      setFiltered(filtrate);
+      setVisibleData(filtrate);
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    if (discounts) {
+      const filteredData = discounts.filter((item: any) => {
+        for (const key in item) {
+          if (item.hasOwnProperty(key)) {
+            const value = item[key];
+
+            if (
+              (typeof value === "string" || typeof value === "number") &&
+              value.toString().toLowerCase().includes(searchTerm)
+            ) {
+              return true; // Found a match in a string or numeric property
+            }
+          }
+        }
+        return false; // No match found in the current object
+      });
+
+      setVisibleData(filteredData);
+    }
+  }, [discounts, searchTerm]);
+
   const handleSearch = (event: any) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
@@ -154,7 +196,7 @@ const Category = ({ slug }: any) => {
         <div className="bg-white w-full text-gray-600 rounded-md flex items-center justify-between p-3 px-4  lg:text-lg font-normal shadow-sm">
           <span>{heading}</span>
           {/* search bar */}
-          {/* <div className="flex item-center">
+          <div className="flex item-center">
             <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
               <svg
                 width="24"
@@ -178,9 +220,10 @@ const Category = ({ slug }: any) => {
               id="search"
               placeholder="search product..."
               className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400"
-              onChange={handleSearch}
+              // onChange={handleSearch}
+              onChange={onSearchCangeHandler}
             />
-          </div> */}
+          </div>
           {/* <div></div> */}
           {/* <a
             href="#"

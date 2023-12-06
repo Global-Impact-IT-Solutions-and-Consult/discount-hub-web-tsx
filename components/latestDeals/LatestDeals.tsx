@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 import DealCard from "./DealCard";
 import Spinner from "@/widgets/spinner/Spinner";
+import AppContext from "@/context/AppContext";
 
 const LatestDeals = () => {
+  const { url } = useContext(AppContext);
+
   const [apiData, setApiData] = useState([]);
   // console.log(
   //   "🚀 ~ file: LatestDeals.tsx:13 ~ LatestDeals ~ apiData:",
@@ -23,7 +26,7 @@ const LatestDeals = () => {
         const client = new ApolloClient({
           // uri: "http://localhost/wp/graphql",
           // uri: "http://localhost:10019/graphql",
-          uri: "http://127.0.0.1:10019/graphql",
+          uri: url,
           cache: new InMemoryCache(),
         });
 

@@ -13,7 +13,7 @@ import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
 
 const Page = () => {
-  const { allDiscounts } = useContext(AppContext);
+  const { url, allDiscounts } = useContext(AppContext);
   // console.log("🚀 ~ file: page.tsx:17 ~ Page ~ allDiscounts:", allDiscounts);
 
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const Page = () => {
       setLoading(true);
 
       const client = new ApolloClient({
-        uri: "http://127.0.0.1:10019/graphql",
+        uri: url,
         cache: new InMemoryCache(),
       });
 
@@ -123,7 +123,12 @@ const Page = () => {
           .toLowerCase()
           .includes(e.target.value.toLocaleLowerCase())
       );
+      console.log(
+        "🚀 ~ file: page.tsx:126 ~ onSearchCangeHandler ~ filtrate:",
+        filtrate
+      );
       setFiltered(filtrate);
+      setVisibleData(filtrate);
     } catch (err) {
       return err;
     }
@@ -181,6 +186,8 @@ const Page = () => {
     });
 
     setVisibleData(filteredData);
+    setFiltered(filteredData);
+    getVisibleData(filteredData);
   };
 
   useEffect(() => {
@@ -257,8 +264,8 @@ const Page = () => {
               id="search"
               placeholder="search product..."
               className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400"
-              onChange={handleSearch}
-              // onChange={onSearchCangeHandler}
+              // onChange={handleSearch}
+              onChange={onSearchCangeHandler}
             />
           </div>
           {/* <a
