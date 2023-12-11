@@ -6,6 +6,9 @@ import Cart from "./sidemenu/Cart";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
+import DescriptionSection from "./[product]/DescriptionSection";
+import ReviewSection from "./[product]/ReviewSection";
+import FeaturesSpecs from "./[product]/FeaturesSpecs";
 
 const ProductPage = ({ id }: any) => {
   const { url } = useContext(AppContext);
@@ -28,7 +31,7 @@ const ProductPage = ({ id }: any) => {
           query: gql`
             query unemployed {
             discount(idType: DATABASE_ID, id: ${id}) {
-                discounts {
+              discounts {
                 companyName
                 discountPercentage
                 discountPrice
@@ -37,7 +40,15 @@ const ProductPage = ({ id }: any) => {
                 productImageUrl
                 productName
                 productUrl
-                }
+                brand
+                keyFeatures
+                parentSiteLogo
+                productDetails
+                specifications
+                itemsLeft
+                verifiedRatings
+                productRating
+              }
             }
             }
           `,
@@ -70,37 +81,39 @@ const ProductPage = ({ id }: any) => {
             <div className="w-full flex flex-col gap-12 md:w-2/3">
               <ProductCard data={apiData} />
               <div className="flex flex-col w-full">
-                {/* <div className="w-full flex justify-start items-center gap-1">
-              <span
-                onClick={() => setSwitchSection(!switchSection)}
-                className={
-                  switchSection
-                    ? "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
-                    : "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
-                }
-              >
-                DESCRIPTION {id}
-              </span>
-              <span
-                onClick={() => setSwitchSection(!switchSection)}
-                className={
-                  switchSection
-                    ? "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
-                    : "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
-                }
-              >
-                REVIEWS (2)
-              </span>
-            </div> */}
-                {/* {switchSection ? (
-              <>
-                <DescriptionSection />
-              </>
-            ) : (
-              <>
-                <ReviewSection />
-              </>
-            )} */}
+                <div className="w-full flex justify-start items-center gap-1">
+                  <span
+                    onClick={() => setSwitchSection(!switchSection)}
+                    className={
+                      switchSection
+                        ? "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
+                        : "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer   hover:bg-green-500"
+                    }
+                  >
+                    DESCRIPTION
+                  </span>
+                  <span
+                    onClick={() => setSwitchSection(!switchSection)}
+                    className={
+                      switchSection
+                        ? "px-8 py-2 rounded-sm bg-green-400 text-white duration-300 ease-in-out cursor-pointer hover:bg-green-500"
+                        : "px-8 py-2 rounded-sm bg-green-500 text-white duration-300 ease-in-out cursor-pointer hover:bg-green-500"
+                    }
+                  >
+                    {/* REVIEWS (2) */}
+                    FEATURES AND SPECIFICATIONS
+                  </span>
+                </div>
+                {switchSection ? (
+                  <>
+                    <DescriptionSection data={apiData} />
+                  </>
+                ) : (
+                  <>
+                    <FeaturesSpecs data={apiData} />
+                    {/* <ReviewSection data={apiData} />{" "} */}
+                  </>
+                )}
               </div>
               {/* related products */}
               {/* <RelatedProducts /> */}
@@ -109,10 +122,10 @@ const ProductPage = ({ id }: any) => {
             <div className="w-full mb-8 md:w-1/3 flex flex-col gap-6">
               <Cart data={apiData} />
               {/* <Filter />
-          <About />
-          <Products />
-          <Newsletter />
-          <RecentReviews /> */}
+              <About />
+              <Products />
+              <Newsletter />
+              <RecentReviews /> */}
             </div>
           </>
         )}

@@ -6,7 +6,16 @@ const DescriptionSection = ({ data }: any) => {
         <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
           <span className="font-light text-2xl text-gray-900">Description</span>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
-            {data?.description}
+            <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
+              {data?.productDetails?.split("\n")
+                .map((detail: any, index: any) => (
+                  <span key={index} className="my-2">
+                    {detail}
+                  </span>
+                ))}
+            </span>
+
+            {/* {data?.productDetails} */}
             {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
             numquam nostrum. amet. Lorem ipsum dolor sit amet, consectetur
             adipisicing elit. Laboriosam, ipsum voluptatum. Eos, saepe harum
@@ -19,7 +28,7 @@ const DescriptionSection = ({ data }: any) => {
             quam quisquam atque numquam magni voluptas deserunt! */}
           </span>
           <span className="ppLineHeight mb-4 text-sm text-gray-800 text-left   font-normal">
-            Category: {data.category.map((item: any) => item.title)}
+            {/* Category: {data.category.map((item: any) => item.title)} */}
           </span>
         </div>
       </div>

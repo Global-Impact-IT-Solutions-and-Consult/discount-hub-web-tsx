@@ -30,8 +30,9 @@ const Cart = ({ data }: any) => {
             </div>
           </div>
           <span className="ppLineHeight text-sm   text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
-            voluptatum recusandae
+            {data.itemsLeft}
+            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
+            voluptatum recusandae */}
           </span>
           <div className="text-3xl   text-green-400">
             {data.discountPrice}{" "}

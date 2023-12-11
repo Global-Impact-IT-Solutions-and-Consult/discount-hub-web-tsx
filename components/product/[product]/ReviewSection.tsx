@@ -66,7 +66,7 @@ const ReviewSection = ({ data }: any) => {
         {/* card bottom */}
         <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
           <span className="font-light text-xl text-gray-900">
-            {data.reviews.length} review(s) for {data.title}
+            {/* {data.reviews.length} review(s) for {data.title} */}
           </span>
           {/* horizontal line */}
           <div className="w-full flex items-center">

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BiSolidBasket, BiSolidMap } from "react-icons/bi";
 
 const ProductCard = ({ data }: any) => {
-  // console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
+  console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
   return (
     <>
       {/* left */}
@@ -55,8 +55,24 @@ const ProductCard = ({ data }: any) => {
             {data.productName}{" "}
           </span>
           <div className="flex flex-col items-start justify-center gap-1">
-            {/* <RatingStars size={16} /> */}
-            {/* <span className="text-sm text-gray-600">(2 customer reviews)</span> */}
+            {data.productRating ? (
+              <>
+                <RatingStars size={16} />
+                {data.verifiedRatings ? (
+                  <span>
+                    {data.verifiedRatings}
+                    {/* (2 customer reviews) */}
+                  </span>
+                ) : (
+                  <span className="text-sm text-gray-300">
+                    No reviews available
+                  </span>
+                )}
+              </>
+            ) : (
+              <span className="text-sm text-gray-300">No rating available</span>
+            )}
+
             <h4 className="text-green-300 font-light text-[2rem] font-serif">
               {data.discountPrice}{" "}
               <span className="text-xl text-gray-300 line-through">
@@ -65,7 +81,7 @@ const ProductCard = ({ data }: any) => {
             </h4>
           </div>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
+            {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
             numquam nostrum. amet. Lorem ipsum dolor sit amet, consectetur
             adipisicing elit. Laboriosam, ipsum voluptatum. Eos, saepe harum
             culpa consequatur aut tenetur, earum, illum eum iste aliquam quam
@@ -74,7 +90,7 @@ const ProductCard = ({ data }: any) => {
             tenetur, earum, illum eum iste aliquam quam quisquam atque numquam
             magni voluptas deserunt! Laboriosam, ipsum voluptatum. Eos, saepe
             harum culpa consequatur aut tenetur, earum, illum eum iste aliquam
-            quam quisquam atque numquam magni voluptas deserunt!
+            quam quisquam atque numquam magni voluptas deserunt! */}
           </span>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
             {/* Category: {data.discountType || "Uncategorized"} */}
