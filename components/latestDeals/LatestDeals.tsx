@@ -72,6 +72,7 @@ const LatestDeals = () => {
                     productImageUrl
                     productName
                     productUrl
+                    parentSiteLogo
                   }
                   databaseId
                 }
@@ -79,10 +80,10 @@ const LatestDeals = () => {
             }
           `,
         });
-        // console.log(
-        //   "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
-        //   response
-        // );
+        console.log(
+          "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
+          response
+        );
 
         const getResponse: any = response.data.discounts.nodes.map(
           (item: any) => item
@@ -132,6 +133,7 @@ const LatestDeals = () => {
                       normalPrice={item.discounts.normalPrice}
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
+                      parentSiteLogo={item.discounts.parentSiteLogo}
                     />
                   ))}
                 </>

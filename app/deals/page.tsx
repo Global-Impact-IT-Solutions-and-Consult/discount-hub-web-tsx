@@ -48,6 +48,7 @@ const Page = () => {
                   productImageUrl
                   productName
                   productUrl
+                  parentSiteLogo
                 }
                 databaseId
               }
@@ -305,6 +306,7 @@ const Page = () => {
                       normalPrice={item.discounts.normalPrice}
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
+                      parentSiteLogo={item.discounts.parentSiteLogo}
                     />
                   ))}
                 </>

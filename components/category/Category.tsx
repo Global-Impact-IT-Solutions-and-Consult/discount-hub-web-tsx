@@ -44,6 +44,7 @@ const Category = ({ slug }: any) => {
                   productImageUrl
                   productName
                   productUrl
+                  parentSiteLogo
                 }
                 databaseId
               }
@@ -255,6 +256,7 @@ const Category = ({ slug }: any) => {
                       normalPrice={item.discounts.normalPrice}
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
+                      parentSiteLogo={item.discounts.parentSiteLogo}
                     />
                   ))}
                 </>

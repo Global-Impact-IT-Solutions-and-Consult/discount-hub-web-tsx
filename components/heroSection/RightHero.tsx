@@ -40,6 +40,7 @@ const RightHero = () => {
                     productImageUrl
                     productName
                     productUrl
+                    parentSiteLogo
                   }
                   databaseId
                 }
@@ -57,10 +58,10 @@ const RightHero = () => {
         );
 
         const truncate = getResponse.slice(0, 5);
-        console.log(
-          "🚀 ~ file: RightHero.tsx:58 ~ fetchServices ~ truncate:",
-          truncate
-        );
+        // console.log(
+        //   "🚀 ~ file: RightHero.tsx:58 ~ fetchServices ~ truncate:",
+        //   truncate
+        // );
 
         setApiData(truncate);
         setLoading(false);
@@ -133,10 +134,14 @@ const RightHero = () => {
                           </div>
                           {/* card right */}
                           <div className="w-full md:w-[50%] relative p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
-                            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
+                            <div className=" text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
                               {/* company logo */}
                               <img
-                                src={"image"}
+                                src={
+                                  item.discounts.parentSiteLogo
+                                    ? item.discounts.parentSiteLogo
+                                    : item.discounts.productImageUrl
+                                }
                                 alt="#"
                                 className="object-contain w-full h-full rounded-t"
                               />

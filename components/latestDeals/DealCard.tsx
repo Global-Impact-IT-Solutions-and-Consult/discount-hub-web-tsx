@@ -13,7 +13,9 @@ const DealCard = ({
   link,
   normalPrice,
   discountPercentage,
+  parentSiteLogo,
 }: any) => {
+  console.log("🚀 ~ file: DealCard.tsx:18 ~ parentSiteLogo:", parentSiteLogo);
   return (
     <>
       {/* <a href={link}> */}
@@ -40,10 +42,10 @@ const DealCard = ({
                 />
               </>
             )}
-            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
+            <div className=" text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
               {/* company logo */}
               <img
-                src={image}
+                src={parentSiteLogo ? parentSiteLogo : image}
                 alt="#"
                 className="object-contain w-full h-full rounded-t"
               />
@@ -56,6 +58,7 @@ const DealCard = ({
             </div> */}
             <div className="w-full h-[45px] overflow-hidden mb-2 ">
               <span className="font-semibold my-2 text-truncate">{title}</span>
+              {parentSiteLogo}
             </div>
             <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
               {/* <div className="flex gap-1">

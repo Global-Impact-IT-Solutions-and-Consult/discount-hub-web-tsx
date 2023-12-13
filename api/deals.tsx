@@ -29,6 +29,7 @@ const data = ({ apiData }: any) => {
                   location={item.location}
                   store={item.store?.title}
                   price={item.price}
+                  parentSiteLogo={item.parentSiteLogo}
                 />
               ))}
             </>

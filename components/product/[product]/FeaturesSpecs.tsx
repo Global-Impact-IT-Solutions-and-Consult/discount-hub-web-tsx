@@ -9,16 +9,18 @@ const FeaturesSpecs = ({ data }: any) => {
           <span className="font-light text-2xl text-gray-900">Features</span>
           <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
             <ul className="ppLineHeight text-sm text-gray-800 text-left font-normal ">
-              {data?.keyFeatures.split("\n").map((feature: any, index: any) => (
-                <>
-                  <li key={index} className="flex gap-2 items-center">
-                    <span className="flex items-center justify-center pt-[0.3rem]">
-                      *
-                    </span>
-                    {feature}
-                  </li>
-                </>
-              ))}
+              {data?.keyFeatures
+                ?.split("\n")
+                .map((feature: any, index: any) => (
+                  <>
+                    <li key={index} className="flex gap-2 items-center">
+                      <span className="flex items-center justify-center pt-[0.3rem]">
+                        *
+                      </span>
+                      {feature}
+                    </li>
+                  </>
+                ))}
             </ul>
             {/* {data?.keyFeatures} */}
             {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
@@ -43,7 +45,7 @@ const FeaturesSpecs = ({ data }: any) => {
           <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
             <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
               {data?.specifications
-                .split("\n")
+                ?.split("\n")
                 .map((detail: any, index: any) => (
                   <span key={index}>{detail}</span>
                 ))}
