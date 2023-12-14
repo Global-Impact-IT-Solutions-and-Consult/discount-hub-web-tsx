@@ -53,12 +53,12 @@ const DealCard = ({
           </div>
           {/* card bottom */}
           <div className="w-full p-2 px-4 flex flex-col items-start text-gray-500">
-            {/* <div className="w-full min-h-[20px] flex items-start mb-2 ">
+            <div className="w-full min-h-[20px] flex items-start mb-2 ">
               <RatingStars number={rating} />
-            </div> */}
+            </div>
             <div className="w-full h-[45px] overflow-hidden mb-2 ">
               <span className="font-semibold my-2 text-truncate">{title}</span>
-              {parentSiteLogo}
+              {/* {parentSiteLogo} */}
             </div>
             <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
               {/* <div className="flex gap-1">

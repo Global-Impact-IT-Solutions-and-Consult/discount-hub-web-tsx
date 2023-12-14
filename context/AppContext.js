@@ -112,36 +112,43 @@ export const AppProvider = ({ children }) => {
   // DISCOUNTS
   // Fetch all discounts
   const getAllDiscounts = async () => {
-    const client = new ApolloClient({
-      uri: `${url}`,
-      cache: new InMemoryCache(),
-    });
+    try {
+      const client = new ApolloClient({
+        uri: `${url}`,
+        cache: new InMemoryCache(),
+      });
 
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          discounts(first: 1000000) {
-            nodes {
-              discounts {
-                companyName
-                discountType
-                discountPrice
-                discountPercentage
-                normalPrice
-                productImageUrl
-                productName
-                productUrl
+      const response = await client.query({
+        query: gql`
+          query unemployed {
+            discounts(first: 1000000) {
+              nodes {
+                discounts {
+                  companyName
+                  discountType
+                  discountPrice
+                  discountPercentage
+                  normalPrice
+                  productImageUrl
+                  productName
+                  productUrl
+                }
               }
             }
           }
-        }
-      `,
-    });
+        `,
+      });
 
-    const getResponse = response.data.discounts.nodes.map((item) => {
-      return item;
-    });
-    setAllDiscounts(getResponse);
+      const getResponse = response.data.discounts.nodes.map((item) => {
+        return item;
+      });
+      setAllDiscounts(getResponse);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: AppContext.js:147 ~ getAllDiscounts ~ error:",
+        error
+      );
+    }
   };
 
   //*******/

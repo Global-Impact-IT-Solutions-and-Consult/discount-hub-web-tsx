@@ -41,6 +41,7 @@ const RightHero = () => {
                     productName
                     productUrl
                     parentSiteLogo
+                    productRating
                   }
                   databaseId
                 }
@@ -58,10 +59,10 @@ const RightHero = () => {
         );
 
         const truncate = getResponse.slice(0, 5);
-        // console.log(
-        //   "🚀 ~ file: RightHero.tsx:58 ~ fetchServices ~ truncate:",
-        //   truncate
-        // );
+        console.log(
+          "🚀 ~ file: RightHero.tsx:58 ~ fetchServices ~ truncate:",
+          truncate
+        );
 
         setApiData(truncate);
         setLoading(false);
@@ -146,11 +147,17 @@ const RightHero = () => {
                                 className="object-contain w-full h-full rounded-t"
                               />
                             </div>
-                            <span className="font-light text-2xl text-gray-800 w-[80%] h-[100px]">
+                            <span className="font-light text-2xl text-gray-800 w-[80%] h-[100px] lg:mb-4">
                               {item.discounts.productName}
                             </span>
                             <div className="flex flex-col items-start justify-center gap-1 h-[30px]">
-                              <RatingStars size={16} number={4} />
+                              <RatingStars
+                                size={26}
+                                number={
+                                  item.discounts.productRating?.split(" ")[0] ||
+                                  4
+                                }
+                              />
                               {/* <span className="text-sm text-gray-600">(2 customer reviews)</span> */}
                             </div>
                             {/* <span className="ppLineHeight text-sm text-gray-800 text-left font-normal h-[100px]">

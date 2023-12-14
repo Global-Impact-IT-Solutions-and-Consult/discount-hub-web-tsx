@@ -57,17 +57,21 @@ const ProductCard = ({ data }: any) => {
           <div className="flex flex-col items-start justify-center gap-1">
             {data.productRating ? (
               <>
-                <RatingStars size={16} />
-                {data.verifiedRatings ? (
+                {/* <RatingStars size={16} /> */}
+                <RatingStars
+                  size={26}
+                  number={data.productRating?.split(" ")[0] || 4}
+                />
+                {/* {data.verifiedRatings ? (
                   <span>
                     {data.verifiedRatings}
-                    {/* (2 customer reviews) */}
+                    (2 customer reviews)
                   </span>
                 ) : (
                   <span className="text-sm text-gray-300">
                     No reviews available
                   </span>
-                )}
+                )} */}
               </>
             ) : (
               <span className="text-sm text-gray-300">No rating available</span>

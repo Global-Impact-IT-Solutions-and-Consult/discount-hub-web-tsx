@@ -49,6 +49,7 @@ const Page = () => {
                   productName
                   productUrl
                   parentSiteLogo
+                  productRating
                 }
                 databaseId
               }
@@ -264,7 +265,7 @@ const Page = () => {
               name="search"
               id="search"
               placeholder="search product..."
-              className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400"
+              className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400 bg-white"
               // onChange={handleSearch}
               onChange={onSearchCangeHandler}
             />
@@ -307,6 +308,9 @@ const Page = () => {
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
                       parentSiteLogo={item.discounts.parentSiteLogo}
+                      rating={
+                        item.discounts.productRating?.split(" ")[0] || 3.5
+                      }
                     />
                   ))}
                 </>
