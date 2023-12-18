@@ -43,7 +43,7 @@ export const AppProvider = ({ children }) => {
       const response = await client.query({
         query: gql`
           query unemployed {
-            discountTypes {
+            discountTypes(where: { hideEmpty: true }) {
               nodes {
                 name
                 count
