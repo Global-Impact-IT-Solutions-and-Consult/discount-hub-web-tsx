@@ -133,7 +133,7 @@ const Footer = () => {
         </div> */}
         {/* COPYWRIGHT */}
         <div className="w-full footerBottomBg p-4 flex items-center justify-center text-slate-500   text-md">
-          Copyright 2022.KlbTheme . All rights reserved
+          Copyright 2023.GIITSC . All rights reserved
         </div>
       </div>
     </>

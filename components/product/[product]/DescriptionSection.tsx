@@ -7,12 +7,21 @@ const DescriptionSection = ({ data }: any) => {
           <span className="font-light text-2xl text-gray-900">Description</span>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
             <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
-              {data?.productDetails?.split("\n")
-                .map((detail: any, index: any) => (
-                  <span key={index} className="my-2">
-                    {detail}
-                  </span>
-                ))}
+              {data.productDetails ? (
+                <>
+                  {data?.productDetails
+                    ?.split("\n")
+                    .map((detail: any, index: any) => (
+                      <span key={index} className="my-2">
+                        {detail}
+                      </span>
+                    ))}
+                </>
+              ) : (
+                <span className="text-base text-gray-300">
+                  Description not available
+                </span>
+              )}
             </span>
 
             {/* {data?.productDetails} */}
