@@ -1,6 +1,12 @@
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import Image from "next/image";
-import { BiSolidBasket, BiSolidMap } from "react-icons/bi";
+import {
+  BiChevronLeft,
+  BiChevronRight,
+  BiGlobe,
+  BiSolidBasket,
+  BiSolidMap,
+} from "react-icons/bi";
 
 const ProductCard = ({ data }: any) => {
   console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
@@ -44,41 +50,56 @@ const ProductCard = ({ data }: any) => {
             </>
           )}
           {data.discountPercentage && (
-            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2">
+            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 md:w-[90px] md:h-[80px] md:text-xl md:font-semibold">
               - {data.discountPercentage}
             </div>
           )}
         </div>
         {/* card bottom */}
-        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800  ">
-          <span className="font-light text-xl text-gray-800">
+        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800 items-center justify-center">
+          <span className="font-light text-xl text-gray-800  my-2 md:text-2xl">
             {data.productName}{" "}
           </span>
-          <div className="flex flex-col items-start justify-center gap-1">
+          <div className="flex flex-col items-start justify-center gap-4">
             {data.productRating ? (
               <>
                 {/* <RatingStars size={16} /> */}
-                <RatingStars
-                  size={26}
-                  number={data.productRating?.split(" ")[0] || 4}
-                />
-                {/* {data.verifiedRatings ? (
-                  <span>
-                    {data.verifiedRatings}
-                    (2 customer reviews)
-                  </span>
-                ) : (
-                  <span className="text-sm text-gray-300">
-                    No reviews available
-                  </span>
-                )} */}
+                <div className="flex items-center justify-center gap-3">
+                  <RatingStars
+                    size={26}
+                    number={data.productRating?.split(" ")[0] || 4}
+                  />
+                  {data.verifiedRatings ? (
+                    <span>(269 customer reviews)</span>
+                  ) : (
+                    <span className="text-sm text-gray-300">
+                      No reviews available
+                    </span>
+                  )}
+                </div>
               </>
             ) : (
               <span className="text-sm text-gray-300">No rating available</span>
             )}
 
-            <h4 className="text-green-300 font-light text-[2rem] font-serif">
-              {data.discountPrice}{" "}
+            <div className="flex gap-4 items-center justify-center text-gray-800 w-full ">
+              <div className="flex gap-1 items-center">
+                <BiGlobe />
+                {data.companyName}{" "}
+              </div>
+              <div className="flex gap-1 items-center">
+                <BiSolidMap />
+                {"Jumia"}
+              </div>
+            </div>
+            <span className="ppLineHeight text-sm   text-gray-500 mx-auto">
+              {data.itemsLeft}
+              {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
+            voluptatum recusandae */}
+            </span>
+
+            <h4 className="text-green-300 font-light text-[2rem] font-serif mx-auto flex items-center justify-center gap-3">
+              {data.discountPrice}
               <span className="text-xl text-gray-300 line-through">
                 {data.normalPrice}
               </span>
@@ -96,8 +117,15 @@ const ProductCard = ({ data }: any) => {
             harum culpa consequatur aut tenetur, earum, illum eum iste aliquam
             quam quisquam atque numquam magni voluptas deserunt! */}
           </span>
-          <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
+          <span className="ppLineHeight text-sm text-gray-800 text-left pb-6 my-4 font-normal">
             {/* Category: {data.discountType || "Uncategorized"} */}
+
+            <a
+              href={data.productUrl}
+              className="py-4 px-8 bg-green-400 rounded-lg text-white w-full text-center text-lg duration-300 ease-in-out cursor-pointer font-sans font-semibold hover:bg-green-500"
+            >
+              GOTO PRODUCT
+            </a>
           </span>
         </div>
       </div>

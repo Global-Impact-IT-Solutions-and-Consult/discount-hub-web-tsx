@@ -78,7 +78,7 @@ const ProductPage = ({ id }: any) => {
         ) : (
           <>
             {/* left */}
-            <div className="w-full flex flex-col gap-12 md:w-2/3">
+            <div className="w-full flex flex-col gap-12">
               <ProductCard data={apiData} />
               <div className="flex flex-col w-full">
                 <div className="w-full flex justify-start items-center gap-1">
@@ -119,14 +119,14 @@ const ProductPage = ({ id }: any) => {
               {/* <RelatedProducts /> */}
             </div>
             {/* right */}
-            <div className="w-full mb-8 md:w-1/3 flex flex-col gap-6">
+            {/* <div className="w-full mb-8 md:w-1/3 flex flex-col gap-6">
               <Cart data={apiData} />
-              {/* <Filter />
+              <Filter />
               <About />
               <Products />
               <Newsletter />
-              <RecentReviews /> */}
-            </div>
+              <RecentReviews />
+            </div> */}
           </>
         )}
       </div>

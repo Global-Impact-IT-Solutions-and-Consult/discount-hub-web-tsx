@@ -57,7 +57,9 @@ export const AppProvider = ({ children }) => {
       const getResponse = response.data.discountTypes.nodes.map((item) => {
         return item;
       });
-      setLeftHero(getResponse);
+      const truncate = getResponse.slice(0, 7);
+
+      setLeftHero(truncate);
       setLoading(false);
     } catch (error) {
       setLoading(false);

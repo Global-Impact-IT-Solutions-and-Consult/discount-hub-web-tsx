@@ -15,8 +15,8 @@ const FeaturesSpecs = ({ data }: any) => {
                     ?.split("\n")
                     .map((feature: any, index: any) => (
                       <>
-                        <li key={index} className="flex gap-2 items-center">
-                          <span className="flex items-center justify-center pt-[0.3rem]">
+                        <li key={index} className="flex gap-2 items-start">
+                          <span className="flex items-center justify-center pt-[0.3rem] ">
                             *
                           </span>
                           {feature}
@@ -57,7 +57,7 @@ const FeaturesSpecs = ({ data }: any) => {
                   {data?.specifications
                     ?.split("\n")
                     .map((detail: any, index: any) => (
-                      <li key={index} className="flex gap-2 items-center">
+                      <li key={index} className="flex gap-2 items-start">
                         <span className="flex items-center justify-center pt-[0.3rem]">
                           *
                         </span>
