@@ -242,12 +242,12 @@ const Navbar = () => {
           </a> */}
         </div>
 
-        <a
+        {/* <a
           href="#"
           className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white   text-sm hover:bg-green-500"
         >
           BETA VERSION
-        </a>
+        </a> */}
 
         {/* <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>

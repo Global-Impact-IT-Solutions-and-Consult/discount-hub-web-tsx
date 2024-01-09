@@ -1,5 +1,6 @@
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import Image from "next/image";
+import { useState } from "react";
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -8,72 +9,80 @@ import {
   BiSolidMap,
 } from "react-icons/bi";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const ProductCard = ({ data }: any) => {
   console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
+
+  const [displayImage, setDisplayImage] = useState(data.productImageUrl);
+
   return (
     <>
-      {/* left */}
-      <div className="w-full bg-white flex flex-col rounded-md">
-        {/* card top*/}
-        {/* <div className="">
-          <Image
-            width={1440}
-            height={600}
-            src={"/heroSlider/1.jpg"}
-            alt="/"
-            className="rounded-t-md"
-          />
-          <img
-            src={data.productImageUrl}
-            alt="#"
-            className="object-contain w-full h-full rounded-t"
-          />
-        </div> */}
-        <div className="w-full h-[250px] mb-2 relative p-2 pt-4">
-          {!data.productImageUrl ? (
-            <>
-              <Image
-                width={1440}
-                height={600}
-                src={"/heroSlider/1.jpg"}
-                alt="/"
-                className="rounded-t w-full h-full object-cover"
-              />
-            </>
-          ) : (
-            <>
+      <div className="w-full bg-white flex flex-col rounded-md shadow-lg md:flex-row md:items-start">
+        {/* left */}
+        <div className="w-full md:w-[50%] flex flex-col gap-6 py-2 pt-6">
+          <div className="w-full flex items-center justify-center">
+            <img
+              src={displayImage}
+              alt="#"
+              className="object-contain w-[420px] rounded md:ml-[-11px]"
+              // className="object-contain w-[320px] rounded-t"
+            />
+          </div>
+          <div className="w-full flex items-center justify-center h-full gap-2 flex-wrap py-2 pb-6">
+            <Slider
+              dots={true}
+              slidesToShow={5}
+              slidesToScroll={1}
+              className="w-[80%]"
+              prevArrow={<div className="custom-arrow">Left</div>}
+              nextArrow={<div className="custom-arrow">Right</div>}
+            >
+              {data.imageUrls.map((item: any, i: any) => (
+                <div key={i} className="slider-item">
+                  <img
+                    src={item}
+                    alt="#"
+                    className="object-contain w-[70px] rounded ease-in-out hover:shadow-xl cursor-pointer"
+                    onClick={() => setDisplayImage(item)}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+          {/* <div className="w-full flex items-center justify-center h-full gap-2 flex-wrap bg-gray-100 py-2">
+            {data.imageUrls.slice(0, 7).map((item: any, i: any) => (
               <img
-                src={data.productImageUrl}
+                key={i}
+                src={item}
                 alt="#"
-                className="object-contain w-full h-full rounded-t"
+                className="object-contain w-[70px] rounded ease-in-out hover:rounded-xl cursor-pointer"
+                onClick={() => setDisplayImage(item)}
               />
-            </>
-          )}
-          {data.discountPercentage && (
-            <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 md:w-[90px] md:h-[80px] md:text-xl md:font-semibold">
-              - {data.discountPercentage}
-            </div>
-          )}
+            ))}
+          </div> */}
         </div>
-        {/* card bottom */}
-        <div className="p-4 flex flex-col gap-3 shadow-lg text-gray-800 items-center justify-center">
-          <span className="font-light text-xl text-gray-800  my-2 md:text-2xl">
+        {/* right */}
+        <div className="w-full h-full md:w-[50%] p-4 flex flex-col gap-5 shadow-lg text-gray-800 items-center justify-center md:justify-start md:items-start md:pl-8">
+          <span className="font-light text-xl text-center text-gray-800  my-2 md:text-3xl md:text-left">
             {data.productName}{" "}
           </span>
-          <div className="flex flex-col items-start justify-center gap-4">
+          <div className="flex flex-col items-start justify-center gap-5">
             {data.productRating ? (
               <>
                 {/* <RatingStars size={16} /> */}
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex items-start justify-center gap-3 w-full md:justify-start">
                   <RatingStars
                     size={26}
                     number={data.productRating?.split(" ")[0] || 4}
                   />
                   {data.verifiedRatings ? (
-                    <span>(269 customer reviews)</span>
+                    <span>{data.verifiedRatings}</span>
                   ) : (
                     <span className="text-sm text-gray-300">
-                      No reviews available
+                      No ratings available
                     </span>
                   )}
                 </div>
@@ -82,7 +91,7 @@ const ProductCard = ({ data }: any) => {
               <span className="text-sm text-gray-300">No rating available</span>
             )}
 
-            <div className="flex gap-4 items-center justify-center text-gray-800 w-full ">
+            <div className="flex gap-4 items-start justify-center text-gray-800 w-full md:justify-start">
               <div className="flex gap-1 items-center">
                 <BiGlobe />
                 {data.companyName}{" "}
@@ -92,17 +101,25 @@ const ProductCard = ({ data }: any) => {
                 {"Jumia"}
               </div>
             </div>
-            <span className="ppLineHeight text-sm   text-gray-500 mx-auto">
+            <span className="ppLineHeight text-sm text-gray-500 flex w-full justify-center md:justify-start">
               {data.itemsLeft}
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
             voluptatum recusandae */}
             </span>
 
-            <h4 className="text-green-300 font-light text-[2rem] font-serif mx-auto flex items-center justify-center gap-3">
+            <h4 className="font-light text-[2rem] font-serif flex items-center justify-center gap-3">
               {data.discountPrice}
-              <span className="text-xl text-gray-300 line-through">
+              <span className="text-xl text-gray-300 line-through flex items-center">
                 {data.normalPrice}
               </span>
+              {data.discountPercentage && (
+                <div className="py-1 px-2 rounded-md flex items-center justify-center text-green-300   md:text-base md:font-semibold">
+                  ( - {data.discountPercentage})
+                </div>
+                // <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center  md:text-xl md:font-semibold">
+                //   (- {data.discountPercentage})
+                // </div>
+              )}
             </h4>
           </div>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
