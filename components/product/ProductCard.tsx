@@ -40,7 +40,7 @@ const ProductCard = ({ data }: any) => {
               prevArrow={<div className="custom-arrow">Left</div>}
               nextArrow={<div className="custom-arrow">Right</div>}
             >
-              {data.imageUrls.map((item: any, i: any) => (
+              {data.imageUrls?.map((item: any, i: any) => (
                 <div key={i} className="slider-item">
                   <img
                     src={item}
@@ -98,7 +98,7 @@ const ProductCard = ({ data }: any) => {
               </div>
               <div className="flex gap-1 items-center">
                 <BiSolidMap />
-                {"Jumia"}
+                {data.crawledFrom}
               </div>
             </div>
             <span className="ppLineHeight text-sm text-gray-500 flex w-full justify-center md:justify-start">

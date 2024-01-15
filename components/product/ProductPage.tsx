@@ -49,6 +49,7 @@ const ProductPage = ({ id }: any) => {
                 verifiedRatings
                 productRating
                 allProductImageUrls
+                crawledFrom
               }
             }
             }
@@ -58,7 +59,7 @@ const ProductPage = ({ id }: any) => {
         const getResponse: any = response.data.discount.discounts;
         // Extract URLs using regular expression and convert to array of strings
         const imageUrlsString = getResponse.allProductImageUrls;
-        const imageUrls = imageUrlsString.match(/https:\/\/[^\s,]+/g);
+        const imageUrls = imageUrlsString?.match(/https:\/\/[^\s,]+/g);
         // console.log("🚀 ~ fetchServices ~ imageUrls:", imageUrls[0]);
 
         // console.log(
