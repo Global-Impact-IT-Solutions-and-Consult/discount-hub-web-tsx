@@ -13,17 +13,14 @@ import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
 
 const Page = () => {
-  const { url, allDiscounts } = useContext(AppContext);
-  // console.log("🚀 ~ file: page.tsx:17 ~ Page ~ allDiscounts:", allDiscounts);
-
-  const [loading, setLoading] = useState(true);
+  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
   const [apiData, setApiData] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
-  // console.log("🚀 ~ file: page.tsx:18 ~ Page ~ visibleData:", visibleData);
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState(1);
   const itemsPerPage = 21;
   const [filtered, setFiltered] = useState([]);
+  // console.log("🚀 ~ Page ~ filtered:", filtered);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchServices = async () => {
@@ -88,11 +85,6 @@ const Page = () => {
     }
   };
 
-  const getVisibleData = (apiData: any) => {
-    const start = currentPage * itemsPerPage;
-    setVisibleData(apiData.slice(start, start + itemsPerPage));
-  };
-
   const handleNextPageChange = () => {
     setLoading(true);
     const nextPage = currentPage + 1;
@@ -117,18 +109,18 @@ const Page = () => {
   };
 
   // SearchBar Handler
-  const onSearchCangeHandler = async (e: any) => {
+  const onSearchChangeHandler = async (e: any) => {
     try {
       e.preventDefault();
-      const filtrate = apiData.filter((item: any) =>
+      const filtrate = allDiscounts.filter((item: any) =>
         item.discounts.productName
           .toLowerCase()
           .includes(e.target.value.toLocaleLowerCase())
       );
-      console.log(
-        "🚀 ~ file: page.tsx:126 ~ onSearchCangeHandler ~ filtrate:",
-        filtrate
-      );
+      // console.log(
+      //   "🚀 ~ file: page.tsx:126 ~ onSearchChangeHandler ~ filtrate:",
+      //   filtrate
+      // );
       setFiltered(filtrate);
       setVisibleData(filtrate);
     } catch (err) {
@@ -136,99 +128,12 @@ const Page = () => {
     }
   };
 
-  // const handleSearch = (event: any) => {
-  //   const searchTerm = event.target.value;
-  //   setSearchTerm(searchTerm);
-  //   const filteredData = apiData.filter((item: any) =>
-  //     Object.values(item).some((value: any) =>
-  //       value.toLowerCase().includes(searchTerm.toLowerCase())
-  //     )
-  //   );
-  //   setPages(Math.ceil(filteredData.length / itemsPerPage));
-  //   setCurrentPage(0);
-  //   getVisibleData(filteredData);
-  // };
-
-  // useEffect(() => {
-  //   if (apiData) {
-  //     const filteredData = apiData.filter((item) =>
-  //       Object.values(item).some((value: any) =>
-  //         value.toLowerCase().includes(searchTerm.toLowerCase())
-  //       )
-  //     );
-  //     setPages(Math.ceil(filteredData.length / itemsPerPage));
-  //     setCurrentPage(0);
-  //     getVisibleData(filteredData);
-  //   }
-  // }, [apiData, searchTerm]);
-
-  const handleSearch = (event: any) => {
-    const searchTerm = event.target.value.toLowerCase();
-    setSearchTerm(searchTerm);
-
-    const filteredData = apiData.filter((item: any) => {
-      for (const key in item) {
-        if (item.hasOwnProperty(key)) {
-          const value = item[key];
-
-          if (
-            typeof value === "string" &&
-            value.toLowerCase().includes(searchTerm)
-          ) {
-            return true; // Found a match in a string property
-          } else if (
-            typeof value === "number" &&
-            value.toString().includes(searchTerm)
-          ) {
-            return true; // Found a match in a numeric property
-          }
-        }
-      }
-      return false; // No match found in the current object
-    });
-
-    setVisibleData(filteredData);
-    setFiltered(filteredData);
-    getVisibleData(filteredData);
-  };
-
   useEffect(() => {
-    if (apiData) {
-      const filteredData = apiData.filter((item: any) => {
-        for (const key in item) {
-          if (item.hasOwnProperty(key)) {
-            const value = item[key];
-
-            if (
-              (typeof value === "string" || typeof value === "number") &&
-              value.toString().toLowerCase().includes(searchTerm)
-            ) {
-              return true; // Found a match in a string or numeric property
-            }
-          }
-        }
-        return false; // No match found in the current object
-      });
-
-      setVisibleData(filteredData);
-    }
-  }, [apiData, searchTerm]);
-
-  // populate filtered with allCaregivers on page load
-  useEffect(() => {
-    setFiltered(apiData);
-  }, [apiData]);
-
-  useEffect(() => {
+    // setVisibleData(allDiscounts);
+    // setApiData(allDiscounts);
+    setVisibleData(allDiscounts);
     fetchServices();
   }, []);
-
-  useEffect(() => {
-    if (apiData) {
-      setPages(Math.ceil(apiData.length / itemsPerPage));
-      setVisibleData(apiData);
-    }
-  }, [apiData]);
 
   return (
     <>
@@ -267,7 +172,7 @@ const Page = () => {
               placeholder="search product..."
               className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-sm w-[450px] outline-green-400 bg-white"
               // onChange={handleSearch}
-              onChange={onSearchCangeHandler}
+              onChange={onSearchChangeHandler}
             />
           </div>
           {/* <a
@@ -300,17 +205,15 @@ const Page = () => {
                       key={i}
                       title={item.discounts.productName}
                       image={item.discounts.productImageUrl}
-                      // description={item.discounts.summary}
-                      // location={item.discounts.location}
+                      // description={item.summary}
+                      // location={item.location}
                       store={item.discounts.companyName}
                       discountPrice={item.discounts.discountPrice}
                       normalPrice={item.discounts.normalPrice}
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
                       parentSiteLogo={item.discounts.parentSiteLogo}
-                      rating={
-                        item.discounts.productRating?.split(" ")[0] || 3.5
-                      }
+                      rating={item.discounts.productRating?.split(" ")[0] || 0}
                     />
                   ))}
                 </>
@@ -344,317 +247,3 @@ const Page = () => {
 };
 
 export default Page;
-
-// ***************
-// ***************
-// ***************
-// ***************
-// ***************
-// ***************
-// ***************
-// ***************
-
-// "use client";
-
-// import React from "react";
-// import { useQuery } from "react-query";
-// import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-// import DealCard from "@/components/latestDeals/DealCard";
-// import Pagination from "@/widgets/pagination/Pagination";
-// import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-
-// const Page = () => {
-//   const { data } = useQuery("latestDeals", async () => {
-//     const client = new ApolloClient({
-//         uri: "http://localhost/wp/graphql",
-//       cache: new InMemoryCache(),
-//     });
-
-//     const response = await client.query({
-//       query: gql`
-//         query unemployed {
-//           products {
-//             nodes {
-//               products {
-//                 price
-//                 rating
-//                 title
-//                 summary
-//                 image {
-//                   sourceUrl
-//                 }
-//                 location
-//                 store {
-//                   ... on Store {
-//                     id
-//  title
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       `,
-//     });
-
-//     return response.data.products.nodes.map((item: any) => item.products);
-//   });
-
-//   return (
-//     <>
-//       <div className="px-4 pt-8  w-full flex flex-col items-center justify-start gap-8">
-//         {/* TOP PART */}
-//         <SectionTopBar
-//           title={"Latest Deals"}
-//           linkText={"CONTACT US"}
-//           link={"#"}
-//         />
-//         {/* BOTTOM PART (CARDS) */}
-//         <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center 2xl:gap-16">
-//           {/* card */}
-//           {data.length > 0 && (
-//             <>
-//               {data.map((item: any) => (
-//                 <DealCard
-//                   key={item.id}
-//                   title={item.title}
-//                   image={item.image?.sourceUrl}
-//                   description={item.summary}
-//                   location={item.location}
-//                   store={item.store?.title}
-//                   price={item.price}
-//                 />
-//               ))}
-//             </>
-//           )}
-//         </div>
-//       </div>
-//       <Pagination />
-//     </>
-//   );
-// };
-
-// export default Page;
-
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-
-// "use client";
-
-// import DealCard from "@/components/latestDeals/DealCard";
-// import Pagination from "@/widgets/pagination/Pagination";
-// import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-// import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
-// export async function generateStaticParams() {
-//   const client = new ApolloClient({
-//       uri: "http://localhost/wp/graphql",
-//     cache: new InMemoryCache(),
-//   });
-
-//   const response = await client.query({
-//     query: gql`
-//       query unemployed {
-//         products {
-//           nodes {
-//             products {
-//               price
-//               rating
-//               title
-//               summary
-//               image {
-//                 sourceUrl
-//               }
-//               location
-//               store {
-//                 ... on Store {
-//                   id
-//                   title
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     `,
-//   });
-
-//   const getResponse = response.data.products.nodes.map(
-//     (item: any) => item.products
-//   );
-
-//   return {
-//     props: {
-//       apiData: getResponse,
-//     },
-//   };
-// }
-
-// const Page = ({ apiData }: any) => {
-//   return (
-//     <>
-//       <div className="px-4 pt-8  w-full flex flex-col items-center justify-start gap-8">
-//         {/* TOP PART */}
-//         <SectionTopBar
-//           title={"Latest Deals"}
-//           linkText={"CONTACT US"}
-//           link={"#"}
-//         />
-//         {/* BOTTOM PART (CARDS) */}
-//         <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center 2xl:gap-16">
-//           {/* card */}
-//           {apiData.length > 0 && (
-//             <>
-//               {apiData.map((item: any, i: any) => (
-//                 <DealCard
-//                   key={i}
-//                   title={item.title}
-//                   image={item.image?.sourceUrl}
-//                   description={item.summary}
-//                   location={item.location}
-//                   store={item.store?.title}
-//                   price={item.price}
-//                 />
-//               ))}
-//             </>
-//           )}
-//         </div>
-//       </div>
-//       <Pagination />
-//     </>
-//   );
-// };
-
-// export default Page;
-
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
-// import DealCard from "@/components/latestDeals/DealCard";
-// import Pagination from "@/widgets/pagination/Pagination";
-// import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-
-// const Page = () => {
-//   const [apiData, setApiData] = useState([]);
-//   useEffect(() => {
-//     async function fetchServices() {
-//       const client = new ApolloClient({
-//           uri: "http://localhost/wp/graphql",
-//         cache: new InMemoryCache(),
-//       });
-
-//       const response = await client.query({
-//         query: gql`
-//           query unemployed {
-//             products {
-//               nodes {
-//                 products {
-//                   price
-//                   rating
-//                   title
-//                   summary
-//                   image {
-//                     sourceUrl
-//                   }
-//                   location
-//                   store {
-//                     ... on Store {
-//                       id
-//                       title
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         `,
-//       });
-
-//       const getResponse = response.data.products.nodes.map(
-//         (item: any) => item.products
-//       );
-//       console.log(
-//         "🚀 ~ file: page.tsx:102 ~ fetchServices ~ getResponse:",
-//         getResponse
-//       );
-
-//       setApiData(getResponse);
-//     }
-//     fetchServices();
-//     // async function getServices() {
-//     //   console.log("🚀 ~ file: page.tsx:59 ~ Page ~ apiData:", apiData);
-//     //   const services = await fetchServices();
-//     //   console.log("🚀 ~ file: page.tsx:96 ~ useEffect ~ services:", services);
-//     // }
-//     // getServices();
-//   }, []);
-
-//   return (
-//     <>
-//       <div className="px-4 pt-8  w-full flex flex-col items-center justify-start gap-8">
-//         {/* TOP PART */}
-//         <SectionTopBar
-//           title={"Latest Deals"}
-//           linkText={"CONTACT US"}
-//           link={"#"}
-//         />
-//         {/* BOTTOM PART (CARDS) */}
-//         <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center 2xl:gap-16">
-//           {/* card */}
-//           {apiData.length > 0 && (
-//             <>
-//               {apiData.map((item: any, i) => (
-//                 <DealCard
-//                   key={i}
-//                   title={item.title}
-//                   image={item.image?.sourceUrl}
-//                   description={item.summary}
-//                   location={item.location}
-//                   store={item.store?.title}
-//                   price={item.price}
-//                 />
-//               ))}
-//             </>
-//           )}
-//           {/* <DealCard
-//             image={"/heroSlider/1.jpg"}
-//             title={"The Crash Bad Instant Folding Twin Bed"}
-//             location={"United States"}
-//             store={"Amazon"}
-//             description={
-//               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-//             }
-//             price={"£350.00"}
-//           /> */}
-//         </div>
-//       </div>
-
-//       <Pagination />
-//     </>
-//   );
-// };
-
-// export default Page;
-// *******************
-// *******************
-// *******************
-// *******************
-// *******************

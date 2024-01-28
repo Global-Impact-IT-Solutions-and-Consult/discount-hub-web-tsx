@@ -5,6 +5,11 @@ import axios from "axios";
 // import { error } from "../helpers/Alert";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
+// const redis = require("redis");
+// const util = require("util");
+
+// const { redisClient, getAsync, setexAsync } = require("../utils/redis");
+
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -113,7 +118,133 @@ export const AppProvider = ({ children }) => {
 
   // DISCOUNTS
   // Fetch all discounts
+
   const getAllDiscounts = async () => {
+    try {
+      const client = new ApolloClient({
+        uri: `${url}`,
+        cache: new InMemoryCache(),
+      });
+
+      let allDiscounts = [];
+      let cursor = null;
+      let hasNextPage = true;
+
+      while (hasNextPage) {
+        const response = await client.query({
+          query: gql`
+            query unemployed($cursor: String) {
+              discounts(first: 100, after: $cursor) {
+                nodes {
+                  discounts {
+                    companyName
+                    discountPercentage
+                    discountPrice
+                    normalPrice
+                    productImageUrl
+                    productName
+                    productUrl
+                    parentSiteLogo
+                    productRating
+                  }
+                  databaseId
+                }
+                pageInfo {
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
+          `,
+          variables: { cursor },
+        });
+
+        const { nodes, pageInfo } = response.data.discounts;
+
+        // Flatten arrays within each iteration and include databaseId
+        allDiscounts = allDiscounts.concat(nodes);
+
+        cursor = pageInfo.endCursor;
+        hasNextPage = pageInfo.hasNextPage;
+      }
+
+      // Update the state with all discounts
+      setAllDiscounts(allDiscounts);
+    } catch (error) {
+      console.log("Error fetching discounts:", error);
+    }
+  };
+
+  // const getAllDiscounts = async () => {
+  //   try {
+  //     const client = new ApolloClient({
+  //       uri: `${url}`,
+  //       cache: new InMemoryCache(),
+  //     });
+
+  //     let newDiscounts = [];
+  //     let cursor = null;
+  //     let hasNextPage = true;
+
+  //     while (hasNextPage) {
+  //       const response = await client.query({
+  //         query: gql`
+  //           query unemployed($cursor: String) {
+  //             discounts(first: 100, after: $cursor) {
+  //               nodes {
+  //                 discounts {
+  //                   companyName
+  //                   discountType
+  //                   discountPrice
+  //                   discountPercentage
+  //                   normalPrice
+  //                   productImageUrl
+  //                   productName
+  //                   productUrl
+  //                 }
+  //               }
+  //               pageInfo {
+  //                 endCursor
+  //                 hasNextPage
+  //               }
+  //             }
+  //           }
+  //         `,
+  //         variables: { cursor },
+  //       });
+  //       // console.log(
+  //       //   "🚀 ~ getAllDiscounts ~ response:",
+  //       //   response.data.discounts.nodes.length
+  //       // );
+
+  //       const { nodes, pageInfo } = response.data.discounts;
+  //       console.log("🚀 ~ getAllDiscounts ~ nodes:", nodes);
+  //       setAllDiscounts((prevDiscounts) => [
+  //         ...prevDiscounts,
+  //         ...nodes,
+  //         // ...nodes.map((item) => item.discounts).flat(),
+  //       ]);
+
+  //       // newDiscounts = newDiscounts.concat(
+  //       //   nodes.map((item) => item.discounts).flat()
+  //       // );
+
+  //       // setAllDiscounts(() => ({
+  //       //   ...allDiscounts,
+  //       //   nodes,
+  //       // }));
+
+  //       cursor = pageInfo.endCursor;
+  //       hasNextPage = pageInfo.hasNextPage;
+  //     }
+  //     // console.log("🚀 ~ getAllDiscounts ~ allDiscounts:", newDiscounts);
+  //     // setAllDiscounts(newDiscounts.flat());
+  //   } catch (error) {
+  //     console.log("Error fetching discounts:", error);
+  //   }
+  // };
+
+  const getAllDiscountss = async () => {
     try {
       const client = new ApolloClient({
         uri: `${url}`,
@@ -123,7 +254,7 @@ export const AppProvider = ({ children }) => {
       const response = await client.query({
         query: gql`
           query unemployed {
-            discounts(first: 1000000) {
+            discounts(first: 200) {
               nodes {
                 discounts {
                   companyName
@@ -153,6 +284,56 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // const getAllDiscounts = async () => {
+  //   try {
+  //     // Try to fetch data from Redis cache
+  //     const cachedData = await getAsync("allDiscounts");
+
+  //     if (cachedData) {
+  //       console.log("🚀 ~ getAllDiscounts ~ cachedData:", cachedData);
+  //       // If data is found in the cache, use it
+  //       setAllDiscounts(JSON.parse(cachedData));
+  //     } else {
+  //       // If data is not in the cache, fetch it from the GraphQL endpoint
+  //       const client = new ApolloClient({
+  //         uri: `${url}`,
+  //         cache: new InMemoryCache(),
+  //       });
+
+  //       const response = await client.query({
+  //         query: gql`
+  //           query unemployed {
+  //             discounts(first: 1000000) {
+  //               nodes {
+  //                 discounts {
+  //                   companyName
+  //                   discountType
+  //                   discountPrice
+  //                   discountPercentage
+  //                   normalPrice
+  //                   productImageUrl
+  //                   productName
+  //                   productUrl
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         `,
+  //       });
+
+  //       // Extract and set the response data
+  //       const getResponse = response.data.discounts.nodes.map((item) => item);
+  //       console.log("🚀 ~ getAllDiscounts ~ getResponse:", getResponse);
+  //       setAllDiscounts(getResponse);
+
+  //       // Store the data in the Redis cache with a TTL of 1 hour (3600 seconds)
+  //       await setexAsync("allDiscounts", 3600, JSON.stringify(getResponse));
+  //     }
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // };
+
   //*******/
   //************/
   // fetch everything on startup
@@ -168,6 +349,10 @@ export const AppProvider = ({ children }) => {
       getAllDiscounts();
     }
   }, []);
+
+  // useEffect(() => {
+  //   extractDiscounts();
+  // }, [allDiscounts]);
 
   return (
     <AppContext.Provider

@@ -135,9 +135,7 @@ const LatestDeals = () => {
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
                       parentSiteLogo={item.discounts.parentSiteLogo}
-                      rating={
-                        item.discounts.productRating?.split(" ")[0] || 3.5
-                      }
+                      rating={item.discounts.productRating?.split(" ")[0] || 0}
                     />
                   ))}
                 </>

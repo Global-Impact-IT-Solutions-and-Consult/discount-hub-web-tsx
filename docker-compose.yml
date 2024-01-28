@@ -1,3 +1,17 @@
+# version: "2.2"
+# services:
+#   redis:
+#     image: redislabs/redis
+#     container_name: redis
+#     ports:
+#       - 6379:6379
+#     volumes:
+#       - data01:/usr/share/redis/data
+
+# volumes:
+#   data01:
+#     driver: local
+
 version: "3"
 
 services:
@@ -11,3 +25,10 @@ services:
     restart: always
     ports:
       - 4000:3000
+
+  redis:
+    image: redis
+    container_name: my-redis
+    ports:
+      - 6379:6379
+    restart: always

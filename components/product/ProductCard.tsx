@@ -76,7 +76,7 @@ const ProductCard = ({ data }: any) => {
                 <div className="flex items-start justify-center gap-3 w-full md:justify-start">
                   <RatingStars
                     size={26}
-                    number={data.productRating?.split(" ")[0] || 4}
+                    number={data.productRating?.split(" ")[0] || 0}
                   />
                   {data.verifiedRatings ? (
                     <span>{data.verifiedRatings}</span>

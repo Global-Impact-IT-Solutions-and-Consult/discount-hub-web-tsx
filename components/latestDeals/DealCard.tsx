@@ -15,7 +15,6 @@ const DealCard = ({
   discountPercentage,
   parentSiteLogo,
 }: any) => {
-  console.log("🚀 ~ file: DealCard.tsx:18 ~ parentSiteLogo:", parentSiteLogo);
   return (
     <>
       {/* <a href={link}> */}
