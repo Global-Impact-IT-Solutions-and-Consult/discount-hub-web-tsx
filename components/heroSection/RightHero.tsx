@@ -155,7 +155,7 @@ const RightHero = () => {
                                 size={26}
                                 number={
                                   item.discounts.productRating?.split(" ")[0] ||
-                                  4
+                                  0
                                 }
                               />
                               {/* <span className="text-sm text-gray-600">(2 customer reviews)</span> */}

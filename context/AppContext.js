@@ -15,10 +15,8 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [url, setUrl] = useState("http://127.0.0.1:10019/graphql");
   const [loading, setLoading] = useState(false);
-  const [leftPanelLoading, setLeftPanelLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
-  const [printing, setPrinting] = useState(false);
   const [topbarName, setTopbarName] = useState("Welcome!");
 
   // HERO SECTION

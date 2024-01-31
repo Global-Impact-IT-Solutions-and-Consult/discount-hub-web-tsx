@@ -6,7 +6,6 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 import DealCard from "@/components/latestDeals/DealCard";
 import Pagination from "@/widgets/pagination/Pagination";
-import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 
 // Spinner
 import Spinner from "@/widgets/spinner/Spinner";
@@ -18,10 +17,8 @@ const Page = () => {
   const [visibleData, setVisibleData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState(1);
-  const itemsPerPage = 21;
+  const itemsPerPage = 24;
   const [filtered, setFiltered] = useState([]);
-  // console.log("🚀 ~ Page ~ filtered:", filtered);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchServices = async () => {
     try {
@@ -68,6 +65,7 @@ const Page = () => {
       // );
 
       setApiData(responseData);
+      // setVisibleData(responseData.slice(0, itemsPerPage));
       setVisibleData(responseData);
       console.log(
         "🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:",
@@ -90,7 +88,7 @@ const Page = () => {
     const nextPage = currentPage + 1;
     if (nextPage <= pages) {
       setCurrentPage(nextPage);
-      getVisibleData(apiData);
+      // getVisibleData(apiData);
       window.scrollTo({ top: 240, behavior: "smooth" });
     }
     setLoading(false);
@@ -111,39 +109,43 @@ const Page = () => {
   // SearchBar Handler
   const onSearchChangeHandler = async (e: any) => {
     try {
+      if (e.target.value.length === 0) {
+        setVisibleData(allDiscounts.slice(0, itemsPerPage));
+      }
       e.preventDefault();
       const filtrate = allDiscounts.filter((item: any) =>
         item.discounts.productName
           .toLowerCase()
           .includes(e.target.value.toLocaleLowerCase())
       );
-      // console.log(
-      //   "🚀 ~ file: page.tsx:126 ~ onSearchChangeHandler ~ filtrate:",
-      //   filtrate
-      // );
       setFiltered(filtrate);
       setVisibleData(filtrate);
+
+      // setPages(Math.ceil(visibleData.length / itemsPerPage));
     } catch (err) {
       return err;
     }
   };
 
+  // useEffect(() => {
+  //   // set number of pages
+  //   console.log("🚀 ~ useEffect ~ allDiscounts:", allDiscounts);
+
+  //   setVisibleData(allDiscounts);
+  //   fetchServices();
+  // }, []);
+
   useEffect(() => {
+    // set number of pages
+    setPages(Math.ceil(allDiscounts.length / itemsPerPage));
+    setVisibleData(allDiscounts.slice(0, itemsPerPage));
     // setVisibleData(allDiscounts);
-    // setApiData(allDiscounts);
-    setVisibleData(allDiscounts);
-    fetchServices();
-  }, []);
+  }, [allDiscounts]);
 
   return (
     <>
       <div className="px-4 pt-8 w-full flex flex-col items-center justify-start gap-8">
         {/* TOP PART */}
-        {/* <SectionTopBar
-          title={"Latest Deals"}
-          linkText={"CONTACT US"}
-          link={"#"}
-        /> */}
         <div className="bg-white w-full text-gray-600 rounded-md flex items-center justify-between p-3 px-4  lg:text-lg font-normal shadow-sm">
           <span>Latest Deals</span>
           {/* search bar */}
@@ -175,12 +177,6 @@ const Page = () => {
               onChange={onSearchChangeHandler}
             />
           </div>
-          {/* <a
-            href="#"
-            className="LinkBorder text-green-400 text-xs rounded-sm border-green-400 border-2  duration-300 ease-in-out    hover:text-white hover:bg-green-400 lg:px-4 lg:py-2"
-          >
-            CONTACT US
-          </a> */}
         </div>
         {/* <Pagination
           currentPage={currentPage}
@@ -235,13 +231,17 @@ const Page = () => {
       </div>
 
       {/* <Pagination /> */}
-      {/* <Pagination
+      <Pagination
         currentPage={currentPage}
         hasNextPage={currentPage < Math.ceil(apiData.length / itemsPerPage)}
         handleNextPageChange={handleNextPageChange}
         handlePrevPageChange={handlePrevPageChange}
         pages={pages}
-      /> */}
+        setVisibleData={setVisibleData}
+        visibleData={visibleData}
+        allDiscounts={allDiscounts}
+        itemsPerPage={itemsPerPage}
+      />
     </>
   );
 };
