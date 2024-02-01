@@ -1,6 +1,7 @@
 const Pagination = ({
   top,
   currentPage,
+  setCurrentPage,
   hasNextPage,
   handleNextPageChange,
   handlePrevPageChange,
@@ -14,6 +15,7 @@ const Pagination = ({
     const startingIndex = index * itemsPerPage;
     const endingIndex = startingIndex + itemsPerPage;
     setVisibleData(allDiscounts.slice(startingIndex, endingIndex));
+    setCurrentPage(index);
     window.scrollTo({ top: 180, behavior: "smooth" });
   };
 
@@ -47,7 +49,7 @@ const Pagination = ({
             // onClick={() => handleNextPageChange(index + 1)}
             onClick={() => gotoPageHandler(index)}
             className={`paginationBtn text-gray-800 text-sm p-3 rounded-lg border-2 duration-300 ease-in-out hover:text-white hover:bg-green-400 lg:px-4 lg:py-2 ${
-              currentPage === index + 1 ? "bg-green-400 text-white" : ""
+              currentPage === index ? "bg-green-400 text-white" : ""
             }`}
           >
             {index + 1}

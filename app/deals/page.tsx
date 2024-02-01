@@ -233,6 +233,7 @@ const Page = () => {
       {/* <Pagination /> */}
       <Pagination
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         hasNextPage={currentPage < Math.ceil(apiData.length / itemsPerPage)}
         handleNextPageChange={handleNextPageChange}
         handlePrevPageChange={handlePrevPageChange}
