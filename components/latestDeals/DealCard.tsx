@@ -25,6 +25,7 @@ const DealCard = ({
             {!image ? (
               <>
                 <Image
+                  loading="lazy"
                   width={1440}
                   height={600}
                   src={"/heroSlider/1.jpg"}
@@ -35,6 +36,7 @@ const DealCard = ({
             ) : (
               <>
                 <img
+                  loading="lazy"
                   src={image}
                   alt="#"
                   className="object-contain w-full h-full rounded-t"

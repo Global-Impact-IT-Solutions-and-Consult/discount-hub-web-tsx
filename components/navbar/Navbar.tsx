@@ -1,6 +1,47 @@
+"use client";
+
+import AppContext from "@/context/AppContext";
+import { useContext, useEffect, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 
+// Spinner
+import Spinner from "@/widgets/spinner/Spinner";
+import NavDealCard from "./NavDealCard";
+
 const Navbar = () => {
+  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
+
+  const [visibleData, setVisibleData] = useState([]);
+  const itemsPerPage = 24;
+  const [filtered, setFiltered] = useState([]);
+  const [showData, setShowData] = useState(false);
+  const [emptyArray, setEmptyArray] = useState([]);
+
+  // SearchBar Handler
+  const onSearchChangeHandler = async (e: any) => {
+    try {
+      if (e.target.value.length === 0) {
+        setVisibleData(emptyArray);
+        setFiltered([]); // Clear the filtered array when the search field is empty
+        setShowData(false);
+        return;
+      }
+      setShowData(true);
+      e.preventDefault();
+      const filtrate = allDiscounts.filter((item: any) =>
+        item.discounts.productName
+          .toLowerCase()
+          .includes(e.target.value.toLocaleLowerCase())
+      );
+      setFiltered(filtrate);
+      setVisibleData(filtrate);
+
+      // setPages(Math.ceil(visibleData.length / itemsPerPage));
+    } catch (err) {
+      return err;
+    }
+  };
+
   return (
     <div className="navBg">
       <div className="flex flex-wrap  items-center justify-between mx-auto px-4 lg:w-10/12 lg:flex lg:justify-between lg:items-center 2xl:w-8/12">
@@ -248,6 +289,81 @@ const Navbar = () => {
         >
           BETA VERSION
         </a> */}
+
+        <div className="flex flex-col gap-2 relative">
+          {/* search bar */}
+          <div className="flex item-center">
+            <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                  stroke="#ABB1BB"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="search product..."
+              className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-white text-sm lg:w-[450px] outline-green-400 bg-white/5"
+              // onChange={handleSearch}
+              onChange={onSearchChangeHandler}
+            />
+          </div>
+          {showData && (
+            <>
+              <div className="bg-white rounded-md absolute w-full top-[110%] z-[4] max-h-[400px] overflow-y-scroll shadow-md pb-2">
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    {/* card */}
+                    {visibleData.length > 0 ? (
+                      <>
+                        {visibleData.map((item: any, i: any) => (
+                          <NavDealCard
+                            key={i}
+                            title={item.discounts.productName}
+                            image={item.discounts.productImageUrl}
+                            // description={item.summary}
+                            // location={item.location}
+                            store={item.discounts.companyName}
+                            discountPrice={item.discounts.discountPrice}
+                            normalPrice={item.discounts.normalPrice}
+                            discountPercentage={
+                              item.discounts.discountPercentage
+                            }
+                            link={item.databaseId}
+                            parentSiteLogo={item.discounts.parentSiteLogo}
+                            rating={
+                              item.discounts.productRating?.split(" ")[0] || 3
+                            }
+                          />
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-full flex items-center justify-center font-medium font-poppins">
+                          No discount found.
+                        </span>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
 
         {/* <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>

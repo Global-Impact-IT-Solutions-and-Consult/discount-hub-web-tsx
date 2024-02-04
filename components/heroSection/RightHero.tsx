@@ -128,6 +128,7 @@ const RightHero = () => {
                           {/* card left */}
                           <div className="w-full md:w-[50%] h-full mb-2 relative p-2 flex items-center justify-center">
                             <img
+                              loading="lazy"
                               src={item.discounts.productImageUrl}
                               alt="#"
                               className="object-contain w-full h-full rounded-t m-auto"
@@ -138,6 +139,7 @@ const RightHero = () => {
                             <div className=" text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
                               {/* company logo */}
                               <img
+                                loading="lazy"
                                 src={
                                   item.discounts.parentSiteLogo
                                     ? item.discounts.parentSiteLogo
