@@ -8,6 +8,8 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // purge: [],
+  variants: {},
   theme: {
     extend: {
       backgroundImage: {
@@ -17,5 +19,6 @@ module.exports = {
       },
     },
   },
+  // variants: {},
   plugins: [require("daisyui")],
 };

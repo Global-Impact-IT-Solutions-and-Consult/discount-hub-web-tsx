@@ -15,7 +15,7 @@ const page = () => {
               <div className="bg-gray-200 p-[1px] w-11/12"></div>
             </div>
             <div className="flex flex-col items-start justify-start gap-8">
-              <span className="ppLineHeight text-sm text-gray-700 text-left font-sans font-normal">
+              <span className="ppLineHeight text-sm text-gray-700 text-left   font-normal">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
                 repellat est quo harum! Ipsa facere perferendis voluptatum
                 mollitia omnis consequatur ab id inventore delectus eos!
@@ -26,10 +26,10 @@ const page = () => {
                   <BiSolidMap size={28} className="text-white" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-base text-gray-800 text-left font-sans font-light">
+                  <span className="text-base text-gray-800 text-left   font-light">
                     Address
                   </span>
-                  <span className="text-xs text-gray-500 text-left font-sans font-normal lg:text-sm">
+                  <span className="text-xs text-gray-500 text-left   font-normal lg:text-sm">
                     Comre, 404 Design Street, Melbourne, Australia
                   </span>
                 </div>
@@ -40,10 +40,10 @@ const page = () => {
                   <BiEnvelope size={28} className="text-white" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-base text-gray-800 text-left font-sans font-light">
+                  <span className="text-base text-gray-800 text-left   font-light">
                     Email
                   </span>
-                  <span className="text-xs text-gray-500 text-left font-sans font-normal lg:text-sm">
+                  <span className="text-xs text-gray-500 text-left   font-normal lg:text-sm">
                     email@address.com
                   </span>
                 </div>
@@ -54,10 +54,10 @@ const page = () => {
                   <BiPhone size={28} className="text-white" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-base text-gray-800 text-left font-sans font-light">
+                  <span className="text-base text-gray-800 text-left   font-light">
                     Our Phone
                   </span>
-                  <span className="text-xs text-gray-500 text-left font-sans font-normal lg:text-sm">
+                  <span className="text-xs text-gray-500 text-left   font-normal lg:text-sm">
                     (+212) 584-241-654
                   </span>
                 </div>
@@ -76,35 +76,35 @@ const page = () => {
             {/* form */}
             <div className="w-full flex flex-col items-start justify-start gap-3">
               {/* name */}
-              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left font-sans font-normal">
+              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left   font-normal">
                 <span className="">Your Name (required)</span>
                 <input
                   type="text"
-                  className="p-1 border border-gray-300 font-sans pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
+                  className="p-1 border border-gray-300   pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
                 />
               </div>
               {/* email */}
-              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left font-sans font-normal">
+              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left   font-normal">
                 <span className="">Your Email (required)</span>
                 <input
                   type="text"
-                  className="p-1 border border-gray-300 font-sans pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
+                  className="p-1 border border-gray-300   pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
                 />
               </div>
               {/* Subject */}
-              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left font-sans font-normal">
+              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left   font-normal">
                 <span className="">Subject</span>
                 <input
                   type="text"
-                  className="p-1 border border-gray-300 font-sans pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
+                  className="p-1 border border-gray-300   pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none"
                 />
               </div>
               {/* Your Message */}
-              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left font-sans font-normal">
+              <div className="ppLineHeight  w-full py-1 flex flex-col gap-1 text-sm text-gray-700 text-left   font-normal">
                 <span className="">Your Message</span>
-                <textarea className="p-1 border border-gray-300 font-sans pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none h-40" />
+                <textarea className="p-1 border border-gray-300   pl-3 bg-white rounded-md w-full focus:ring-2 focus:ring-green-400 outline-none h-40" />
               </div>
-              <button className="flex items-center justify-center rounded-md bg-green-400 text-white px-4 py-2 mt-3 mb-5 outline-none w-[10rem] text-sm font-light font-sans focus:ring-2 focus:ring-gray-300 hover:bg-green-500">
+              <button className="flex items-center justify-center rounded-md bg-green-400 text-white px-4 py-2 mt-3 mb-5 outline-none w-[10rem] text-sm font-light   focus:ring-2 focus:ring-gray-300 hover:bg-green-500">
                 SEND MESSAGE
               </button>
             </div>

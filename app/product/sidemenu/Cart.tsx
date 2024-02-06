@@ -15,7 +15,7 @@ const Cart = () => {
       <div className="w-full bg-white flex flex-col rounded-md mb-4">
         {/* card bottom */}
 
-        <div className="p-5 flex flex-col gap-6 items-center justify-center shadow-lg text-center text-gray-800 font-sans">
+        <div className="p-5 flex flex-col gap-6 items-center justify-center shadow-lg text-center text-gray-800  ">
           <span className="font-light text-xl text-gray-800">
             Timberland Men’s Thorton Waterproof Boots
           </span>
@@ -29,11 +29,11 @@ const Cart = () => {
               {"Canada"}
             </div>
           </div>
-          <span className="ppLineHeight text-sm font-sans text-gray-500">
+          <span className="ppLineHeight text-sm   text-gray-500">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
             voluptatum recusandae
           </span>
-          <div className="text-3xl font-sans text-green-400">£390.00</div>
+          <div className="text-3xl   text-green-400">£390.00</div>
           <span className="p-3 bg-green-400 rounded-md text-white w-full text-center text-sm duration-300 ease-in-out cursor-pointer hover:bg-green-500">
             BUY PRODUCT
           </span>

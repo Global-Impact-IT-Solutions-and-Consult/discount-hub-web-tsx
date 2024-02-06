@@ -1,8 +1,49 @@
+"use client";
+
+import AppContext from "@/context/AppContext";
+import { useContext, useEffect, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 
+// Spinner
+import Spinner from "@/widgets/spinner/Spinner";
+import NavDealCard from "./NavDealCard";
+
 const Navbar = () => {
+  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
+
+  const [visibleData, setVisibleData] = useState([]);
+  const itemsPerPage = 24;
+  const [filtered, setFiltered] = useState([]);
+  const [showData, setShowData] = useState(false);
+  const [emptyArray, setEmptyArray] = useState([]);
+
+  // SearchBar Handler
+  const onSearchChangeHandler = async (e: any) => {
+    try {
+      if (e.target.value.length === 0) {
+        setVisibleData(emptyArray);
+        setFiltered([]); // Clear the filtered array when the search field is empty
+        setShowData(false);
+        return;
+      }
+      setShowData(true);
+      e.preventDefault();
+      const filtrate = allDiscounts.filter((item: any) =>
+        item.discounts.productName
+          .toLowerCase()
+          .includes(e.target.value.toLocaleLowerCase())
+      );
+      setFiltered(filtrate);
+      setVisibleData(filtrate);
+
+      // setPages(Math.ceil(visibleData.length / itemsPerPage));
+    } catch (err) {
+      return err;
+    }
+  };
+
   return (
-    <div className="bg-cyan-900">
+    <div className="navBg">
       <div className="flex flex-wrap  items-center justify-between mx-auto px-4 lg:w-10/12 lg:flex lg:justify-between lg:items-center 2xl:w-8/12">
         {/* MOBILE MENU */}
         {/* <ul className="menu lg:menu-horizontal bg-base-200 rounded-box md:hidden">
@@ -46,37 +87,37 @@ const Navbar = () => {
           >
             <li>
               <a
-                href="#"
+                href="/"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Home
               </a>
             </li>
-            <li>
+            {/*<li>
               <details open>
                 <summary className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
                   Deals
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
               </details>
             </li>
-            <li>
+             <li>
               <details open>
                 <summary className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
                   Coupons
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
@@ -88,43 +129,51 @@ const Navbar = () => {
                   Stores
                 </summary>
                 <ul className="bg-white min-w-full ml-[-8px] text-gray-700">
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Top offers</a>
                   </li>
-                  <li className="p-4 font-sans text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
+                  <li className="p-4   text-sm duration-300 ease-in-out  hover:bg-gray-100 hover:text-green-400">
                     <a href="#">Best deals</a>
                   </li>
                 </ul>
               </details>
-            </li>
+            </li> */}
+            {/* <li>
+              <a
+                href="/deals"
+                className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+              >
+                Deals
+              </a>
+            </li> */}
             <li>
               <a
-                href="#"
+                href="https://www.giitsc.com"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Contact us
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="#"
                 className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
               >
                 Blog
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
         {/* LEFT LINKS */}
-        <div className="text-sm font-sans text-white font-normal hidden md:flex ">
+        <div className="text-[13px]   text-white font-normal hidden md:flex ">
           <a
             href="/"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Home
           </a>
-          <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          {/* <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
             <label tabIndex={0} className="flex gap-2 cursor-pointer">
               Deals{" "}
               <svg
@@ -146,15 +195,15 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="/latest-deals">Top offers</a>
+              <li className="p-4 text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/deals">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+              <li className="p-4 text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/deals">Best deals</a>
               </li>
             </ul>
-          </div>
-          <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          </div> */}
+          {/* <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
             <label tabIndex={0} className="flex gap-2 cursor-pointer">
               Coupons{" "}
               <svg
@@ -176,11 +225,11 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Top offers</a>
+              <li className="p-4 text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/coupons">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+              <li className="p-4 text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/coupons">Best deals</a>
               </li>
             </ul>
           </div>
@@ -206,34 +255,115 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] bg-white min-w-full mt-5 ml-[-20px] shadow-md text-gray-700"
             >
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Top offers</a>
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/stores">Top offers</a>
               </li>
-              <li className="p-4 font-sans text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
-                <a href="#">Best deals</a>
+              <li className="p-4   text-sm duration-300 ease-in-out hover:bg-gray-100 hover:text-green-400">
+                <a href="/stores">Best deals</a>
               </li>
             </ul>
-          </div>
+          </div> */}
+          {/* <a
+            href="/deals"
+            className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+          >
+            Deals
+          </a> */}
           <a
-            href="#"
+            href="https://www.giitsc.com"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Contact us
           </a>
-          <a
+          {/* <a
             href="#"
             className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
           >
             Blog
-          </a>
+          </a> */}
         </div>
 
-        <a
+        {/* <a
           href="#"
-          className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white font-sans text-sm hover:bg-green-500"
+          className="bg-green-400 p-5 duration-300 ease-in-out cursor-pointer text-white   text-sm hover:bg-green-500"
         >
-          RLT VERSION
-        </a>
+          BETA VERSION
+        </a> */}
+
+        <div className="flex flex-col gap-2 relative">
+          {/* search bar */}
+          <div className="flex item-center">
+            <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                  stroke="#ABB1BB"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="search product..."
+              className="border-r-2 border-t-2 border-b-2 border-gray-300/50 rounded-r-lg p-2 pl-4 font-light text-white text-sm lg:w-[450px] outline-green-400 bg-white/5"
+              // onChange={handleSearch}
+              onChange={onSearchChangeHandler}
+            />
+          </div>
+          {showData && (
+            <>
+              <div className="bg-white rounded-md absolute w-full top-[110%] z-[4] max-h-[400px] overflow-y-scroll shadow-md pb-2">
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    {/* card */}
+                    {visibleData.length > 0 ? (
+                      <>
+                        {visibleData.map((item: any, i: any) => (
+                          <NavDealCard
+                            key={i}
+                            title={item.discounts.productName}
+                            image={item.discounts.productImageUrl}
+                            // description={item.summary}
+                            // location={item.location}
+                            store={item.discounts.companyName}
+                            discountPrice={item.discounts.discountPrice}
+                            normalPrice={item.discounts.normalPrice}
+                            discountPercentage={
+                              item.discounts.discountPercentage
+                            }
+                            link={item.databaseId}
+                            parentSiteLogo={item.discounts.parentSiteLogo}
+                            rating={
+                              item.discounts.productRating?.split(" ")[0] || 3
+                            }
+                          />
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-full flex items-center justify-center font-medium font-poppins">
+                          No discount found.
+                        </span>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
 
         {/* <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
