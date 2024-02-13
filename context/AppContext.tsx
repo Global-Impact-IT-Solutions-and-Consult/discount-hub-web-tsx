@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 // import { error } from "../helpers/Alert";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -10,10 +10,12 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 // const { redisClient, getAsync, setexAsync } = require("../utils/redis");
 
-const AppContext = createContext();
+const AppContext = createContext<any>(null);
 
-export const AppProvider = ({ children }) => {
-  const [url, setUrl] = useState("http://127.0.0.1:10019/graphql");
+export const AppProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
@@ -43,21 +45,30 @@ export const AppProvider = ({ children }) => {
         cache: new InMemoryCache(),
       });
 
+      // const response = await client.query({
+      //   query: gql`
+      //     query unemployed {
+      //       discountTypes(where: { hideEmpty: true }) {
+      //         nodes {
+      //           name
+      //           count
+      //           slug
+      //         }
+      //       }
+      //     }
+      //   `,
+      // });
       const response = await client.query({
         query: gql`
-          query unemployed {
-            discountTypes(where: { hideEmpty: true }) {
+            products {
               nodes {
-                name
-                count
-                slug
-              }
-            }
-          }
+                content
+             }
+         }
         `,
       });
-
-      const getResponse = response.data.discountTypes.nodes.map((item) => {
+      console.log(response);
+      const getResponse = response.data.discountTypes.nodes.map((item: any) => {
         return item;
       });
       const truncate = getResponse.slice(0, 7);
@@ -66,108 +77,105 @@ export const AppProvider = ({ children }) => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(
-        "🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:",
-        error
-      );
+      console.log("🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:", error);
     }
   };
 
-  const fetchServices = async () => {
-    const client = new ApolloClient({
-      // uri: "http://discounthub.local/graphql",
-      uri: url,
-      cache: new InMemoryCache(),
-    });
+  // const fetchServices = async () => {
+  //   const client = new ApolloClient({
+  //     // uri: "http://discounthub.local/graphql",
+  //     uri: url,
+  //     cache: new InMemoryCache(),
+  //   });
 
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          discounts {
-            edges {
-              node {
-                discounts {
-                  companyName
-                  discountPercentage
-                  discountPrice
-                  normalPrice
-                  productImageUrl
-                  productName
-                  productUrl
-                }
-              }
-            }
-          }
-        }
-      `,
-    });
-    // console.log(
-    //   "🚀 ~ file: AppContext.js:54 ~ fetchServices ~ response:",
-    //   response
-    // );
+  //   const response = await client.query({
+  //     query: gql`
+  //       query unemployed {
+  //         discounts {
+  //           edges {
+  //             node {
+  //               discounts {
+  //                 companyName
+  //                 discountPercentage
+  //                 discountPrice
+  //                 normalPrice
+  //                 productImageUrl
+  //                 productName
+  //                 productUrl
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     `,
+  //   });
+  //   // console.log(
+  //   //   "🚀 ~ file: AppContext.js:54 ~ fetchServices ~ response:",
+  //   //   response
+  //   // );
 
-    // const getResponse = response.data.discounts.nodes.map((item) => {
-    //   return item;
-    // });
+  //   // const getResponse = response.data.discounts.nodes.map((item) => {
+  //   //   return item;
+  //   // });
 
-    // const getResponse = response.data.footer.footers;
-    // return getResponse;
-  };
+  //   // const getResponse = response.data.footer.footers;
+  //   // return getResponse;
+  // };
 
   // DISCOUNTS
   // Fetch all discounts
 
   const getAllDiscounts = async () => {
     try {
-      const client = new ApolloClient({
-        uri: `${url}`,
-        cache: new InMemoryCache(),
-      });
+      // const client = new ApolloClient({
+      //   uri: `${url}`,
+      //   cache: new InMemoryCache(),
+      // });
 
-      let allDiscounts = [];
-      let cursor = null;
-      let hasNextPage = true;
+      // let allDiscounts = [];
+      // let cursor = null;
+      // let hasNextPage = true;
 
-      while (hasNextPage) {
-        const response = await client.query({
-          query: gql`
-            query unemployed($cursor: String) {
-              discounts(first: 100, after: $cursor) {
-                nodes {
-                  discounts {
-                    companyName
-                    discountPercentage
-                    discountPrice
-                    normalPrice
-                    productImageUrl
-                    productName
-                    productUrl
-                    parentSiteLogo
-                    productRating
-                  }
-                  databaseId
-                }
-                pageInfo {
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-          `,
-          variables: { cursor },
-        });
+      // while (hasNextPage) {
+      //   const response = await client.query({
+      //     query: gql`
+      //       query unemployed($cursor: String) {
+      //         discounts(first: 100, after: $cursor) {
+      //           nodes {
+      //             discounts {
+      //               companyName
+      //               discountPercentage
+      //               discountPrice
+      //               normalPrice
+      //               productImageUrl
+      //               productName
+      //               productUrl
+      //               parentSiteLogo
+      //               productRating
+      //             }
+      //             databaseId
+      //           }
+      //           pageInfo {
+      //             endCursor
+      //             hasNextPage
+      //           }
+      //         }
+      //       }
+      //     `,
+      //     variables: { cursor },
+      //   });
 
-        const { nodes, pageInfo } = response.data.discounts;
+      //   const { nodes, pageInfo } = response.data.discounts;
 
-        // Flatten arrays within each iteration and include databaseId
-        allDiscounts = allDiscounts.concat(nodes);
+      //   // Flatten arrays within each iteration and include databaseId
+      //   allDiscounts = allDiscounts.concat(nodes);
 
-        cursor = pageInfo.endCursor;
-        hasNextPage = pageInfo.hasNextPage;
-      }
+      //   cursor = pageInfo.endCursor;
+      //   hasNextPage = pageInfo.hasNextPage;
+      // }
 
       // Update the state with all discounts
-      setAllDiscounts(allDiscounts);
+      setAllDiscounts([]);
     } catch (error) {
       console.log("Error fetching discounts:", error);
     }
@@ -242,45 +250,45 @@ export const AppProvider = ({ children }) => {
   //   }
   // };
 
-  const getAllDiscountss = async () => {
-    try {
-      const client = new ApolloClient({
-        uri: `${url}`,
-        cache: new InMemoryCache(),
-      });
+  // const getAllDiscountss = async () => {
+  //   try {
+  //     const client = new ApolloClient({
+  //       uri: `${url}`,
+  //       cache: new InMemoryCache(),
+  //     });
 
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            discounts(first: 200) {
-              nodes {
-                discounts {
-                  companyName
-                  discountType
-                  discountPrice
-                  discountPercentage
-                  normalPrice
-                  productImageUrl
-                  productName
-                  productUrl
-                }
-              }
-            }
-          }
-        `,
-      });
+  //     const response = await client.query({
+  //       query: gql`
+  //         query unemployed {
+  //           discounts(first: 200) {
+  //             nodes {
+  //               discounts {
+  //                 companyName
+  //                 discountType
+  //                 discountPrice
+  //                 discountPercentage
+  //                 normalPrice
+  //                 productImageUrl
+  //                 productName
+  //                 productUrl
+  //               }
+  //             }
+  //           }
+  //         }
+  //       `,
+  //     });
 
-      const getResponse = response.data.discounts.nodes.map((item) => {
-        return item;
-      });
-      setAllDiscounts(getResponse);
-    } catch (error) {
-      console.log(
-        "🚀 ~ file: AppContext.js:147 ~ getAllDiscounts ~ error:",
-        error
-      );
-    }
-  };
+  //     const getResponse = response.data.discounts.nodes.map((item) => {
+  //       return item;
+  //     });
+  //     setAllDiscounts(getResponse);
+  //   } catch (error) {
+  //     console.log(
+  //       "🚀 ~ file: AppContext.js:147 ~ getAllDiscounts ~ error:",
+  //       error
+  //     );
+  //   }
+  // };
 
   // const getAllDiscounts = async () => {
   //   try {
@@ -341,7 +349,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // console.log("Fetch everything");
+      console.log("Fetch everything");
       // fetchServices();
       getLeftHeroCategories();
       getAllDiscounts();
@@ -355,7 +363,6 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        // Misc
         url,
         user,
         loading,
@@ -376,8 +383,7 @@ export const AppProvider = ({ children }) => {
         getAllDiscounts,
       }}
     >
-      {" "}
-      {children}{" "}
+      {children}
     </AppContext.Provider>
   );
 };

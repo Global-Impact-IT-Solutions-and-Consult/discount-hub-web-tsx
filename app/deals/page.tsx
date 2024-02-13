@@ -56,9 +56,7 @@ const Page = () => {
         // },
       });
 
-      const responseData = response.data.discounts.nodes.map(
-        (item: any) => item
-      );
+      const responseData = response.data.discounts.nodes.map((item: any) => item);
       // console.log(
       //   "🚀 ~ file: page.tsx:66 ~ fetchServices ~ responseData:",
       //   responseData
@@ -67,10 +65,7 @@ const Page = () => {
       setApiData(responseData);
       // setVisibleData(responseData.slice(0, itemsPerPage));
       setVisibleData(responseData);
-      console.log(
-        "🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:",
-        responseData
-      );
+      console.log("🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:", responseData);
       // setCurrentPage(1);
       // setVisibleData(responseData.slice(0, itemsPerPage));
       // setHasNextPage(response.data.discounts.pageInfo.hasNextPage);
@@ -113,11 +108,7 @@ const Page = () => {
         setVisibleData(allDiscounts.slice(0, itemsPerPage));
       }
       e.preventDefault();
-      const filtrate = allDiscounts.filter((item: any) =>
-        item.discounts.productName
-          .toLowerCase()
-          .includes(e.target.value.toLocaleLowerCase())
-      );
+      const filtrate = allDiscounts.filter((item: any) => item.discounts.productName.toLowerCase().includes(e.target.value.toLocaleLowerCase()));
       setFiltered(filtrate);
       setVisibleData(filtrate);
 
@@ -151,19 +142,13 @@ const Page = () => {
           {/* search bar */}
           <div className="flex item-center">
             <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
                   stroke="#ABB1BB"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>

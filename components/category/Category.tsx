@@ -55,9 +55,7 @@ const Category = ({ slug }: any) => {
       });
       // console.log("🚀 ~ file: page.tsx:48 ~ fetchServices ~ response:", response);
 
-      const filteredDiscounts = response.data.discounts.nodes
-        .filter((item: any) => item.discounts.discountType === slug)
-        .map((item: any) => item);
+      const filteredDiscounts = response.data.discounts.nodes.filter((item: any) => item.discounts.discountType === slug).map((item: any) => item);
       // console.log(
       //   "🚀 ~ file: Category.tsx:55 ~ fetchServices ~ filteredDiscounts:",
       //   filteredDiscounts
@@ -74,9 +72,7 @@ const Category = ({ slug }: any) => {
   }
 
   async function getHeading(inputString: string) {
-    return inputString
-      .replace(/_([a-z])/g, (_, match) => ` ${match.toUpperCase()}`)
-      .replace(/^([a-z])/, (_, match) => match.toUpperCase());
+    return inputString.replace(/_([a-z])/g, (_, match) => ` ${match.toUpperCase()}`).replace(/^([a-z])/, (_, match) => match.toUpperCase());
   }
 
   useEffect(() => {
@@ -115,15 +111,8 @@ const Category = ({ slug }: any) => {
   const onSearchCangeHandler = async (e: any) => {
     try {
       e.preventDefault();
-      const filtrate = discounts.filter((item: any) =>
-        item.discounts.productName
-          .toLowerCase()
-          .includes(e.target.value.toLocaleLowerCase())
-      );
-      console.log(
-        "🚀 ~ file: page.tsx:126 ~ onSearchCangeHandler ~ filtrate:",
-        filtrate
-      );
+      const filtrate = discounts.filter((item: any) => item.discounts.productName.toLowerCase().includes(e.target.value.toLocaleLowerCase()));
+      console.log("🚀 ~ file: page.tsx:126 ~ onSearchCangeHandler ~ filtrate:", filtrate);
       setFiltered(filtrate);
       setVisibleData(filtrate);
     } catch (err) {
@@ -138,10 +127,7 @@ const Category = ({ slug }: any) => {
           if (item.hasOwnProperty(key)) {
             const value = item[key];
 
-            if (
-              (typeof value === "string" || typeof value === "number") &&
-              value.toString().toLowerCase().includes(searchTerm)
-            ) {
+            if ((typeof value === "string" || typeof value === "number") && value.toString().toLowerCase().includes(searchTerm)) {
               return true; // Found a match in a string or numeric property
             }
           }
@@ -157,9 +143,7 @@ const Category = ({ slug }: any) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
     const filteredData = discounts.filter((item: any) =>
-      Object.values(item).some((value: any) =>
-        value.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      Object.values(item).some((value: any) => value.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     setPages(Math.ceil(filteredData.length / itemsPerPage));
     setCurrentPage(0);
@@ -169,9 +153,7 @@ const Category = ({ slug }: any) => {
   useEffect(() => {
     if (discounts) {
       const filteredData = discounts.filter((item) =>
-        Object.values(item).some((value: any) =>
-          value.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        Object.values(item).some((value: any) => value.toLowerCase().includes(searchTerm.toLowerCase()))
       );
       setPages(Math.ceil(filteredData.length / itemsPerPage));
       setCurrentPage(0);
@@ -200,19 +182,13 @@ const Category = ({ slug }: any) => {
           {/* search bar */}
           <div className="flex item-center">
             <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
                   stroke="#ABB1BB"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>
@@ -258,9 +234,7 @@ const Category = ({ slug }: any) => {
                       discountPercentage={item.discounts.discountPercentage}
                       link={item.databaseId}
                       parentSiteLogo={item.discounts.parentSiteLogo}
-                      rating={
-                        item.discounts.productRating?.split(" ")[0] || 3.5
-                      }
+                      rating={item.discounts.productRating?.split(" ")[0] || 3.5}
                     />
                   ))}
                 </>
