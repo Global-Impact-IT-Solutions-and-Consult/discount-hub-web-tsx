@@ -20,9 +20,9 @@ const RightHeroCard = () => {
         const response = await client.query({
           query: gql`
             query unemployed {
-              discounts(last: 9) {
+              products(last: 9) {
                 nodes {
-                  discounts {
+                  products {
                     companyName
                     discountPercentage
                     discountPrice
@@ -42,7 +42,7 @@ const RightHeroCard = () => {
         //   response
         // );
 
-        const getResponse: any = response.data.discounts.nodes.map(
+        const getResponse: any = response.data.products.nodes.map(
           (item: any) => item
         );
 

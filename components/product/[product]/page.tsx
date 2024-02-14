@@ -57,8 +57,8 @@ const ProductPage = async ({ params }: any) => {
     const response = await client.query({
       query: gql`
         query unemployed {
-          discount(idType: DATABASE_ID, id: ${params.id}) {
-            discounts {
+          product(idType: DATABASE_ID, id: ${params.id}) {
+            products {
               companyName
               discountPercentage
               discountPrice
@@ -78,7 +78,7 @@ const ProductPage = async ({ params }: any) => {
     //   return item.products;
     // });
 
-    const getResponse = response.data.discount.discounts;
+    const getResponse = response.data.product.products;
     // console.log(
     //   "🚀 ~ file: page.tsx:90 ~ fetchServices ~ getResponse:",
     //   getResponse

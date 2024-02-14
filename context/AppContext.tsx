@@ -77,7 +77,10 @@ export const AppProvider: React.FC<{
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log("🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:", error);
+      console.log(
+        "🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:",
+        error
+      );
     }
   };
 
@@ -114,7 +117,7 @@ export const AppProvider: React.FC<{
   //   //   response
   //   // );
 
-  //   // const getResponse = response.data.discounts.nodes.map((item) => {
+  //   // const getResponse = response.data.products.nodes.map((item) => {
   //   //   return item;
   //   // });
 
@@ -165,7 +168,7 @@ export const AppProvider: React.FC<{
       //     variables: { cursor },
       //   });
 
-      //   const { nodes, pageInfo } = response.data.discounts;
+      //   const { nodes, pageInfo } = response.data.products;
 
       //   // Flatten arrays within each iteration and include databaseId
       //   allDiscounts = allDiscounts.concat(nodes);
@@ -220,10 +223,10 @@ export const AppProvider: React.FC<{
   //       });
   //       // console.log(
   //       //   "🚀 ~ getAllDiscounts ~ response:",
-  //       //   response.data.discounts.nodes.length
+  //       //   response.data.products.nodes.length
   //       // );
 
-  //       const { nodes, pageInfo } = response.data.discounts;
+  //       const { nodes, pageInfo } = response.data.products;
   //       console.log("🚀 ~ getAllDiscounts ~ nodes:", nodes);
   //       setAllDiscounts((prevDiscounts) => [
   //         ...prevDiscounts,
@@ -278,7 +281,7 @@ export const AppProvider: React.FC<{
   //       `,
   //     });
 
-  //     const getResponse = response.data.discounts.nodes.map((item) => {
+  //     const getResponse = response.data.products.nodes.map((item) => {
   //       return item;
   //     });
   //     setAllDiscounts(getResponse);
@@ -328,7 +331,7 @@ export const AppProvider: React.FC<{
   //       });
 
   //       // Extract and set the response data
-  //       const getResponse = response.data.discounts.nodes.map((item) => item);
+  //       const getResponse = response.data.products.nodes.map((item) => item);
   //       console.log("🚀 ~ getAllDiscounts ~ getResponse:", getResponse);
   //       setAllDiscounts(getResponse);
 

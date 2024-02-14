@@ -30,9 +30,9 @@ const RightHero = () => {
         const response = await client.query({
           query: gql`
             query unemployed {
-              discounts(first: 5) {
+              products(first: 5) {
                 nodes {
-                  discounts {
+                  products {
                     companyName
                     discountPercentage
                     discountPrice
@@ -54,7 +54,7 @@ const RightHero = () => {
         //   response
         // );
 
-        const getResponse: any = response.data.discounts.nodes.map(
+        const getResponse: any = response.data.products.nodes.map(
           (item: any) => item
         );
 

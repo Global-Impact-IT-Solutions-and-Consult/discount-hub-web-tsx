@@ -62,9 +62,9 @@ const LatestDeals = () => {
         const response = await client.query({
           query: gql`
             query unemployed {
-              discounts(last: 9) {
+              products(last: 9) {
                 nodes {
-                  discounts {
+                  products {
                     companyName
                     discountPercentage
                     discountPrice
@@ -86,7 +86,7 @@ const LatestDeals = () => {
           response
         );
 
-        const getResponse: any = response.data.discounts.nodes.map(
+        const getResponse: any = response.data.products.nodes.map(
           (item: any) => item
         );
 

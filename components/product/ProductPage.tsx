@@ -30,8 +30,8 @@ const ProductPage = ({ id }: any) => {
         const response = await client.query({
           query: gql`
             query unemployed {
-            discount(idType: DATABASE_ID, id: ${id}) {
-              discounts {
+            product(idType: DATABASE_ID, id: ${id}) {
+              products {
                 companyName
                 discountPercentage
                 discountPrice
@@ -56,7 +56,7 @@ const ProductPage = ({ id }: any) => {
           `,
         });
 
-        const getResponse: any = response.data.discount.discounts;
+        const getResponse: any = response.data.product.products;
         // Extract URLs using regular expression and convert to array of strings
         const imageUrlsString = getResponse.allProductImageUrls;
         const imageUrls = imageUrlsString?.match(/https:\/\/[^\s,]+/g);
