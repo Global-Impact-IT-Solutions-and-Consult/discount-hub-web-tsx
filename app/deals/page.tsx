@@ -12,7 +12,8 @@ import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
 
 const Page = () => {
-  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
+  const { url, loading, setLoading, allProducts } = useContext(AppContext);
+  console.log("🚀 ~ Page ~ allProducts:", allProducts);
   const [apiData, setApiData] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,68 +21,68 @@ const Page = () => {
   const itemsPerPage = 24;
   const [filtered, setFiltered] = useState([]);
 
-  const fetchServices = async () => {
-    try {
-      setLoading(true);
+  // const fetchServices = async () => {
+  //   try {
+  //     setLoading(true);
 
-      const client = new ApolloClient({
-        uri: url,
-        cache: new InMemoryCache(),
-      });
+  //     const client = new ApolloClient({
+  //       uri: url,
+  //       cache: new InMemoryCache(),
+  //     });
 
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            products(first: 1000000) {
-              nodes {
-                products {
-                  companyName
-                  discountPercentage
-                  discountPrice
-                  normalPrice
-                  productImageUrl
-                  productName
-                  productUrl
-                  parentSiteLogo
-                  productRating
-                }
-                databaseId
-              }
-            }
-          }
-        `,
-        // variables: {
-        //   first: 21,
-        //   after: endCursor,
-        // },
-      });
+  //     const response = await client.query({
+  //       query: gql`
+  //         query unemployed {
+  //           products(first: 1000000) {
+  //             nodes {
+  //               products {
+  //                 companyName
+  //                 discountPercentage
+  //                 discountPrice
+  //                 normalPrice
+  //                 productImageUrl
+  //                 productName
+  //                 productUrl
+  //                 parentSiteLogo
+  //                 productRating
+  //               }
+  //               databaseId
+  //             }
+  //           }
+  //         }
+  //       `,
+  //       // variables: {
+  //       //   first: 21,
+  //       //   after: endCursor,
+  //       // },
+  //     });
 
-      const responseData = response.data.products.nodes.map(
-        (item: any) => item
-      );
-      // console.log(
-      //   "🚀 ~ file: page.tsx:66 ~ fetchServices ~ responseData:",
-      //   responseData
-      // );
+  //     const responseData = response.data.products.nodes.map(
+  //       (item: any) => item
+  //     );
+  //     // console.log(
+  //     //   "🚀 ~ file: page.tsx:66 ~ fetchServices ~ responseData:",
+  //     //   responseData
+  //     // );
 
-      setApiData(responseData);
-      // setVisibleData(responseData.slice(0, itemsPerPage));
-      setVisibleData(responseData);
-      console.log(
-        "🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:",
-        responseData
-      );
-      // setCurrentPage(1);
-      // setVisibleData(responseData.slice(0, itemsPerPage));
-      // setHasNextPage(response.data.products.pageInfo.hasNextPage);
-      // setHasPrevPage(response.data.products.pageInfo.hasPreviousPage);
-      // setEndCursor(response.data.products.pageInfo.endCursor);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    }
-  };
+  //     setApiData(responseData);
+  //     // setVisibleData(responseData.slice(0, itemsPerPage));
+  //     setVisibleData(responseData);
+  //     console.log(
+  //       "🚀 ~ file: page.tsx:72 ~ fetchServices ~ responseData:",
+  //       responseData
+  //     );
+  //     // setCurrentPage(1);
+  //     // setVisibleData(responseData.slice(0, itemsPerPage));
+  //     // setHasNextPage(response.data.products.pageInfo.hasNextPage);
+  //     // setHasPrevPage(response.data.products.pageInfo.hasPreviousPage);
+  //     // setEndCursor(response.data.products.pageInfo.endCursor);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleNextPageChange = () => {
     setLoading(true);
@@ -110,10 +111,10 @@ const Page = () => {
   const onSearchChangeHandler = async (e: any) => {
     try {
       if (e.target.value.length === 0) {
-        setVisibleData(allDiscounts.slice(0, itemsPerPage));
+        setVisibleData(allProducts.slice(0, itemsPerPage));
       }
       e.preventDefault();
-      const filtrate = allDiscounts.filter((item: any) =>
+      const filtrate = allProducts.filter((item: any) =>
         item.discounts.productName
           .toLowerCase()
           .includes(e.target.value.toLocaleLowerCase())
@@ -129,18 +130,18 @@ const Page = () => {
 
   // useEffect(() => {
   //   // set number of pages
-  //   console.log("🚀 ~ useEffect ~ allDiscounts:", allDiscounts);
+  //   console.log("🚀 ~ useEffect ~ allProducts:", allProducts);
 
-  //   setVisibleData(allDiscounts);
+  //   setVisibleData(allProducts);
   //   fetchServices();
   // }, []);
 
   useEffect(() => {
     // set number of pages
-    setPages(Math.ceil(allDiscounts.length / itemsPerPage));
-    setVisibleData(allDiscounts.slice(0, itemsPerPage));
-    // setVisibleData(allDiscounts);
-  }, [allDiscounts]);
+    setPages(Math.ceil(allProducts.length / itemsPerPage));
+    setVisibleData(allProducts.slice(0, itemsPerPage));
+    // setVisibleData(allProducts);
+  }, [allProducts]);
 
   return (
     <>
@@ -199,17 +200,22 @@ const Page = () => {
                   {visibleData.map((item: any, i: any) => (
                     <DealCard
                       key={i}
-                      title={item.discounts.productName}
-                      image={item.discounts.productImageUrl}
-                      // description={item.summary}
-                      // location={item.location}
-                      store={item.discounts.companyName}
-                      discountPrice={item.discounts.discountPrice}
-                      normalPrice={item.discounts.normalPrice}
-                      discountPercentage={item.discounts.discountPercentage}
-                      link={item.databaseId}
-                      parentSiteLogo={item.discounts.parentSiteLogo}
-                      rating={item.discounts.productRating?.split(" ")[0] || 3}
+                      title={item?.name}
+                      image={item?.images[0]}
+                      // description={item?.summary?}
+                      // location={item?.location?}
+                      store={item?.companyName}
+                      discountPrice={item?.discountPrice}
+                      normalPrice={item?.price}
+                      discountPercentage={
+                        item?.discountPercentage ||
+                        ((item?.price - item?.discountPrice) / item?.price) *
+                          100
+                      }
+                      link={item?._id}
+                      parentSiteLogo={item?.parentSiteLogo}
+                      // rating={item?.productRating?.split(" ")[0] || 3}
+                      rating={parseInt(item?.rating.split(" out")[0]) || 3}
                     />
                   ))}
                 </>
@@ -240,7 +246,7 @@ const Page = () => {
         pages={pages}
         setVisibleData={setVisibleData}
         visibleData={visibleData}
-        allDiscounts={allDiscounts}
+        allProducts={allProducts}
         itemsPerPage={itemsPerPage}
       />
     </>

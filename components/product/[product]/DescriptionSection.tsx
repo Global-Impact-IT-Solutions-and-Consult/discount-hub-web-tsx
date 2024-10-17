@@ -7,9 +7,9 @@ const DescriptionSection = ({ data }: any) => {
           <span className="font-light text-2xl text-gray-900">Description</span>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">
             <span className="ppLineHeight text-sm text-gray-800 text-left font-normal flex flex-col">
-              {data.productDetails ? (
+              {data.description ? (
                 <>
-                  {data?.productDetails
+                  {data?.description
                     ?.split("\n")
                     .map((detail: any, index: any) => (
                       <span key={index} className="my-2">
@@ -24,7 +24,7 @@ const DescriptionSection = ({ data }: any) => {
               )}
             </span>
 
-            {/* {data?.productDetails} */}
+            {/* {data?.description} */}
             {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
             numquam nostrum. amet. Lorem ipsum dolor sit amet, consectetur
             adipisicing elit. Laboriosam, ipsum voluptatum. Eos, saepe harum

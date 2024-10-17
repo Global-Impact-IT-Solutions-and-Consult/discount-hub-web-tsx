@@ -11,70 +11,77 @@ import ReviewSection from "./[product]/ReviewSection";
 import FeaturesSpecs from "./[product]/FeaturesSpecs";
 
 const ProductPage = ({ id }: any) => {
-  const { url } = useContext(AppContext);
+  const { url, loading, setOneProductId, oneProduct } = useContext(AppContext);
+  console.log("🚀 ~ ProductPage ~ oneProduct:", oneProduct);
 
   const [switchSection, setSwitchSection] = useState(true);
 
   const [apiData, setApiData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   async function fetchServices() {
+  //     try {
+  //       const client = new ApolloClient({
+  //         uri: url,
+  //         cache: new InMemoryCache(),
+  //       });
+
+  //       const response = await client.query({
+  //         query: gql`
+  //           query unemployed {
+  //           product(idType: DATABASE_ID, id: ${id}) {
+  //             products {
+  //               companyName
+  //               discountPercentage
+  //               discountPrice
+  //               discountType
+  //               normalPrice
+  //               productImageUrl
+  //               productName
+  //               productUrl
+  //               brand
+  //               keyFeatures
+  //               parentSiteLogo
+  //               productDetails
+  //               specifications
+  //               itemsLeft
+  //               verifiedRatings
+  //               productRating
+  //               allProductImageUrls
+  //               crawledFrom
+  //             }
+  //           }
+  //           }
+  //         `,
+  //       });
+
+  //       const getResponse: any = response.data.product.products;
+  //       // Extract URLs using regular expression and convert to array of strings
+  //       const imageUrlsString = getResponse.allProductImageUrls;
+  //       const imageUrls = imageUrlsString?.match(/https:\/\/[^\s,]+/g);
+  //       // console.log("🚀 ~ fetchServices ~ imageUrls:", imageUrls[0]);
+
+  //       // console.log(
+  //       //   "🚀 ~ file: ProductPage.tsx:47 ~ fetchServices ~ getResponse:",
+  //       //   getResponse
+  //       // );
+
+  //       setApiData({ ...getResponse, imageUrls });
+  //       setLoading(false);
+  //     } catch (ex: any) {
+  //       console.log("Error fetching data:", ex);
+  //       console.log("Server response:", ex.response);
+  //     }
+  //   }
+  //   fetchServices();
+  // }, [id]);
 
   useEffect(() => {
-    setLoading(true);
-    async function fetchServices() {
-      try {
-        const client = new ApolloClient({
-          uri: url,
-          cache: new InMemoryCache(),
-        });
-
-        const response = await client.query({
-          query: gql`
-            query unemployed {
-            product(idType: DATABASE_ID, id: ${id}) {
-              products {
-                companyName
-                discountPercentage
-                discountPrice
-                discountType
-                normalPrice
-                productImageUrl
-                productName
-                productUrl
-                brand
-                keyFeatures
-                parentSiteLogo
-                productDetails
-                specifications
-                itemsLeft
-                verifiedRatings
-                productRating
-                allProductImageUrls
-                crawledFrom
-              }
-            }
-            }
-          `,
-        });
-
-        const getResponse: any = response.data.product.products;
-        // Extract URLs using regular expression and convert to array of strings
-        const imageUrlsString = getResponse.allProductImageUrls;
-        const imageUrls = imageUrlsString?.match(/https:\/\/[^\s,]+/g);
-        // console.log("🚀 ~ fetchServices ~ imageUrls:", imageUrls[0]);
-
-        // console.log(
-        //   "🚀 ~ file: ProductPage.tsx:47 ~ fetchServices ~ getResponse:",
-        //   getResponse
-        // );
-
-        setApiData({ ...getResponse, imageUrls });
-        setLoading(false);
-      } catch (ex: any) {
-        console.log("Error fetching data:", ex);
-        console.log("Server response:", ex.response);
-      }
+    if (id) {
+      setOneProductId(id);
     }
-    fetchServices();
   }, [id]);
 
   return (
@@ -86,7 +93,7 @@ const ProductPage = ({ id }: any) => {
           <>
             {/* left */}
             <div className="w-full flex flex-col gap-12">
-              <ProductCard data={apiData} />
+              <ProductCard data={oneProduct} />
               <div className="flex flex-col w-full">
                 <div className="w-full flex justify-start items-center gap-1">
                   <span
@@ -113,11 +120,11 @@ const ProductPage = ({ id }: any) => {
                 </div>
                 {switchSection ? (
                   <>
-                    <DescriptionSection data={apiData} />
+                    <DescriptionSection data={oneProduct} />
                   </>
                 ) : (
                   <>
-                    <FeaturesSpecs data={apiData} />
+                    <FeaturesSpecs data={oneProduct} />
                     {/* <ReviewSection data={apiData} />{" "} */}
                   </>
                 )}

@@ -16,7 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
 const ProductCard = ({ data }: any) => {
   console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
 
-  const [displayImage, setDisplayImage] = useState(data.productImageUrl);
+  const [displayImage, setDisplayImage] = useState(data?.images?.[0]);
 
   return (
     <>
@@ -40,7 +40,7 @@ const ProductCard = ({ data }: any) => {
               prevArrow={<div className="custom-arrow">Left</div>}
               nextArrow={<div className="custom-arrow">Right</div>}
             >
-              {data.imageUrls?.map((item: any, i: any) => (
+              {data.images?.map((item: any, i: any) => (
                 <div key={i} className="slider-item">
                   <img
                     src={item}
@@ -67,19 +67,26 @@ const ProductCard = ({ data }: any) => {
         {/* right */}
         <div className="w-full h-full md:w-[50%] p-4 flex flex-col gap-5 shadow-lg text-gray-800 items-center justify-center md:justify-start md:items-start md:pl-8">
           <span className="font-light text-xl text-center text-gray-800  my-2 md:text-3xl md:text-left">
-            {data.productName}{" "}
+            {data.name}{" "}
           </span>
           <div className="flex flex-col items-start justify-center gap-5">
-            {data.productRating ? (
+            {data.rating ? (
               <>
                 {/* <RatingStars size={16} /> */}
-                <div className="flex items-start justify-center gap-3 w-full md:justify-start">
+                <div className="flex items-end justify-center gap-3 w-full md:justify-start">
                   <RatingStars
                     size={26}
-                    number={data.productRating?.split(" ")[0] || 0}
+                    number={parseInt(data?.rating.split(" out")[0]) || 0}
                   />
-                  {data.verifiedRatings ? (
-                    <span>{data.verifiedRatings}</span>
+                  {data?.rating ? (
+                    <span>
+                      {(() => {
+                        const match = data?.rating.match(/\((\d+)\)/);
+                        return match
+                          ? `(${match[1]}) ratings`
+                          : "No ratings available";
+                      })()}
+                    </span>
                   ) : (
                     <span className="text-sm text-gray-300">
                       No ratings available
@@ -98,7 +105,8 @@ const ProductCard = ({ data }: any) => {
               </div>
               <div className="flex gap-1 items-center">
                 <BiSolidMap />
-                {data.crawledFrom}
+                {/* {data.crawledFrom} */}
+                {"Jumia"}
               </div>
             </div>
             <span className="ppLineHeight text-sm text-gray-500 flex w-full justify-center md:justify-start">
@@ -108,18 +116,22 @@ const ProductCard = ({ data }: any) => {
             </span>
 
             <h4 className="font-light text-[2rem] font-serif flex items-center justify-center gap-3">
-              {data.discountPrice}
+              ₦{new Intl.NumberFormat("en-NG").format(data.discountPrice)}
               <span className="text-xl text-gray-300 line-through flex items-center">
-                {data.normalPrice}
+                ₦{new Intl.NumberFormat("en-NG").format(data.price)}
               </span>
-              {data.discountPercentage && (
-                <div className="py-1 px-2 rounded-md flex items-center justify-center text-green-300   md:text-base md:font-semibold">
-                  ( - {data.discountPercentage})
-                </div>
-                // <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center  md:text-xl md:font-semibold">
-                //   (- {data.discountPercentage})
-                // </div>
-              )}
+              {/* {data.discountPercentage && ( */}
+              <div className="py-1 px-2 rounded-md flex items-center justify-center text-green-300   md:text-base md:font-semibold">
+                -
+                {Math.floor(
+                  ((data?.price - data?.discountPrice) / data?.price) * 100
+                )}{" "}
+                %
+              </div>
+              {/* <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center  md:text-xl md:font-semibold">
+                   (- {data.discountPercentage})
+                </div> */}
+              {/* )} */}
             </h4>
           </div>
           <span className="ppLineHeight text-sm text-gray-800 text-left   font-normal">

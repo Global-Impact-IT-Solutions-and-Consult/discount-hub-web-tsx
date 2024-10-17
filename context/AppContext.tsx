@@ -15,17 +15,25 @@ const AppContext = createContext<any>(null);
 export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
+  // const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
+  const url = `${process.env.NEXT_API_BASE_URL}`;
+  console.log("🚀 ~ url:", url);
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
   const [topbarName, setTopbarName] = useState("Welcome!");
+  const [baseURL, setBaseURL] = useState("http://localhost:6001");
 
   // HERO SECTION
   const [leftHero, setLeftHero] = useState([]);
 
-  // DISCOUNTS
-  const [allDiscounts, setAllDiscounts] = useState([]);
+  // PRODUCTS
+  const [allProducts, setAllProducts] = useState([]);
+  const [oneProductId, setOneProductId] = useState();
+  const [oneProduct, setOneProduct] = useState([]);
+
+  // CATEGORIES
+  const [allCategories, setAllCategories] = useState([]);
 
   //************/
   //*******/
@@ -35,54 +43,6 @@ export const AppProvider: React.FC<{
   // **************** //
 
   // HERO SECTION
-  // Fetch left hero categories
-  const getLeftHeroCategories = async () => {
-    try {
-      setLoading(true);
-      const client = new ApolloClient({
-        // uri: "http://localhost/wp/graphql",
-        uri: `${url}`,
-        cache: new InMemoryCache(),
-      });
-
-      // const response = await client.query({
-      //   query: gql`
-      //     query unemployed {
-      //       discountTypes(where: { hideEmpty: true }) {
-      //         nodes {
-      //           name
-      //           count
-      //           slug
-      //         }
-      //       }
-      //     }
-      //   `,
-      // });
-      const response = await client.query({
-        query: gql`
-            products {
-              nodes {
-                content
-             }
-         }
-        `,
-      });
-      console.log(response);
-      const getResponse = response.data.discountTypes.nodes.map((item: any) => {
-        return item;
-      });
-      const truncate = getResponse.slice(0, 7);
-
-      setLeftHero(truncate);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(
-        "🚀 ~ file: AppContext.js:38 ~ getLeftHeroCategories ~ error:",
-        error
-      );
-    }
-  };
 
   // const fetchServices = async () => {
   //   const client = new ApolloClient({
@@ -125,66 +85,67 @@ export const AppProvider: React.FC<{
   //   // return getResponse;
   // };
 
-  // DISCOUNTS
+  // PRODUCTS
   // Fetch all discounts
 
-  const getAllDiscounts = async () => {
-    try {
-      // const client = new ApolloClient({
-      //   uri: `${url}`,
-      //   cache: new InMemoryCache(),
-      // });
+  // const getAllProducts = async () => {
+  //   try {
+  //     // const client = new ApolloClient({
+  //     //   uri: `${url}`,
+  //     //   cache: new InMemoryCache(),
+  //     // });
 
-      // let allDiscounts = [];
-      // let cursor = null;
-      // let hasNextPage = true;
+  //     // let allProducts = [];
+  //     // let cursor = null;
+  //     // let hasNextPage = true;
 
-      // while (hasNextPage) {
-      //   const response = await client.query({
-      //     query: gql`
-      //       query unemployed($cursor: String) {
-      //         discounts(first: 100, after: $cursor) {
-      //           nodes {
-      //             discounts {
-      //               companyName
-      //               discountPercentage
-      //               discountPrice
-      //               normalPrice
-      //               productImageUrl
-      //               productName
-      //               productUrl
-      //               parentSiteLogo
-      //               productRating
-      //             }
-      //             databaseId
-      //           }
-      //           pageInfo {
-      //             endCursor
-      //             hasNextPage
-      //           }
-      //         }
-      //       }
-      //     `,
-      //     variables: { cursor },
-      //   });
+  //     // while (hasNextPage) {
+  //     //   const response = await client.query({
+  //     //     query: gql`
+  //     //       query unemployed($cursor: String) {
+  //     //         discounts(first: 100, after: $cursor) {
+  //     //           nodes {
+  //     //             discounts {
+  //     //               companyName
+  //     //               discountPercentage
+  //     //               discountPrice
+  //     //               normalPrice
+  //     //               productImageUrl
+  //     //               productName
+  //     //               productUrl
+  //     //               parentSiteLogo
+  //     //               productRating
+  //     //             }
+  //     //             databaseId
+  //     //           }
+  //     //           pageInfo {
+  //     //             endCursor
+  //     //             hasNextPage
+  //     //           }
+  //     //         }
+  //     //       }
+  //     //     `,
+  //     //     variables: { cursor },
+  //     //   });
 
-      //   const { nodes, pageInfo } = response.data.products;
+  //     //   const { nodes, pageInfo } = response.data.products;
 
-      //   // Flatten arrays within each iteration and include databaseId
-      //   allDiscounts = allDiscounts.concat(nodes);
+  //     //   // Flatten arrays within each iteration and include databaseId
+  //     //   allProducts = allProducts.concat(nodes);
 
-      //   cursor = pageInfo.endCursor;
-      //   hasNextPage = pageInfo.hasNextPage;
-      // }
+  //     //   cursor = pageInfo.endCursor;
+  //     //   hasNextPage = pageInfo.hasNextPage;
+  //     // }
 
-      // Update the state with all discounts
-      setAllDiscounts([]);
-    } catch (error) {
-      console.log("Error fetching discounts:", error);
-    }
-  };
+  //     // Update the state with all discounts
 
-  // const getAllDiscounts = async () => {
+  //     setAllProducts([]);
+  //   } catch (error) {
+  //     console.log("Error fetching discounts:", error);
+  //   }
+  // };
+
+  // const getAllProducts = async () => {
   //   try {
   //     const client = new ApolloClient({
   //       uri: `${url}`,
@@ -222,13 +183,13 @@ export const AppProvider: React.FC<{
   //         variables: { cursor },
   //       });
   //       // console.log(
-  //       //   "🚀 ~ getAllDiscounts ~ response:",
+  //       //   "🚀 ~ getAllProducts ~ response:",
   //       //   response.data.products.nodes.length
   //       // );
 
   //       const { nodes, pageInfo } = response.data.products;
-  //       console.log("🚀 ~ getAllDiscounts ~ nodes:", nodes);
-  //       setAllDiscounts((prevDiscounts) => [
+  //       console.log("🚀 ~ getAllProducts ~ nodes:", nodes);
+  //       setAllProducts((prevDiscounts) => [
   //         ...prevDiscounts,
   //         ...nodes,
   //         // ...nodes.map((item) => item.discounts).flat(),
@@ -238,22 +199,22 @@ export const AppProvider: React.FC<{
   //       //   nodes.map((item) => item.discounts).flat()
   //       // );
 
-  //       // setAllDiscounts(() => ({
-  //       //   ...allDiscounts,
+  //       // setAllProducts(() => ({
+  //       //   ...allProducts,
   //       //   nodes,
   //       // }));
 
   //       cursor = pageInfo.endCursor;
   //       hasNextPage = pageInfo.hasNextPage;
   //     }
-  //     // console.log("🚀 ~ getAllDiscounts ~ allDiscounts:", newDiscounts);
-  //     // setAllDiscounts(newDiscounts.flat());
+  //     // console.log("🚀 ~ getAllProducts ~ allProducts:", newDiscounts);
+  //     // setAllProducts(newDiscounts.flat());
   //   } catch (error) {
   //     console.log("Error fetching discounts:", error);
   //   }
   // };
 
-  // const getAllDiscountss = async () => {
+  // const getAllProductss = async () => {
   //   try {
   //     const client = new ApolloClient({
   //       uri: `${url}`,
@@ -284,24 +245,24 @@ export const AppProvider: React.FC<{
   //     const getResponse = response.data.products.nodes.map((item) => {
   //       return item;
   //     });
-  //     setAllDiscounts(getResponse);
+  //     setAllProducts(getResponse);
   //   } catch (error) {
   //     console.log(
-  //       "🚀 ~ file: AppContext.js:147 ~ getAllDiscounts ~ error:",
+  //       "🚀 ~ file: AppContext.js:147 ~ getAllProducts ~ error:",
   //       error
   //     );
   //   }
   // };
 
-  // const getAllDiscounts = async () => {
+  // const getAllProducts = async () => {
   //   try {
   //     // Try to fetch data from Redis cache
-  //     const cachedData = await getAsync("allDiscounts");
+  //     const cachedData = await getAsync("allProducts");
 
   //     if (cachedData) {
-  //       console.log("🚀 ~ getAllDiscounts ~ cachedData:", cachedData);
+  //       console.log("🚀 ~ getAllProducts ~ cachedData:", cachedData);
   //       // If data is found in the cache, use it
-  //       setAllDiscounts(JSON.parse(cachedData));
+  //       setAllProducts(JSON.parse(cachedData));
   //     } else {
   //       // If data is not in the cache, fetch it from the GraphQL endpoint
   //       const client = new ApolloClient({
@@ -332,11 +293,11 @@ export const AppProvider: React.FC<{
 
   //       // Extract and set the response data
   //       const getResponse = response.data.products.nodes.map((item) => item);
-  //       console.log("🚀 ~ getAllDiscounts ~ getResponse:", getResponse);
-  //       setAllDiscounts(getResponse);
+  //       console.log("🚀 ~ getAllProducts ~ getResponse:", getResponse);
+  //       setAllProducts(getResponse);
 
   //       // Store the data in the Redis cache with a TTL of 1 hour (3600 seconds)
-  //       await setexAsync("allDiscounts", 3600, JSON.stringify(getResponse));
+  //       await setexAsync("allProducts", 3600, JSON.stringify(getResponse));
   //     }
   //   } catch (error) {
   //     console.log("Error:", error);
@@ -349,19 +310,102 @@ export const AppProvider: React.FC<{
   //************/
   //*******/
 
+  const getAllProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${baseURL}/product`, {
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      // console.log("🚀 ~ getAllProducts ~ response:", response);
+      setLoading(false);
+      if (response.status === 200) {
+        setAllProducts(response.data.data);
+      }
+    } catch (err: any) {
+      setLoading(false);
+      console.log("🚀 ~ getAllProducts ~ err:", err);
+      // error(
+      //   err.response?.data?.message
+      //     ? err?.response?.data?.message
+      //     : err.response?.data?.error
+      // );
+    }
+  };
+
+  const getOneProduct = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${baseURL}/product/${oneProductId}`, {
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      console.log("🚀 ~ getOneProduct ~ response:", response);
+      setLoading(false);
+      if (response.status === 200) {
+        setOneProduct(response.data.data);
+      }
+    } catch (err: any) {
+      setLoading(false);
+      console.log("🚀 ~ getOneProduct ~ err:", err);
+      // error(
+      //   err.response?.data?.message
+      //     ? err?.response?.data?.message
+      //     : err.response?.data?.error
+      // );
+    }
+  };
+
+  // CATEGORIES
+  // Fetch left hero categories
+  const getAllCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${baseURL}/product/categories/product-count`,
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      // console.log("🚀 ~ getAllCategories ~ response:", response);
+      setLoading(false);
+      if (response.status === 200) {
+        setAllCategories(response.data.data);
+      }
+    } catch (err: any) {
+      setLoading(false);
+      console.log("🚀 ~ getAllCategories ~ err:", err);
+      // error(
+      //   err.response?.data?.message
+      //     ? err?.response?.data?.message
+      //     : err.response?.data?.error
+      // );
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("Fetch everything");
+      console.log("3dik4n.init");
       // fetchServices();
-      getLeftHeroCategories();
-      getAllDiscounts();
+      // getLeftHeroCategories();
+      // getAllProducts();
+      getAllProducts();
+      getAllCategories();
     }
+    getAllProducts();
+    getAllCategories();
   }, []);
 
-  // useEffect(() => {
-  //   extractDiscounts();
-  // }, [allDiscounts]);
+  useEffect(() => {
+    if (oneProductId) {
+      getOneProduct();
+    }
+  }, [oneProductId]);
 
   return (
     <AppContext.Provider
@@ -377,13 +421,23 @@ export const AppProvider: React.FC<{
         leftHero,
 
         setLeftHero,
-        getLeftHeroCategories,
+        // getLeftHeroCategories,
 
-        // DISCOUNTS
-        allDiscounts,
+        // PRODUCTS
+        oneProduct,
+        allProducts,
+        oneProductId,
 
-        setAllDiscounts,
-        getAllDiscounts,
+        setOneProduct,
+        setAllProducts,
+        getAllProducts,
+        setOneProductId,
+
+        // CATEGORIES
+        allCategories,
+
+        getAllCategories,
+        setAllCategories,
       }}
     >
       {children}

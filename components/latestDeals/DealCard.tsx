@@ -61,17 +61,17 @@ const DealCard = ({
               <span className="font-semibold my-2 text-truncate">{title}</span>
               {/* {parentSiteLogo} */}
             </div>
-            <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
-              {/* <div className="flex gap-1">
+            {/* <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
+              <div className="flex gap-1">
                 <BiSolidMap />
                 {location}
-              </div> */}
+              </div>
               <div className="font-semibold flex gap-1">
                 <BiSolidMap />
-                {/* <BiSolidBasket /> */}
+                <BiSolidBasket />
                 {store}
               </div>
-            </div>
+            </div> */}
             {/* <div className="w-full h-[70px] overflow-hidden mb-2">
               <span className="font-light text-sm h-[50px] text-truncate text-gray-400">
                 {description}
@@ -80,14 +80,14 @@ const DealCard = ({
             <div className="flex justify-between items-center w-full relative mt-2">
               <div className="flex flex-col justify-start items-start">
                 <div className="w-full flex py-1 text-green-300 text-[24px]">
-                  {discountPrice}
+                  ₦{new Intl.NumberFormat("en-NG").format(discountPrice)}
                 </div>
                 <div className="w-full flex py-1 text-gray-300 text-[18px] line-through">
-                  {normalPrice}
+                  ₦{new Intl.NumberFormat("en-NG").format(normalPrice)}
                 </div>
               </div>
               <div className="bg-red-300/40 text-orange-500 py-4 px-2 rounded-md flex items-center justify-center absolute top-2 right-2">
-                - {discountPercentage}
+                - {Math.floor(discountPercentage)} %
               </div>
             </div>
           </div>

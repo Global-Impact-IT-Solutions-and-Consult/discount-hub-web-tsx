@@ -10,97 +10,98 @@ import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
 
 const LatestDeals = () => {
-  const { url } = useContext(AppContext);
+  const { url, loading, setLoading, allProducts } = useContext(AppContext);
+  // console.log("🚀 ~ LatestDeals ~ allProducts:", allProducts);
 
   const [apiData, setApiData] = useState([]);
   // console.log(
   //   "🚀 ~ file: LatestDeals.tsx:13 ~ LatestDeals ~ apiData:",
   //   apiData
   // );
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    async function fetchServices() {
-      try {
-        const client = new ApolloClient({
-          // uri: "http://localhost/wp/graphql",
-          // uri: "http://localhost:10019/graphql",
-          uri: url,
-          cache: new InMemoryCache(),
-        });
+  // useEffect(() => {
+  //   setLoading(true);
+  //   async function fetchServices() {
+  //     try {
+  //       const client = new ApolloClient({
+  //         // uri: "http://localhost/wp/graphql",
+  //         // uri: "http://localhost:10019/graphql",
+  //         uri: url,
+  //         cache: new InMemoryCache(),
+  //       });
 
-        // const response = await client.query({
-        //   query: gql`
-        //     query unemployed {
-        //       products {
-        //         nodes {
-        //           products {
-        //             price
-        //             rating
-        //             title
-        //             summary
-        //             image {
-        //               sourceUrl
-        //             }
-        //             location
-        //             store {
-        //               ... on Store {
-        //                 id
-        //                 title
-        //               }
-        //             }
-        //           }
-        //           slug
-        //           databaseId
-        //         }
-        //       }
-        //     }
-        //   `,
-        // });
+  //       // const response = await client.query({
+  //       //   query: gql`
+  //       //     query unemployed {
+  //       //       products {
+  //       //         nodes {
+  //       //           products {
+  //       //             price
+  //       //             rating
+  //       //             title
+  //       //             summary
+  //       //             image {
+  //       //               sourceUrl
+  //       //             }
+  //       //             location
+  //       //             store {
+  //       //               ... on Store {
+  //       //                 id
+  //       //                 title
+  //       //               }
+  //       //             }
+  //       //           }
+  //       //           slug
+  //       //           databaseId
+  //       //         }
+  //       //       }
+  //       //     }
+  //       //   `,
+  //       // });
 
-        const response = await client.query({
-          query: gql`
-            query unemployed {
-              products(last: 9) {
-                nodes {
-                  products {
-                    companyName
-                    discountPercentage
-                    discountPrice
-                    normalPrice
-                    productImageUrl
-                    productName
-                    productUrl
-                    parentSiteLogo
-                    productRating
-                  }
-                  databaseId
-                }
-              }
-            }
-          `,
-        });
-        console.log(
-          "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
-          response
-        );
+  //       const response = await client.query({
+  //         query: gql`
+  //           query unemployed {
+  //             products(last: 9) {
+  //               nodes {
+  //                 products {
+  //                   companyName
+  //                   discountPercentage
+  //                   discountPrice
+  //                   normalPrice
+  //                   productImageUrl
+  //                   productName
+  //                   productUrl
+  //                   parentSiteLogo
+  //                   productRating
+  //                 }
+  //                 databaseId
+  //               }
+  //             }
+  //           }
+  //         `,
+  //       });
+  //       console.log(
+  //         "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
+  //         response
+  //       );
 
-        const getResponse: any = response.data.products.nodes.map(
-          (item: any) => item
-        );
+  //       const getResponse: any = response.data.products.nodes.map(
+  //         (item: any) => item
+  //       );
 
-        const truncate = getResponse.slice(0, 9);
+  //       const truncate = getResponse.slice(0, 9);
 
-        setApiData(truncate);
-        setLoading(false);
-      } catch (ex: any) {
-        console.log("Error fetching data:", ex);
-        console.log("Server response:", ex.response);
-      }
-    }
-    fetchServices();
-  }, []);
+  //       setApiData(truncate);
+  //       setLoading(false);
+  //     } catch (ex: any) {
+  //       console.log("Error fetching data:", ex);
+  //       console.log("Server response:", ex.response);
+  //     }
+  //   }
+  //   fetchServices();
+  // }, []);
 
   return (
     <>
@@ -119,25 +120,34 @@ const LatestDeals = () => {
             <Spinner />
           ) : (
             <>
-              {apiData.length > 0 && (
+              {allProducts.length > 0 && (
                 <>
                   {/* <Loader /> */}
-                  {apiData.map((item: any, i) => (
-                    <DealCard
-                      key={i}
-                      title={item.discounts.productName}
-                      image={item.discounts.productImageUrl}
-                      // description={item.discounts.summary}
-                      // location={item.discounts.location}
-                      store={item.discounts.companyName}
-                      discountPrice={item.discounts.discountPrice}
-                      normalPrice={item.discounts.normalPrice}
-                      discountPercentage={item.discounts.discountPercentage}
-                      link={item.databaseId}
-                      parentSiteLogo={item.discounts.parentSiteLogo}
-                      rating={item.discounts.productRating?.split(" ")[0] || 3}
-                    />
-                  ))}
+                  {allProducts.map((item: any, i: number) => {
+                    if (i < 9) {
+                      return (
+                        <DealCard
+                          key={i}
+                          title={item?.name}
+                          image={item?.images[0]}
+                          store={item?.companyName}
+                          discountPrice={item?.discountPrice}
+                          normalPrice={item?.price}
+                          discountPercentage={
+                            item?.discountPercentage ||
+                            ((item?.price - item?.discountPrice) /
+                              item?.price) *
+                              100
+                          }
+                          link={item?._id}
+                          parentSiteLogo={item?.parentSiteLogo}
+                          // rating={item?.productRating?.split(" ")[0] || 3}
+                          rating={parseInt(item?.rating.split(" out")[0]) || 0}
+                        />
+                      );
+                    }
+                    return null;
+                  })}
                 </>
               )}
             </>
