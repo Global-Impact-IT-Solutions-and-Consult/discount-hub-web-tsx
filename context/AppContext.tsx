@@ -349,7 +349,7 @@ export const AppProvider: React.FC<{
       }
     } catch (err: any) {
       setLoading(false);
-      console.log("🚀 ~ getOneProduct ~ err:", err);
+      console.log("🚀 ~ getOneProduct ~ err: ", err);
       // error(
       //   err.response?.data?.message
       //     ? err?.response?.data?.message
