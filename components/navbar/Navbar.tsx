@@ -9,7 +9,8 @@ import Spinner from "@/widgets/spinner/Spinner";
 import NavDealCard from "./NavDealCard";
 
 const Navbar = () => {
-  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
+  const { url, loading, setLoading, allProducts } = useContext(AppContext);
+  console.log("🚀 ~ Navbar ~ allProducts:", allProducts);
 
   const [visibleData, setVisibleData] = useState([]);
   const itemsPerPage = 24;
@@ -28,7 +29,9 @@ const Navbar = () => {
       }
       setShowData(true);
       e.preventDefault();
-      const filtrate = allDiscounts.filter((item: any) => item.discounts.productName.toLowerCase().includes(e.target.value.toLocaleLowerCase()));
+      const filtrate = allProducts.filter((item: any) =>
+        item?.name.toLowerCase().includes(e.target.value.toLocaleLowerCase())
+      );
       setFiltered(filtrate);
       setVisibleData(filtrate);
 
@@ -77,9 +80,15 @@ const Navbar = () => {
           <label tabIndex={0} className="btn m-1">
             <BiMenu className="" size={20} />
           </label>
-          <ul tabIndex={0} className="dropdown-content z-[5] menu p-2 rounded-box bg-white min-w-full w-[90dvw] shadow-md">
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[5] menu p-2 rounded-box bg-white min-w-full w-[90dvw] shadow-md"
+          >
             <li>
-              <a href="/" className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+              <a
+                href="/"
+                className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+              >
                 Home
               </a>
             </li>
@@ -137,7 +146,10 @@ const Navbar = () => {
               </a>
             </li> */}
             <li>
-              <a href="https://www.giitsc.com" className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+              <a
+                href="https://www.giitsc.com"
+                className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+              >
                 Contact us
               </a>
             </li>
@@ -154,7 +166,10 @@ const Navbar = () => {
 
         {/* LEFT LINKS */}
         <div className="text-[13px]   text-white font-normal hidden md:flex ">
-          <a href="/" className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          <a
+            href="/"
+            className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+          >
             Home
           </a>
           {/* <div className="dropdown dropdown-hover p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
@@ -253,7 +268,10 @@ const Navbar = () => {
           >
             Deals
           </a> */}
-          <a href="https://www.giitsc.com" className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400">
+          <a
+            href="https://www.giitsc.com"
+            className="p-5 duration-300 ease-in-out cursor-pointer hover:bg-green-400"
+          >
             Contact us
           </a>
           {/* <a
@@ -275,7 +293,13 @@ const Navbar = () => {
           {/* search bar */}
           <div className="flex item-center">
             <span className="border-l-2 border-t-2 border-b-2 border-gray-300/50 rounded-l-lg p-2 flex justify-center item-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
                   stroke="#ABB1BB"
@@ -308,23 +332,29 @@ const Navbar = () => {
                         {visibleData.map((item: any, i: any) => (
                           <NavDealCard
                             key={i}
-                            title={item.discounts.productName}
-                            image={item.discounts.productImageUrl}
+                            title={item?.name}
+                            image={item?.images?.[0]}
                             // description={item.summary}
                             // location={item.location}
-                            store={item.discounts.companyName}
-                            discountPrice={item.discounts.discountPrice}
-                            normalPrice={item.discounts.normalPrice}
-                            discountPercentage={item.discounts.discountPercentage}
-                            link={item.databaseId}
-                            parentSiteLogo={item.discounts.parentSiteLogo}
-                            rating={item.discounts.productRating?.split(" ")[0] || 3}
+                            // store={item?.companyName}
+                            discountPrice={item?.discountPrice}
+                            normalPrice={item?.price}
+                            discountPercentage={
+                              item.discountPercentage ||
+                              ((item.price - item.discountPrice) / item.price) *
+                                100
+                            }
+                            link={item._id}
+                            parentSiteLogo={item?.parentSiteLogo}
+                            rating={parseInt(item.rating.split(" out")[0]) || 3}
                           />
                         ))}
                       </>
                     ) : (
                       <>
-                        <span className="w-full flex items-center justify-center font-medium font-poppins">No discount found.</span>
+                        <span className="w-full flex items-center justify-center font-medium font-poppins">
+                          No product found.
+                        </span>
                       </>
                     )}
                   </>

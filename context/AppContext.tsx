@@ -34,6 +34,7 @@ export const AppProvider: React.FC<{
 
   // CATEGORIES
   const [allCategories, setAllCategories] = useState([]);
+  const [oneCategory, setOneCategory] = useState([]);
 
   //************/
   //*******/
@@ -414,12 +415,10 @@ export const AppProvider: React.FC<{
         user,
         loading,
         topbarName,
-
         setLoading,
 
         // HERO SECTION
         leftHero,
-
         setLeftHero,
         // getLeftHeroCategories,
 
@@ -427,15 +426,15 @@ export const AppProvider: React.FC<{
         oneProduct,
         allProducts,
         oneProductId,
-
         setOneProduct,
         setAllProducts,
         getAllProducts,
         setOneProductId,
 
         // CATEGORIES
+        oneCategory,
         allCategories,
-
+        setOneCategory,
         getAllCategories,
         setAllCategories,
       }}

@@ -21,7 +21,7 @@ const TopHeader = () => {
         <div className="flex flex-col gap-7 items-center justify-between md:flex-row  lg:flex-row lg:w-10/12 lg:gap-5 2xl:w-8/12">
           <a
             href="/"
-            className="flex items-center gap-1 text-black duration-300 ease-in-out lg:w-[15rem]"
+            className="w-full flex items-center gap-1 text-black duration-300 ease-in-out"
           >
             <BiSolidDiscount size={40} className="text-green-400" />
             <span className="w-full font-extrabold text-2xl   md:text-3xl  xl:text-3xl">

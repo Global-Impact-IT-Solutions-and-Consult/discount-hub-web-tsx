@@ -114,7 +114,7 @@ const LatestDeals = () => {
         />
         {/* BOTTOM PART (CARDS) */}
         {/* <div className="w-full flex flex-col gap-2 items-start md:flex-row md:justify-between md:flex-wrap 2xl:justify-center  2xl:gap-16"> */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+        <div className="w-full gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:ml-6">
           {/* card */}
           {loading ? (
             <Spinner />

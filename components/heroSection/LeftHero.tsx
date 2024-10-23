@@ -13,15 +13,24 @@ import {
 
 import AppContext from "@/context/AppContext";
 import Spinner from "@/widgets/spinner/Spinner";
+import { useRouter } from "next/navigation";
 
 const LeftHero = () => {
-  const { loading, allCategories } = useContext(AppContext);
+  const { loading, allCategories, setOneCategory } = useContext(AppContext);
   console.log("🚀 ~ LeftHero ~ allCategories:", allCategories);
+  const router = useRouter();
 
   // Filter categories with productCount > 0 and get the top 7
   const topCategories = allCategories
     .filter((item: any) => item.productCount > 0)
     .slice(0, 7);
+
+  const selectOneCategory = (item: any) => {
+    setOneCategory(item);
+    // router.push(`/category/${item.category.name}`);
+    // router.push(`/deals/${item.category.name}`);
+    router.push(`/deals`);
+  };
 
   return (
     <div className="w-full md:w-2/5 lg:w-1/4">
@@ -34,7 +43,8 @@ const LeftHero = () => {
               topCategories.map((item: any, i: number) => (
                 <li key={i} className="first:rounded-t last:rounded-b">
                   <a
-                    href={`/category/${item.category.name}`}
+                    // href={`/category/${item.category.name}`}
+                    onClick={() => selectOneCategory(item)}
                     className="specialHover p-3 flex gap-4 items-center border-b-[1px] bg-white font-light text-gray-600 hover:pl-5 duration-300 ease-in-out cursor-pointer text-sm capitalize md:text-xs"
                   >
                     <div className="flex justify-center items-center px-2 pr-4 border-r-[1px]">
