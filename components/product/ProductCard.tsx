@@ -150,7 +150,7 @@ const ProductCard = ({ data }: any) => {
             {/* Category: {data.discountType || "Uncategorized"} */}
 
             <a
-              href={data.productUrl}
+              href={data.link}
               className="py-4 px-8 bg-green-400 rounded-lg text-white w-full text-center text-lg duration-300 ease-in-out cursor-pointer font-sans font-semibold hover:bg-green-500"
             >
               GOTO PRODUCT
