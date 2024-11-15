@@ -9,7 +9,7 @@ import Spinner from "@/widgets/spinner/Spinner";
 import NavDealCard from "./NavDealCard";
 
 const Navbar = () => {
-  const { url, loading, setLoading, allProducts } = useContext(AppContext);
+  const { baseURL, loading, setLoading, allProducts } = useContext(AppContext);
   console.log("🚀 ~ Navbar ~ allProducts:", allProducts);
 
   const [visibleData, setVisibleData] = useState([]);

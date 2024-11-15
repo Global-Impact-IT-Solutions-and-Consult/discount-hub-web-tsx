@@ -3,7 +3,7 @@ import RatingStars from "@/widgets/ratingStars/RatingStars";
 import React, { useContext, useEffect, useState } from "react";
 
 const RightHeroCard = () => {
-  const { url } = useContext(AppContext);
+  const { baseURL } = useContext(AppContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
 

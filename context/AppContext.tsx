@@ -9,14 +9,14 @@ const AppContext = createContext<any>(null);
 export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  // const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
-  const url = `${process.env.NEXT_API_BASE_URL}`;
-  console.log("🚀 ~ url:", url);
+  // const baseURL = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
+  const baseURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+  // console.log("🚀 ~ baseURL:", baseURL);
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
   const [topbarName, setTopbarName] = useState("Welcome!");
-  const [baseURL, setBaseURL] = useState("http://localhost:6001");
+  // const [baseURL, setBaseURL] = useState("http://localhost:6001");
 
   // HERO SECTION
   const [leftHero, setLeftHero] = useState([]);
@@ -130,7 +130,7 @@ export const AppProvider: React.FC<{
   return (
     <AppContext.Provider
       value={{
-        url,
+        baseURL,
         user,
         loading,
         topbarName,

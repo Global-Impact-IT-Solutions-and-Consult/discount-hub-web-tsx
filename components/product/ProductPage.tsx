@@ -10,7 +10,8 @@ import ReviewSection from "./[product]/ReviewSection";
 import FeaturesSpecs from "./[product]/FeaturesSpecs";
 
 const ProductPage = ({ id }: any) => {
-  const { url, loading, setOneProductId, oneProduct } = useContext(AppContext);
+  const { baseURL, loading, setOneProductId, oneProduct } =
+    useContext(AppContext);
   console.log("🚀 ~ ProductPage ~ oneProduct:", oneProduct);
 
   const [switchSection, setSwitchSection] = useState(true);

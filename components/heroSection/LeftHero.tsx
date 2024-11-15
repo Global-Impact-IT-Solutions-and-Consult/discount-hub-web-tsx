@@ -71,16 +71,18 @@ const LeftHero = () => {
             )}
           </>
         )}
-        <li
-          onClick={() => setShowExtra(!showExtra)}
-          className="specialHover p-3 pl-5 flex gap-4 items-center border-b-[1px] bg-white font-normal text-gray-600 hover:pl-3 duration-300 ease-in-out lg:last:rounded-b cursor-pointer text-sm"
-        >
-          {/* <a href="/deals">ALL CATEGORIES</a> */}
-          <a href="#">
-            {!showExtra ? "ALL CATEGORIES" : "HIDE EXTRA CATEGORIES"}
-          </a>
-          {/* <span>ALL CATEGORIES</span> */}
-        </li>
+        {topCategories.length > 0 && (
+          <li
+            onClick={() => setShowExtra(!showExtra)}
+            className="specialHover p-3 pl-5 flex gap-4 items-center border-b-[1px] bg-white font-normal text-gray-600 hover:pl-3 duration-300 ease-in-out lg:last:rounded-b cursor-pointer text-sm"
+          >
+            {/* <a href="/deals">ALL CATEGORIES</a> */}
+            <a href="#">
+              {!showExtra ? "ALL CATEGORIES" : "HIDE EXTRA CATEGORIES"}
+            </a>
+            {/* <span>ALL CATEGORIES</span> */}
+          </li>
+        )}
         {showExtra && (
           <div className="absolute z-50 shadow-2xl w-[100vw] bg-white rounded-lg p-4 flex flex-wrap items-center justify-start gap-4 lg:w-[1200px]">
             {extraCategories.length > 0 &&

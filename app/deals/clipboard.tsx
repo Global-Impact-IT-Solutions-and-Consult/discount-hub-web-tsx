@@ -18,7 +18,7 @@ const Page = () => {
   const [hasPrevPage, setHasPrevPage] = useState(false);
   const [endCursor, setEndCursor] = useState(null);
 
-  const { url } = useContext(AppContext);
+  const { baseURL } = useContext(AppContext);
 
   const handleNextPageChange = (newPage: any) => {
     if (

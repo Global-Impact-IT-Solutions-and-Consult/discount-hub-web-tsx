@@ -10,7 +10,7 @@ import Spinner from "@/widgets/spinner/Spinner";
 import Pagination from "@/widgets/pagination/Pagination";
 
 const Category = ({ slug }: any) => {
-  const { url, loading, setLoading, allDiscounts } = useContext(AppContext);
+  const { baseURL, loading, setLoading, allDiscounts } = useContext(AppContext);
   const [discounts, setDiscounts] = useState([]);
   const [apiData, setApiData] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
