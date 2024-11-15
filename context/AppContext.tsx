@@ -9,16 +9,11 @@ const AppContext = createContext<any>(null);
 export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  // const baseURL = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
-  // const baseURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
-  // console.log("🚀 ~ baseURL:", baseURL);
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
   const [topbarName, setTopbarName] = useState("Welcome!");
-  const [baseURL, setBaseURL] = useState(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}`
-  );
 
   // HERO SECTION
   const [leftHero, setLeftHero] = useState([]);
@@ -85,14 +80,11 @@ export const AppProvider: React.FC<{
   const getAllCategories = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${baseURL}/product/categories/product-count`,
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
+      const response = await axios.get(`${baseURL}/product/categories/product-count`, {
+        headers: {
+          "content-type": "application/json",
+        },
+      });
       // console.log("🚀 ~ getAllCategories ~ response:", response);
       setLoading(false);
       if (response.status === 200) {
