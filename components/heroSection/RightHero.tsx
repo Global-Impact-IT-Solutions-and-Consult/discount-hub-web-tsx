@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight, BiSolidBasket } from "react-icons/bi";
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import AppContext from "@/context/AppContext";
 
@@ -26,7 +26,7 @@ const RightHero = () => {
   }
 
   return (
-    <div className="w-full flex items-center justify-center lg:w-3/4">
+    <div className="w-full flex items-center justify-end lg:w-3/4">
       <div className="relative w-full max-w-[800px] overflow-hidden">
         {filteredDiscounts.map((item: any, index: number) => (
           <div
@@ -58,15 +58,16 @@ const RightHero = () => {
                 {/* Card Right */}
                 <div className="w-full md:w-[50%] relative p-4 flex flex-col gap-3 shadow-lg text-gray-800">
                   <div className="text-orange-500 py-1 px-2 rounded-md flex items-center justify-center absolute top-2 right-2 w-16">
-                    <img
+                    <BiSolidBasket /> {item?.store}
+                    {/* <img
                       loading="lazy"
                       src={item?.parentSiteLogo || item?.images[0]}
                       alt="#"
                       className="object-contain w-full h-full rounded-t"
-                    />
+                    /> */}
                   </div>
 
-                  <span className="font-light text-2xl text-gray-800 w-[80%] h-[100px] lg:mb-4">
+                  <span className="font-light text-2xl text-gray-800 w-[80%] h-[120px] lg:mb-4 overflow-y-hidden">
                     {item?.name}
                   </span>
 

@@ -61,17 +61,17 @@ const DealCard = ({
               <span className="font-semibold my-2 text-truncate">{title}</span>
               {/* {parentSiteLogo} */}
             </div>
-            {/* <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
-              <div className="flex gap-1">
+            <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
+              {/* <div className="flex gap-1">
                 <BiSolidMap />
                 {location}
-              </div>
-              <div className="font-semibold flex gap-1">
-                <BiSolidMap />
+              </div> */}
+              <div className="font-semibold flex items-center gap-1">
+                {/* <BiSolidMap /> */}
                 <BiSolidBasket />
                 {store}
               </div>
-            </div> */}
+            </div>
             {/* <div className="w-full h-[70px] overflow-hidden mb-2">
               <span className="font-light text-sm h-[50px] text-truncate text-gray-400">
                 {description}

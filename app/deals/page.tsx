@@ -109,7 +109,7 @@ const Page = () => {
                 key={i}
                 title={item.name}
                 image={item.images[0]}
-                store={item.companyName}
+                store={item.store}
                 discountPrice={item.discountPrice}
                 normalPrice={item.price}
                 discountPercentage={

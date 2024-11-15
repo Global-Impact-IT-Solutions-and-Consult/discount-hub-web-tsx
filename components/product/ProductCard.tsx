@@ -25,10 +25,10 @@ const ProductCard = ({ data }: any) => {
         <div className="w-full md:w-[50%] flex flex-col gap-6 py-2 pt-6">
           <div className="w-full flex items-center justify-center">
             <img
-              src={displayImage}
+              src={displayImage || data?.images?.[0]}
               alt="#"
-              className="object-contain w-[420px] rounded md:ml-[-11px]"
-              // className="object-contain w-[320px] rounded-t"
+              // className="object-contain w-[420px] rounded md:ml-[-11px]"
+              className="object-contain w-[320px] rounded-t"
             />
           </div>
           <div className="w-full flex items-center justify-center h-full gap-2 flex-wrap py-2 pb-6">
@@ -84,7 +84,7 @@ const ProductCard = ({ data }: any) => {
                         const match = data?.rating.match(/\((\d+)\)/);
                         return match
                           ? `(${match[1]}) ratings`
-                          : "No ratings available";
+                          : "No total number of ratings";
                       })()}
                     </span>
                   ) : (
@@ -99,14 +99,14 @@ const ProductCard = ({ data }: any) => {
             )}
 
             <div className="flex gap-4 items-start justify-center text-gray-800 w-full md:justify-start">
-              <div className="flex gap-1 items-center">
+              {/* <div className="flex gap-1 items-center">
                 <BiGlobe />
                 {data.companyName}{" "}
-              </div>
+              </div> */}
               <div className="flex gap-1 items-center">
                 <BiSolidMap />
-                {/* {data.crawledFrom} */}
-                {"Jumia"}
+                {data.store}
+                {/* {"Jumia"} */}
               </div>
             </div>
             <span className="ppLineHeight text-sm text-gray-500 flex w-full justify-center md:justify-start">

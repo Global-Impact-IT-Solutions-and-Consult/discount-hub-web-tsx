@@ -336,7 +336,7 @@ const Navbar = () => {
                             image={item?.images?.[0]}
                             // description={item.summary}
                             // location={item.location}
-                            // store={item?.companyName}
+                            store={item?.store}
                             discountPrice={item?.discountPrice}
                             normalPrice={item?.price}
                             discountPercentage={

@@ -61,6 +61,11 @@ const NavDealCard = ({
                 {title}
               </span>
             </div>
+            <div className="w-full overflow-hidden">
+              <span className="flex items-center gap-1 font-light text-truncate lg:text-sm">
+                <BiSolidBasket /> {store}
+              </span>
+            </div>
             <div className="flex justify-start items-center w-full gap-4">
               {/* <div className="flex flex-col justify-start items-start"> */}
               <div className="flex py-1 text-green-400 text-sm">
