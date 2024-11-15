@@ -10,7 +10,7 @@ export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   // const baseURL = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/graphql`;
-  const baseURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+  // const baseURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
   // console.log("🚀 ~ baseURL:", baseURL);
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
