@@ -9,7 +9,7 @@ const AppContext = createContext<any>(null);
 export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://dolphin-app-2irch.ondigitalocean.app";
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
