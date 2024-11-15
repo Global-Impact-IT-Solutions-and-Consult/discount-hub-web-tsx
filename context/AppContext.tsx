@@ -16,7 +16,7 @@ export const AppProvider: React.FC<{
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
   const [topbarName, setTopbarName] = useState("Welcome!");
-  const [baseURL, setBaseURL] = useState("http://localhost:6001");
+  const [baseURL, setBaseURL] = useState(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}`);
 
   // HERO SECTION
   const [leftHero, setLeftHero] = useState([]);
@@ -83,14 +83,11 @@ export const AppProvider: React.FC<{
   const getAllCategories = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${baseURL}/product/categories/product-count`,
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
+      const response = await axios.get(`${baseURL}/product/categories/product-count`, {
+        headers: {
+          "content-type": "application/json",
+        },
+      });
       // console.log("🚀 ~ getAllCategories ~ response:", response);
       setLoading(false);
       if (response.status === 200) {
