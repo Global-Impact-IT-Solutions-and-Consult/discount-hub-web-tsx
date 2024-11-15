@@ -1,7 +1,6 @@
 "use client";
 
 // import AppContext from "@/context/AppContext";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import AppContext from "../../context/AppContext";
 import React, { useContext, useEffect, useState } from "react";
 import DealCard from "../latestDeals/DealCard";
@@ -22,66 +21,11 @@ const Category = ({ slug }: any) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [heading, setHeading] = useState("");
 
-  async function fetchServices() {
-    try {
-      setLoading(true);
-      const client = new ApolloClient({
-        uri: url,
-        cache: new InMemoryCache(),
-      });
-
-      const response = await client.query({
-        query: gql`
-          query unemployed {
-            products(first: 1000000) {
-              nodes {
-                products {
-                  companyName
-                  discountType
-                  discountPrice
-                  discountPercentage
-                  normalPrice
-                  productImageUrl
-                  productName
-                  productUrl
-                  parentSiteLogo
-                  productRating
-                }
-                databaseId
-              }
-            }
-          }
-        `,
-      });
-      // console.log("🚀 ~ file: page.tsx:48 ~ fetchServices ~ response:", response);
-
-      const filteredDiscounts = response.data.products.nodes
-        .filter((item: any) => item.discounts.discountType === slug)
-        .map((item: any) => item);
-      // console.log(
-      //   "🚀 ~ file: Category.tsx:55 ~ fetchServices ~ filteredDiscounts:",
-      //   filteredDiscounts
-      // );
-
-      setDiscounts(filteredDiscounts);
-      setVisibleData(filteredDiscounts.slice(0, itemsPerPage));
-      setHeading(await getHeading(filteredDiscounts[0].discounts.discountType));
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log("🚀 ~ file: Category.tsx:19 ~ fetchServices ~ error:", error);
-    }
-  }
-
   async function getHeading(inputString: string) {
     return inputString
       .replace(/_([a-z])/g, (_, match) => ` ${match.toUpperCase()}`)
       .replace(/^([a-z])/, (_, match) => match.toUpperCase());
   }
-
-  useEffect(() => {
-    fetchServices();
-  }, [slug]);
 
   const getVisibleData = (apiData: any) => {
     const start = currentPage * itemsPerPage;
@@ -289,114 +233,6 @@ const Category = ({ slug }: any) => {
         handlePrevPageChange={handlePrevPageChange}
         pages={pages}
       /> */}
-    </>
-  );
-
-  return (
-    <>
-      {/* <ProductCard data={prodArr} /> */}
-      <div className="w-full my-4 flex flex-col gap-4 md:flex-row 2xl:gap-10">
-        {/* left */}
-        <div className="w-full flex flex-col items-start gap-4 md:w-2/3">
-          {/* <div className="bg-white w-full rounded-lg flex items-center justify-between p-4   lg:text-lg font-normal shadow-lg">
-            <span> </span>
-            <select
-              name="#"
-              id="#"
-              className="shopSelectOptions text-gray-800 text-xs px-2 py-1 rounded-sm border-green-400 duration-300 ease-in-out   lg:px-4 lg:py-2 "
-            >
-              <option value="#">Default Sorting</option>
-              <option value="#">Sort by popularity</option>
-              <option value="#">Sort by average rating</option>
-              <option value="#">Sort by latest</option>
-              <option value="#">Sort by price: high to low</option>
-              <option value="#">Sort by price: low to high</option>
-            </select>
-          </div> */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            {/* card */}
-            {loading ? (
-              <Spinner />
-            ) : (
-              <>
-                <ProductCard data={discounts} />
-                {discounts.length > 0 && (
-                  <>
-                    {/* <Loader /> */}
-                    {discounts.map((item: any, i: any) => (
-                      <DealCard
-                        key={i}
-                        title={item.discounts.productName}
-                        image={item.discounts.productImageUrl}
-                        // description={item.discounts.summary}
-                        // location={item.discounts.location}
-                        store={item.discounts.companyName}
-                        discountPrice={item.discounts.discountPrice}
-                        normalPrice={item.discounts.normalPrice}
-                        discountPercentage={item.discounts.discountPercentage}
-                        link={item.databaseId}
-                      />
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-            {/* <DealCard
-            image={"/heroSlider/1.jpg"}
-            title={"The Crash Bad Instant Folding Twin Bed"}
-            location={"United States"}
-            store={"Amazon"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-            }
-            price={"£350.00"}
-            link={"/product"}
-          /> */}
-          </div>
-          <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap 2xl:gap-10">
-            {discounts ? (
-              <>
-                {discounts.map((item: any, i: any) => (
-                  <DealCard
-                    key={i}
-                    title={item.discounts.productName}
-                    image={item.discounts.productImageUrl}
-                    // description={item.discounts.summary}
-                    // location={item.discounts.location}
-                    store={item.discounts.companyName}
-                    discountPrice={item.discounts.discountPrice}
-                    normalPrice={item.discounts.normalPrice}
-                    discountPercentage={item.discounts.discountPercentage}
-                    link={item.databaseId}
-                  />
-                ))}
-              </>
-            ) : (
-              <>
-                {" "}
-                {discounts.length > 0 && (
-                  <>
-                    {discounts.map((item: any, i: any) => (
-                      <DealCard
-                        key={i}
-                        title={item.discounts.productName}
-                        image={item.discounts.productImageUrl}
-                        // description={item.discounts.summary}
-                        // location={item.discounts.location}
-                        store={item.discounts.companyName}
-                        discountPrice={item.discounts.discountPrice}
-                        normalPrice={item.discounts.normalPrice}
-                        discountPercentage={item.discounts.discountPercentage}
-                        link={item.databaseId}
-                      />
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      </div>
     </>
   );
 };

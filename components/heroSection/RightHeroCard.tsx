@@ -1,62 +1,11 @@
 import AppContext from "@/context/AppContext";
 import RatingStars from "@/widgets/ratingStars/RatingStars";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 
 const RightHeroCard = () => {
   const { url } = useContext(AppContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    async function fetchServices() {
-      try {
-        const client = new ApolloClient({
-          uri: url,
-          cache: new InMemoryCache(),
-        });
-
-        const response = await client.query({
-          query: gql`
-            query unemployed {
-              products(last: 9) {
-                nodes {
-                  products {
-                    companyName
-                    discountPercentage
-                    discountPrice
-                    normalPrice
-                    productImageUrl
-                    productName
-                    productUrl
-                  }
-                  databaseId
-                }
-              }
-            }
-          `,
-        });
-        // console.log(
-        //   "🚀 ~ file: LatestDeals.tsx:72 ~ fetchServices ~ response:",
-        //   response
-        // );
-
-        const getResponse: any = response.data.products.nodes.map(
-          (item: any) => item
-        );
-
-        const truncate = getResponse.slice(0, 9);
-
-        setApiData(truncate);
-        setLoading(false);
-      } catch (ex: any) {
-        console.log("Error fetching data:", ex);
-        console.log("Server response:", ex.response);
-      }
-    }
-    fetchServices();
-  }, []);
 
   return (
     <>

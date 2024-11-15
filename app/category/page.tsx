@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Pagination from "@/widgets/pagination/Pagination";
 import About from "../product/sidemenu/About";
 import Filter from "../product/sidemenu/Filter";
@@ -8,58 +11,9 @@ import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 import ProductCard from "../product/ProductCard";
 import DealCard from "@/components/latestDeals/DealCard";
 
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
-const page = async ({ params }: any) => {
-  let apiData = [];
+const Page = async ({ params }: any) => {
+  const [apiData, setApiData] = useState([]);
   let prodArr: any = [];
-
-  async function fetchServices() {
-    const client = new ApolloClient({
-      uri: "http://localhost/wp/graphql",
-      cache: new InMemoryCache(),
-    });
-
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          products {
-            nodes {
-              products {
-                price
-                rating
-                title
-                summary
-                image {
-                  sourceUrl
-                }
-                location
-                store {
-                  ... on Store {
-                    id
-                    title
-                  }
-                }
-                category {
-                  ... on ProductCategory {
-                    slug
-                    title
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-    });
-
-    const getResponse = response.data.products.nodes.map((item: any) => {
-      return item.products;
-    });
-    return getResponse;
-  }
-
-  apiData = await fetchServices();
 
   return (
     <>
@@ -84,7 +38,7 @@ const page = async ({ params }: any) => {
           <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap 2xl:gap-10">
             {apiData.length > 0 && (
               <>
-                {apiData.map((item: any, i: any) => (
+                {apiData?.map((item: any, i: any) => (
                   <DealCard
                     key={i}
                     title={item.title}
@@ -108,117 +62,7 @@ const page = async ({ params }: any) => {
               }
               price={"£350.00"}
               link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            />{" "}
-            <DealCard
-              image={"/heroSlider/1.jpg"}
-              title={"The Crash Bad Instant Folding Twin Bed"}
-              location={"United States"}
-              store={"Amazon"}
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam numquam nostrum."
-              }
-              price={"£350.00"}
-              link={"/product"}
-            /> */}
+            />{" "} */}
           </div>
           <Pagination />
         </div>
@@ -235,4 +79,4 @@ const page = async ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;

@@ -2,63 +2,8 @@ import { useEffect, useState } from "react";
 import AddReview from "./AddReview";
 import ReviewCard from "./ReviewCard";
 
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
 const ReviewSection = ({ data }: any) => {
   const [apiData, setApiData] = useState<any>();
-
-  let reviewArr: any = [];
-
-  async function fetchServices() {
-    const client = new ApolloClient({
-      uri: "http://localhost/wp/graphql",
-      cache: new InMemoryCache(),
-    });
-
-    const response = await client.query({
-      query: gql`
-        query unemployed {
-          reviews {
-            nodes {
-              reviews {
-                date
-                image {
-                  sourceUrl
-                }
-                product {
-                  ... on Product {
-                    databaseId
-                  }
-                }
-                name
-                rating
-                review
-              }
-            }
-          }
-        }
-      `,
-    });
-    // console.log(
-    //   "🚀 ~ file: ReviewSection.tsx:40 ~ fetchServices ~ response:",
-    //   response.data.reviews
-    // );
-
-    const getResponse = response.data.reviews.nodes.map((item: any) => {
-      if (item.reviews.product.databaseId === 85) {
-        return item.reviews;
-      }
-    });
-
-    setApiData((prevApiData: any) => ({
-      ...prevApiData,
-      ...getResponse,
-    }));
-
-    return apiData;
-  }
-
-  reviewArr = fetchServices();
 
   return (
     <>

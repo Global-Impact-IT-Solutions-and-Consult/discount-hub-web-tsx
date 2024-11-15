@@ -3,7 +3,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Cart from "./sidemenu/Cart";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Spinner from "@/widgets/spinner/Spinner";
 import AppContext from "@/context/AppContext";
 import DescriptionSection from "./[product]/DescriptionSection";
@@ -17,66 +16,6 @@ const ProductPage = ({ id }: any) => {
   const [switchSection, setSwitchSection] = useState(true);
 
   const [apiData, setApiData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   async function fetchServices() {
-  //     try {
-  //       const client = new ApolloClient({
-  //         uri: url,
-  //         cache: new InMemoryCache(),
-  //       });
-
-  //       const response = await client.query({
-  //         query: gql`
-  //           query unemployed {
-  //           product(idType: DATABASE_ID, id: ${id}) {
-  //             products {
-  //               companyName
-  //               discountPercentage
-  //               discountPrice
-  //               discountType
-  //               normalPrice
-  //               productImageUrl
-  //               productName
-  //               productUrl
-  //               brand
-  //               keyFeatures
-  //               parentSiteLogo
-  //               productDetails
-  //               specifications
-  //               itemsLeft
-  //               verifiedRatings
-  //               productRating
-  //               allProductImageUrls
-  //               crawledFrom
-  //             }
-  //           }
-  //           }
-  //         `,
-  //       });
-
-  //       const getResponse: any = response.data.product.products;
-  //       // Extract URLs using regular expression and convert to array of strings
-  //       const imageUrlsString = getResponse.allProductImageUrls;
-  //       const imageUrls = imageUrlsString?.match(/https:\/\/[^\s,]+/g);
-  //       // console.log("🚀 ~ fetchServices ~ imageUrls:", imageUrls[0]);
-
-  //       // console.log(
-  //       //   "🚀 ~ file: ProductPage.tsx:47 ~ fetchServices ~ getResponse:",
-  //       //   getResponse
-  //       // );
-
-  //       setApiData({ ...getResponse, imageUrls });
-  //       setLoading(false);
-  //     } catch (ex: any) {
-  //       console.log("Error fetching data:", ex);
-  //       console.log("Server response:", ex.response);
-  //     }
-  //   }
-  //   fetchServices();
-  // }, [id]);
 
   useEffect(() => {
     if (id) {

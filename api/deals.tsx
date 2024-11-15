@@ -3,7 +3,6 @@
 import DealCard from "@/components/latestDeals/DealCard";
 import Pagination from "@/widgets/pagination/Pagination";
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 const data = ({ apiData }: any) => {
   return (
@@ -41,88 +40,4 @@ const data = ({ apiData }: any) => {
   );
 };
 
-export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: "http://localhost/wp/graphql",
-    cache: new InMemoryCache(),
-  });
-
-  const response = await client.query({
-    query: gql`
-      query unemployed {
-        products {
-          nodes {
-            products {
-              price
-              rating
-              title
-              summary
-              image {
-                sourceUrl
-              }
-              location
-              store {
-                ... on Store {
-                  id
-                  title
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-  });
-
-  const getResponse = response.data.products.nodes.map(
-    (item: any) => item.products
-  );
-
-  return {
-    props: {
-      apiData: getResponse,
-    },
-  };
-}
-
 export default data;
-
-// import { ApolloClient, InMemoryCache, HttpLink, gql } from "@apollo/client";
-
-// const link = new HttpLink({
-//     uri: "http://localhost/wp/graphql",
-//   fetchOptions: {
-//     credentials: "same-origin",
-//   },
-// });
-
-// export const fetchServices = async () => {
-//   const client = new ApolloClient({
-//     link: link,
-//     cache: new InMemoryCache(),
-//   });
-
-//   const response = await client.query({
-//     query: gql`
-//       query discountHub {
-//         products {
-//           nodes {
-//             products {
-//               location
-//               price
-//               productRating
-//               store
-//               summary
-//               title
-//             }
-//           }
-//         }
-//       }
-//     `,
-//   });
-
-//   console.log("🚀 ~ file: page.tsx:39 ~ fetchServices ~ response:", response);
-
-//   const getResponse = response.data.footer.footers;
-//   return getResponse;
-// };

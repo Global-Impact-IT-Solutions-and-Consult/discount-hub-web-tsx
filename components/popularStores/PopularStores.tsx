@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 import StoreCard from "./StoreCard";
 import {
@@ -22,45 +20,6 @@ import Spinner from "@/widgets/spinner/Spinner";
 const PopularStores = () => {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   async function fetchServices() {
-  //     const client = new ApolloClient({
-  //       uri: "http://localhost/wp/graphql",
-  //       cache: new InMemoryCache(),
-  //     });
-
-  //     const response = await client.query({
-  //       query: gql`
-  //         query unemployed {
-  //           stores {
-  //             nodes {
-  //               databaseId
-  //               stores {
-  //                 description
-  //                 rating
-  //                 ratingCount
-  //                 title
-  //               }
-  //             }
-  //           }
-  //         }
-  //       `,
-  //     });
-
-  //     const getResponse: any = response.data.stores.nodes;
-  //     console.log(
-  //       "🚀 ~ file: PopularStores.tsx:47 ~ fetchServices ~ getResponse:",
-  //       getResponse
-  //     );
-
-  //     const truncate = getResponse.slice(0, 9);
-  //     setApiData(truncate);
-  //     setLoading(false);
-  //   }
-  //   fetchServices();
-  // }, []);
 
   return (
     <>

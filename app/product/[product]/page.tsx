@@ -16,7 +16,6 @@
 // import RecentReviews from "./sidemenu/RecentReviews";
 // import Newsletter from "./sidemenu/Newsletter";
 
-// import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import ProductPage from "@/components/product/ProductPage";
 // import ProductPage from "@/components/product/[product]/page";
 // import ProductPage from "../../../components/product/[product]/page";

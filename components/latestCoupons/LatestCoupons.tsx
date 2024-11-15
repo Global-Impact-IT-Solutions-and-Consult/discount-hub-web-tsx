@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
 import SectionTopBar from "@/widgets/sectionTopBar/SectionTopBar";
 import CouponCard from "./Couponcard";
 
@@ -13,51 +11,6 @@ import Spinner from "@/widgets/spinner/Spinner";
 const LatestCoupons = () => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   async function fetchServices() {
-  //     const client = new ApolloClient({
-  //       uri: "http://localhost/wp/graphql",
-  //       cache: new InMemoryCache(),
-  //     });
-
-  //     const response = await client.query({
-  //       query: gql`
-  //         query unemployed {
-  //           coupons {
-  //             nodes {
-  //               coupons {
-  //                 code
-  //                 discount
-  //                 expiryDate
-  //                 location
-  //                 title
-  //                 image {
-  //                   sourceUrl
-  //                 }
-  //                 store {
-  //                   ... on Store {
-  //                     title
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       `,
-  //     });
-
-  //     const getResponse = response.data.coupons.nodes.map(
-  //       (item: any) => item.coupons
-  //     );
-
-  //     const truncate = getResponse.slice(0, 5);
-  //     setApiData(truncate);
-  //     setLoading(false);
-  //   }
-  //   fetchServices();
-  // }, []);
 
   return (
     <>
