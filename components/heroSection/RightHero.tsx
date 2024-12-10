@@ -7,7 +7,7 @@ import AppContext from "@/context/AppContext";
 
 const RightHero = () => {
   const { allProducts } = useContext(AppContext);
-  console.log("🚀 ~ RightHero ~ allProducts:", allProducts);
+  // console.log("🚀 ~ RightHero ~ allProducts:", allProducts);
 
   const [current, setCurrent] = useState(0);
 
