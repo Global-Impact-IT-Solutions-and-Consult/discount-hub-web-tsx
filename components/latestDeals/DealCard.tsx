@@ -18,7 +18,7 @@ const DealCard = ({
   return (
     <>
       {/* <a href={link}> */}
-      <a href={`/product/${link}`}>
+      <a href={`/product/${link}`} className="dealCard">
         <div className="bg-white flex flex-col items-center my-6 cursor-pointer rounded w-full md:w-[21.5rem] lg:w-[24rem] xl:w-[21.5rem] 2xl:w-[22rem] 2xl:my-2">
           {/* card top*/}
           <div className="w-full h-[210px] mb-2 relative p-2 pt-4">
@@ -54,11 +54,13 @@ const DealCard = ({
           </div>
           {/* card bottom */}
           <div className="w-full p-2 px-4 flex flex-col items-start text-gray-500">
-            <div className="w-full min-h-[20px] flex items-start mb-2 ">
+            <div className="dealRating w-full min-h-[20px] flex items-start mb-2 ">
               <RatingStars number={rating} />
             </div>
             <div className="w-full h-[45px] overflow-hidden mb-2 ">
-              <span className="font-semibold my-2 text-truncate">{title}</span>
+              <span className="dealName font-semibold my-2 text-truncate">
+                {title}
+              </span>
               {/* {parentSiteLogo} */}
             </div>
             <div className="flex gap-4 text-sm w-full my-2 h-[20px] text-gray-400">
@@ -79,10 +81,10 @@ const DealCard = ({
             </div> */}
             <div className="flex justify-between items-center w-full relative mt-2">
               <div className="flex flex-col justify-start items-start">
-                <div className="w-full flex py-1 text-green-300 text-[24px]">
+                <div className="dealDiscountPrice w-full flex py-1 text-green-300 text-[24px]">
                   ₦{new Intl.NumberFormat("en-NG").format(discountPrice)}
                 </div>
-                <div className="w-full flex py-1 text-gray-300 text-[18px] line-through">
+                <div className="dealOriginalPrice w-full flex py-1 text-gray-300 text-[18px] line-through">
                   ₦{new Intl.NumberFormat("en-NG").format(normalPrice)}
                 </div>
               </div>

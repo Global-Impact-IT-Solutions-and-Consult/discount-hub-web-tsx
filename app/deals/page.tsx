@@ -65,6 +65,67 @@ const Page = () => {
     setPages(Math.ceil(activeData.length / itemsPerPage));
   }, [oneCategory, allProducts]);
 
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "http://127.0.0.1:8080/scraper.js"; // Replace with your Live Server URL
+  //   script.type = "text/javascript";
+  //   script.async = true;
+  //   script.onload = () => {
+  //     // Call the initialization with the dynamic classes
+  //     window.initializeScraper({
+  //       containerClass: "dealContainer",
+  //       cardClass: "dealCard",
+  //       nameClass: "dealName",
+  //       descriptionClass: "dealDescription",
+  //       originalPriceClass: "dealOriginalPrice",
+  //       discountedPriceClass: "dealDiscountPrice",
+  //       ratingClass: "dealRating",
+  //     });
+  //   };
+  //   document.body.appendChild(script);
+
+  //   return () => {
+  //     document.body.removeChild(script); // Cleanup script on unmount
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/giitsc-scraper/scraper.js"; // Replace with your CDN URL
+    script.type = "text/javascript";
+    script.async = true;
+
+    script.onload = () => {
+      if (window.scraper) {
+        // Set the dynamic classes
+        window.scraper.setClasses({
+          containerClass: "dealContainer",
+          cardClass: "dealCard",
+          nameClass: "dealName",
+          descriptionClass: "dealDescription",
+          originalPriceClass: "dealOriginalPrice",
+          discountedPriceClass: "dealDiscountPrice",
+          ratingClass: "dealRating",
+        });
+
+        // Initialize the scraper
+        window.scraper.init("YOUR_API_KEY"); // Pass your API key here
+      } else {
+        console.error("Scraper script not loaded correctly.");
+      }
+    };
+
+    script.onerror = () => {
+      console.error("Failed to load scraper script.");
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script); // Cleanup script on unmount
+    };
+  }, []);
+
   return (
     <>
       <div className="px-4 pt-8 w-full flex flex-col items-center justify-start gap-8">
@@ -100,7 +161,7 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="w-full gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:ml-8">
+        <div className="dealContainer w-full gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:ml-8">
           {loading ? (
             <Spinner />
           ) : (

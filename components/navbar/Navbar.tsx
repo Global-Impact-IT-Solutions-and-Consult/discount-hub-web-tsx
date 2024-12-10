@@ -10,7 +10,7 @@ import NavDealCard from "./NavDealCard";
 
 const Navbar = () => {
   const { baseURL, loading, setLoading, allProducts } = useContext(AppContext);
-  console.log("🚀 ~ Navbar ~ allProducts:", allProducts);
+  // console.log("🚀 ~ Navbar ~ allProducts:", allProducts);
 
   const [visibleData, setVisibleData] = useState([]);
   const itemsPerPage = 24;

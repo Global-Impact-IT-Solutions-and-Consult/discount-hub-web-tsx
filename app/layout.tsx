@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { AppProvider } from "../context/AppContext";
+import Script from "next/script";
 // import 'text-encoding';
 
 interface Props {
@@ -24,6 +25,21 @@ export const metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+          `}
+        </Script>
+      </head>
       <AppProvider>
         <body className={inter.className}>
           <TopHeader />
