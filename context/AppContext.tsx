@@ -9,7 +9,9 @@ const AppContext = createContext<any>(null);
 export const AppProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://dolphin-app-2irch.ondigitalocean.app";
+  const baseURL =
+    process.env.NEXT_PUBLIC_API_BASE_URL ||
+    "https://dolphin-app-2irch.ondigitalocean.app";
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
@@ -59,7 +61,7 @@ export const AppProvider: React.FC<{
           "content-type": "application/json",
         },
       });
-      console.log("🚀 ~ getOneProduct ~ response:", response);
+      // console.log("🚀 ~ getOneProduct ~ response:", response);
       setLoading(false);
       if (response.status === 200) {
         setOneProduct(response.data.data);
@@ -80,11 +82,14 @@ export const AppProvider: React.FC<{
   const getAllCategories = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${baseURL}/product/categories/product-count`, {
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const response = await axios.get(
+        `${baseURL}/product/categories/product-count`,
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       // console.log("🚀 ~ getAllCategories ~ response:", response);
       setLoading(false);
       if (response.status === 200) {
