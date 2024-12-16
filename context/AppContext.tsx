@@ -145,6 +145,7 @@ export const AppProvider: React.FC<{
         allProducts,
         oneProductId,
         setOneProduct,
+        getOneProduct,
         setAllProducts,
         getAllProducts,
         setOneProductId,

@@ -2,7 +2,7 @@
 
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -14,18 +14,22 @@ import {
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AppContext from "@/context/AppContext";
 
 const ProductCard = ({ data }: any) => {
   const [displayImage, setDisplayImage] = useState(data?.images?.[0]);
   const [fetchOnce, setFetchOnce] = useState(false);
 
+  const { oneProductId, setOneProductId, getOneProduct, oneProduct } =
+    useContext(AppContext);
+  // console.log("🚀 ~ ProductCard ~ oneProduct:", oneProduct);
+  // console.log("🚀 ~ ProductCard ~ oneProductId:", oneProductId);
+
   useEffect(() => {
-    // console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
-    // console.log(
-    //   "🚀 ~ useEffect ~ data.length > 0 && fetchOnce:",
-    //   data && fetchOnce
-    // );
-    if (data && !fetchOnce) {
+    if (oneProductId && !fetchOnce) {
+      setFetchOnce(true);
+      getOneProduct();
+      // if (data && !fetchOnce) {
       console.log("🚀 ~ useEffect ~ data:", data);
       const handleCardClick = () => {
         if (typeof window !== "undefined" && window.gtag) {
@@ -43,8 +47,36 @@ const ProductCard = ({ data }: any) => {
       };
       handleCardClick();
       setFetchOnce(true);
+      // }
     }
-  }, [data]);
+  }, []);
+
+  // useEffect(() => {
+  //   // console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
+  //   // console.log(
+  //   //   "🚀 ~ useEffect ~ data.length > 0 && fetchOnce:",
+  //   //   data && fetchOnce
+  //   // );
+  //   if (data && !fetchOnce) {
+  //     console.log("🚀 ~ useEffect ~ data:", data);
+  //     const handleCardClick = () => {
+  //       if (typeof window !== "undefined" && window.gtag) {
+  //         window.gtag("event", "view_item", {
+  //           items: [
+  //             {
+  //               id: data?._id, // Unique product ID
+  //               name: data?.name, // Product name
+  //               store: data?.store, // Store name
+  //               price: data?.discountPrice, // Discounted price
+  //             },
+  //           ],
+  //         });
+  //       }
+  //     };
+  //     handleCardClick();
+  //     setFetchOnce(true);
+  //   }
+  // }, [data]);
 
   return (
     <>
