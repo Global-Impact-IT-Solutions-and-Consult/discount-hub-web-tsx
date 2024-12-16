@@ -6,6 +6,13 @@ declare global {
     google: any;
     scraper: any;
     FB: any; // You can be more specific if you know the exact shape of `google`
+    gtag: (
+      event: string,
+      action: string,
+      params: {
+        [key: string]: any;
+      }
+    ) => void;
   }
   declare namespace google {
     namespace accounts {
