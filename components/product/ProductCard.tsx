@@ -1,6 +1,8 @@
+"use client";
+
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -14,9 +16,35 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ProductCard = ({ data }: any) => {
-  console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
-
   const [displayImage, setDisplayImage] = useState(data?.images?.[0]);
+  const [fetchOnce, setFetchOnce] = useState(false);
+
+  useEffect(() => {
+    // console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
+    // console.log(
+    //   "🚀 ~ useEffect ~ data.length > 0 && fetchOnce:",
+    //   data && fetchOnce
+    // );
+    if (data && !fetchOnce) {
+      console.log("🚀 ~ useEffect ~ data:", data);
+      const handleCardClick = () => {
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "view_item", {
+            items: [
+              {
+                id: data?._id, // Unique product ID
+                name: data?.name, // Product name
+                store: data?.store, // Store name
+                price: data?.discountPrice, // Discounted price
+              },
+            ],
+          });
+        }
+      };
+      handleCardClick();
+      setFetchOnce(true);
+    }
+  }, [data]);
 
   return (
     <>

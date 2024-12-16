@@ -15,10 +15,30 @@ const DealCard = ({
   discountPercentage,
   parentSiteLogo,
 }: any) => {
+  // const handleCardClick = () => {
+  //   console.log("🚀 ~ link:", link);
+  //   if (typeof window !== "undefined" && window.gtag) {
+  //     window.gtag("event", "view_item", {
+  //       items: [
+  //         {
+  //           id: link, // Unique product ID
+  //           name: title, // Product name
+  //           store: store, // Store name
+  //           price: discountPrice, // Discounted price
+  //         },
+  //       ],
+  //     });
+  //   }
+  // };
+
   return (
     <>
       {/* <a href={link}> */}
-      <a href={`/product/${link}`} className="dealCard">
+      <a
+        href={`/product/${link}`}
+        // onClick={handleCardClick}
+        className="dealCard"
+      >
         <div className="bg-white flex flex-col items-center my-6 cursor-pointer rounded w-full md:w-[21.5rem] lg:w-[24rem] xl:w-[21.5rem] 2xl:w-[22rem] 2xl:my-2">
           {/* card top*/}
           <div className="w-full h-[210px] mb-2 relative p-2 pt-4">
@@ -100,64 +120,3 @@ const DealCard = ({
 };
 
 export default DealCard;
-
-{
-  /* <>
-  <a href={`/product/${link}`}>
-    <div className="bg-white flex flex-col items-center my-6 cursor-pointer rounded w-full md:w-[21.5rem] lg:w-[24rem] xl:w-[21.5rem] 2xl:w-[22rem] 2xl:my-2">
-      <div className="w-full h-[180px] mb-2 ">
-        {!image ? (
-          <>
-            <Image
-              width={1440}
-              height={600}
-              src={"/heroSlider/1.jpg"}
-              alt="/"
-              className="rounded-t w-full h-full object-cover"
-            />
-          </>
-        ) : (
-          <>
-            <Image
-              width={1440}
-              height={600}
-              src={image}
-              alt="/"
-              className="rounded-t w-full h-full object-cover"
-            />
-          </>
-        )}
-      </div>
-      <div className="w-full p-2 px-4 flex flex-col items-start text-gray-500">
-        <div className="w-full min-h-[20px] flex items-start mb-2 ">
-          <RatingStars number={rating} />
-        </div>
-        <div className="w-full h-[45px] overflow-hidden mb-2 ">
-          <span className="font-semibold my-2 text-truncate">{title}</span>
-        </div>
-        <div className="flex gap-4 text-xs w-full my-2 h-[20px] text-gray-400">
-          <div className="flex gap-1">
-            <BiSolidMap />
-            {location}
-          </div>
-          <div className="font-semibold flex gap-1">
-            <BiSolidBasket />
-            {store}
-          </div>
-        </div>
-        <div className="w-full h-[70px] overflow-hidden mb-2">
-          <span className="font-light text-sm h-[50px] text-truncate text-gray-400">
-            {description}
-          </span>
-        </div>
-        <div className="w-full flex justify-end p-1 text-green-300 text-[24px]">
-          {price}
-        </div>
-        <div className="w-full flex justify-end p-1 text-gray-300 text-[18px] line-through">
-          {price}
-        </div>
-      </div>
-    </div>
-  </a>
-</>; */
-}
