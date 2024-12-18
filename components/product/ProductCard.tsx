@@ -34,8 +34,8 @@ const ProductCard = ({ data }: any) => {
         data._id &&
         !analyticsTracked.current
       ) {
-        console.log("🚀 ~ handleAnalytics ~ data:", data);
-        console.log("analyticsTracked 1 : ", analyticsTracked.current);
+        // console.log("🚀 ~ handleAnalytics ~ data:", data);
+        // console.log("analyticsTracked 1 : ", analyticsTracked.current);
         window.gtag("event", "view_item", {
           id: data._id,
           name: data.name,
@@ -43,10 +43,10 @@ const ProductCard = ({ data }: any) => {
           price: data.discountPrice,
         });
         analyticsTracked.current = true; // Mark as tracked
-        console.log(
-          "🚀 ~ ProductCard ~ analyticsTracked:",
-          analyticsTracked.current
-        );
+        // console.log(
+        //   "🚀 ~ ProductCard ~ analyticsTracked:",
+        //   analyticsTracked.current
+        // );
       }
     };
 
@@ -56,8 +56,8 @@ const ProductCard = ({ data }: any) => {
   // Handle product fetching separately
   useEffect(() => {
     if (oneProductId?.length > 0 && !productFetched.current) {
-      console.log("🚀 ~ useEffect ~ oneProductId:", oneProductId);
-      console.log("🚀 ~ useEffect ~ productFetched:", productFetched.current);
+      // console.log("🚀 ~ useEffect ~ oneProductId:", oneProductId);
+      // console.log("🚀 ~ useEffect ~ productFetched:", productFetched.current);
       getOneProduct();
       productFetched.current = true; // Mark as fetched
     }
