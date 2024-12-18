@@ -12,7 +12,7 @@ import FeaturesSpecs from "./[product]/FeaturesSpecs";
 const ProductPage = ({ id }: any) => {
   const { baseURL, loading, setOneProductId, oneProduct } =
     useContext(AppContext);
-  // console.log("🚀 ~ ProductPage ~ oneProduct:", oneProduct);
+  console.log("🚀 ~ ProductPage ~ oneProduct:", oneProduct);
 
   const [switchSection, setSwitchSection] = useState(true);
 

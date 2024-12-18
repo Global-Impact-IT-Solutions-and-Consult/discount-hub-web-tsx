@@ -34,15 +34,21 @@ const ProductCard = ({ data }: any) => {
       const handleCardClick = () => {
         if (typeof window !== "undefined" && window.gtag) {
           window.gtag("event", "view_item", {
-            items: [
-              {
-                id: data?._id, // Unique product ID
-                name: data?.name, // Product name
-                store: data?.store, // Store name
-                price: data?.discountPrice, // Discounted price
-              },
-            ],
+            id: data?._id, // Unique product ID
+            name: data?.name, // Product name
+            store: data?.store, // Store name
+            price: data?.discountPrice, // Discounted price
           });
+          // window.gtag("event", "view_item", {
+          //   items: [
+          //     {
+          //       id: data?._id, // Unique product ID
+          //       name: data?.name, // Product name
+          //       store: data?.store, // Store name
+          //       price: data?.discountPrice, // Discounted price
+          //     },
+          //   ],
+          // });
         }
       };
       handleCardClick();
