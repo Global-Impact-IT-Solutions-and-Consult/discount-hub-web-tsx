@@ -2,7 +2,7 @@
 
 import RatingStars from "@/widgets/ratingStars/RatingStars";
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -18,71 +18,50 @@ import AppContext from "@/context/AppContext";
 
 const ProductCard = ({ data }: any) => {
   const [displayImage, setDisplayImage] = useState(data?.images?.[0]);
-  const [fetchOnce, setFetchOnce] = useState(false);
 
-  const { oneProductId, setOneProductId, getOneProduct, oneProduct } =
+  const analyticsTracked = useRef(false); // Ref to track analytics tracking
+  const productFetched = useRef(false); // Ref to track product fetching
+
+  const { oneProductId, setOneProductId, getOneProduct } =
     useContext(AppContext);
-  // console.log("🚀 ~ ProductCard ~ oneProduct:", oneProduct);
-  // console.log("🚀 ~ ProductCard ~ oneProductId:", oneProductId);
 
+  // Separate analytics tracking into its own effect
   useEffect(() => {
-    if (oneProductId && !fetchOnce) {
-      setFetchOnce(true);
-      getOneProduct();
-      // if (data && !fetchOnce) {
-      console.log("🚀 ~ useEffect ~ data:", data);
-      const handleCardClick = () => {
-        if (typeof window !== "undefined" && window.gtag) {
-          window.gtag("event", "view_item", {
-            id: data?._id, // Unique product ID
-            name: data?.name, // Product name
-            store: data?.store, // Store name
-            price: data?.discountPrice, // Discounted price
-          });
-          // window.gtag("event", "view_item", {
-          //   items: [
-          //     {
-          //       id: data?._id, // Unique product ID
-          //       name: data?.name, // Product name
-          //       store: data?.store, // Store name
-          //       price: data?.discountPrice, // Discounted price
-          //     },
-          //   ],
-          // });
-        }
-      };
-      handleCardClick();
-      setFetchOnce(true);
-      // }
-    }
-  }, []);
+    const handleAnalytics = () => {
+      if (
+        typeof window !== "undefined" &&
+        window.gtag &&
+        data._id &&
+        !analyticsTracked.current
+      ) {
+        console.log("🚀 ~ handleAnalytics ~ data:", data);
+        console.log("analyticsTracked 1 : ", analyticsTracked.current);
+        window.gtag("event", "view_item", {
+          id: data._id,
+          name: data.name,
+          store: data.store,
+          price: data.discountPrice,
+        });
+        analyticsTracked.current = true; // Mark as tracked
+        console.log(
+          "🚀 ~ ProductCard ~ analyticsTracked:",
+          analyticsTracked.current
+        );
+      }
+    };
 
-  // useEffect(() => {
-  //   // console.log("🚀 ~ file: ProductCard.tsx:6 ~ ProductCard ~ data:", data);
-  //   // console.log(
-  //   //   "🚀 ~ useEffect ~ data.length > 0 && fetchOnce:",
-  //   //   data && fetchOnce
-  //   // );
-  //   if (data && !fetchOnce) {
-  //     console.log("🚀 ~ useEffect ~ data:", data);
-  //     const handleCardClick = () => {
-  //       if (typeof window !== "undefined" && window.gtag) {
-  //         window.gtag("event", "view_item", {
-  //           items: [
-  //             {
-  //               id: data?._id, // Unique product ID
-  //               name: data?.name, // Product name
-  //               store: data?.store, // Store name
-  //               price: data?.discountPrice, // Discounted price
-  //             },
-  //           ],
-  //         });
-  //       }
-  //     };
-  //     handleCardClick();
-  //     setFetchOnce(true);
-  //   }
-  // }, [data]);
+    handleAnalytics();
+  }, [data]); // Only run when data changes
+
+  // Handle product fetching separately
+  useEffect(() => {
+    if (oneProductId?.length > 0 && !productFetched.current) {
+      console.log("🚀 ~ useEffect ~ oneProductId:", oneProductId);
+      console.log("🚀 ~ useEffect ~ productFetched:", productFetched.current);
+      getOneProduct();
+      productFetched.current = true; // Mark as fetched
+    }
+  }, [oneProductId, getOneProduct]); // Add proper dependencies
 
   return (
     <>
@@ -182,18 +161,25 @@ const ProductCard = ({ data }: any) => {
             </span>
 
             <h4 className="font-light text-[2rem] font-serif flex items-center justify-center gap-3">
-              ₦{new Intl.NumberFormat("en-NG").format(data.discountPrice)}
-              <span className="text-xl text-gray-300 line-through flex items-center">
-                ₦{new Intl.NumberFormat("en-NG").format(data.price)}
-              </span>
-              {/* {data.discountPercentage && ( */}
-              <div className="py-1 px-2 rounded-md flex items-center justify-center text-green-300   md:text-base md:font-semibold">
-                -
-                {Math.floor(
-                  ((data?.price - data?.discountPrice) / data?.price) * 100
-                )}{" "}
-                %
-              </div>
+              {data.discountPrice && (
+                <>
+                  ₦
+                  {new Intl.NumberFormat("en-NG").format(data.discountPrice) ||
+                    0}
+                  <span className="text-xl text-gray-300 line-through flex items-center">
+                    ₦{new Intl.NumberFormat("en-NG").format(data.price)}
+                  </span>
+                </>
+              )}
+              {data.discountPrice && (
+                <div className="py-1 px-2 rounded-md flex items-center justify-center text-green-300   md:text-base md:font-semibold">
+                  -
+                  {Math.floor(
+                    ((data?.price - data?.discountPrice) / data?.price) * 100
+                  )}{" "}
+                  %
+                </div>
+              )}
               {/* <div className="bg-red-300/40 text-orange-500 py-1 px-2 rounded-md flex items-center justify-center  md:text-xl md:font-semibold">
                    (- {data.discountPercentage})
                 </div> */}
@@ -212,16 +198,18 @@ const ProductCard = ({ data }: any) => {
             harum culpa consequatur aut tenetur, earum, illum eum iste aliquam
             quam quisquam atque numquam magni voluptas deserunt! */}
           </span>
-          <span className="ppLineHeight text-sm text-gray-800 text-left pb-6 my-4 font-normal">
-            {/* Category: {data.discountType || "Uncategorized"} */}
+          {data.name && (
+            <span className="ppLineHeight text-sm text-gray-800 text-left pb-6 my-4 font-normal">
+              {/* Category: {data.discountType || "Uncategorized"} */}
 
-            <a
-              href={data.link}
-              className="py-4 px-8 bg-green-400 rounded-lg text-white w-full text-center text-lg duration-300 ease-in-out cursor-pointer font-sans font-semibold hover:bg-green-500"
-            >
-              GOTO PRODUCT
-            </a>
-          </span>
+              <a
+                href={data.link}
+                className="py-4 px-8 bg-green-400 rounded-lg text-white w-full text-center text-lg duration-300 ease-in-out cursor-pointer font-sans font-semibold hover:bg-green-500"
+              >
+                GOTO PRODUCT
+              </a>
+            </span>
+          )}
         </div>
       </div>
     </>

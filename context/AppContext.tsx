@@ -22,7 +22,7 @@ export const AppProvider: React.FC<{
 
   // PRODUCTS
   const [allProducts, setAllProducts] = useState([]);
-  const [oneProductId, setOneProductId] = useState();
+  const [oneProductId, setOneProductId] = useState("");
   const [oneProduct, setOneProduct] = useState([]);
 
   // CATEGORIES
